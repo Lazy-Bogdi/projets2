@@ -20,7 +20,6 @@
       <parameter key="MonologBundle">Symfony\Bundle\MonologBundle\MonologBundle</parameter>
       <parameter key="MakerBundle">Symfony\Bundle\MakerBundle\MakerBundle</parameter>
       <parameter key="SensioFrameworkExtraBundle">Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle</parameter>
-      <parameter key="FOSUserBundle">FOS\UserBundle\FOSUserBundle</parameter>
       <parameter key="KnpPaginatorBundle">Knp\Bundle\PaginatorBundle\KnpPaginatorBundle</parameter>
       <parameter key="StofDoctrineExtensionsBundle">Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle</parameter>
       <parameter key="VichUploaderBundle">Vich\UploaderBundle\VichUploaderBundle</parameter>
@@ -72,10 +71,6 @@
       <parameter key="SensioFrameworkExtraBundle" type="collection">
         <parameter key="path">C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\sensio\framework-extra-bundle\src</parameter>
         <parameter key="namespace">Sensio\Bundle\FrameworkExtraBundle</parameter>
-      </parameter>
-      <parameter key="FOSUserBundle" type="collection">
-        <parameter key="path">C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\friendsofsymfony\user-bundle</parameter>
-        <parameter key="namespace">FOS\UserBundle</parameter>
       </parameter>
       <parameter key="KnpPaginatorBundle" type="collection">
         <parameter key="path">C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\knplabs\knp-paginator-bundle</parameter>
@@ -286,48 +281,6 @@
         </parameter>
       </parameter>
     </parameter>
-    <parameter key="fos_user.backend_type_orm">true</parameter>
-    <parameter key="fos_user.security.interactive_login_listener.class">FOS\UserBundle\EventListener\LastLoginListener</parameter>
-    <parameter key="fos_user.security.login_manager.class">FOS\UserBundle\Security\LoginManager</parameter>
-    <parameter key="fos_user.resetting.email.template">@FOSUser/Resetting/email.txt.twig</parameter>
-    <parameter key="fos_user.registration.confirmation.template">@FOSUser/Registration/email.txt.twig</parameter>
-    <parameter key="fos_user.registration.confirmation.from_email" type="collection">
-      <parameter key="%env(MAILER_FROM_ADDRESS)%">%env(MAILER_FROM_NAME)%</parameter>
-    </parameter>
-    <parameter key="fos_user.resetting.email.from_email" type="collection">
-      <parameter key="%env(MAILER_FROM_ADDRESS)%">%env(MAILER_FROM_NAME)%</parameter>
-    </parameter>
-    <parameter key="fos_user.storage">orm</parameter>
-    <parameter key="fos_user.firewall_name">main</parameter>
-    <parameter key="fos_user.model_manager_name">null</parameter>
-    <parameter key="fos_user.model.user.class">App\Entity\User</parameter>
-    <parameter key="fos_user.profile.form.type">FOS\UserBundle\Form\Type\ProfileFormType</parameter>
-    <parameter key="fos_user.profile.form.name">fos_user_profile_form</parameter>
-    <parameter key="fos_user.profile.form.validation_groups" type="collection">
-      <parameter>Profile</parameter>
-      <parameter>Default</parameter>
-    </parameter>
-    <parameter key="fos_user.registration.confirmation.enabled">false</parameter>
-    <parameter key="fos_user.registration.form.type">FOS\UserBundle\Form\Type\RegistrationFormType</parameter>
-    <parameter key="fos_user.registration.form.name">fos_user_registration_form</parameter>
-    <parameter key="fos_user.registration.form.validation_groups" type="collection">
-      <parameter>Registration</parameter>
-      <parameter>Default</parameter>
-    </parameter>
-    <parameter key="fos_user.change_password.form.type">FOS\UserBundle\Form\Type\ChangePasswordFormType</parameter>
-    <parameter key="fos_user.change_password.form.name">fos_user_change_password_form</parameter>
-    <parameter key="fos_user.change_password.form.validation_groups" type="collection">
-      <parameter>ChangePassword</parameter>
-      <parameter>Default</parameter>
-    </parameter>
-    <parameter key="fos_user.resetting.retry_ttl">7200</parameter>
-    <parameter key="fos_user.resetting.token_ttl">86400</parameter>
-    <parameter key="fos_user.resetting.form.type">FOS\UserBundle\Form\Type\ResettingFormType</parameter>
-    <parameter key="fos_user.resetting.form.name">fos_user_resetting_form</parameter>
-    <parameter key="fos_user.resetting.form.validation_groups" type="collection">
-      <parameter>ResetPassword</parameter>
-      <parameter>Default</parameter>
-    </parameter>
     <parameter key="knp_paginator.template.pagination">@KnpPaginator/Pagination/sliding.html.twig</parameter>
     <parameter key="knp_paginator.template.filtration">@KnpPaginator/Pagination/filtration.html.twig</parameter>
     <parameter key="knp_paginator.template.sortable">@KnpPaginator/Pagination/sortable_link.html.twig</parameter>
@@ -459,6 +412,48 @@
     <service id="App\Entity" class="App\Entity" abstract="true">
       <tag name="container.excluded" source="in &quot;config/services.yaml&quot;"/>
     </service>
+    <service id="App\Controller\AdminArticleController" class="App\Controller\AdminArticleController" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+      <tag name="container.service_subscriber"/>
+      <call method="setContainer">
+        <argument type="service" id=".service_locator.CshazM0.App\Controller\AdminArticleController"/>
+      </call>
+    </service>
+    <service id="App\Controller\AdminCategoryController" class="App\Controller\AdminCategoryController" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+      <tag name="container.service_subscriber"/>
+      <call method="setContainer">
+        <argument type="service" id=".service_locator.CshazM0.App\Controller\AdminCategoryController"/>
+      </call>
+    </service>
+    <service id="App\Controller\AdminCommentController" class="App\Controller\AdminCommentController" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+      <tag name="container.service_subscriber"/>
+      <call method="setContainer">
+        <argument type="service" id=".service_locator.CshazM0.App\Controller\AdminCommentController"/>
+      </call>
+    </service>
+    <service id="App\Controller\AdminUserController" class="App\Controller\AdminUserController" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+      <tag name="container.service_subscriber"/>
+      <call method="setContainer">
+        <argument type="service" id=".service_locator.CshazM0.App\Controller\AdminUserController"/>
+      </call>
+    </service>
+    <service id="App\Controller\ArticleController" class="App\Controller\ArticleController" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+      <tag name="container.service_subscriber"/>
+      <call method="setContainer">
+        <argument type="service" id=".service_locator.CshazM0.App\Controller\ArticleController"/>
+      </call>
+    </service>
+    <service id="App\Controller\CategoryController" class="App\Controller\CategoryController" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+      <tag name="container.service_subscriber"/>
+      <call method="setContainer">
+        <argument type="service" id=".service_locator.CshazM0.App\Controller\CategoryController"/>
+      </call>
+    </service>
     <service id="App\Controller\HomeController" class="App\Controller\HomeController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
@@ -489,7 +484,22 @@
         <argument type="service" id=".service_locator.CshazM0.App\Controller\SecurityController"/>
       </call>
     </service>
+    <service id="App\Form\Article1Type" class="App\Form\Article1Type" autowire="true" autoconfigure="true">
+      <tag name="form.type"/>
+    </service>
+    <service id="App\Form\ArticleType" class="App\Form\ArticleType" autowire="true" autoconfigure="true">
+      <tag name="form.type"/>
+    </service>
+    <service id="App\Form\Category1Type" class="App\Form\Category1Type" autowire="true" autoconfigure="true">
+      <tag name="form.type"/>
+    </service>
+    <service id="App\Form\CategoryType" class="App\Form\CategoryType" autowire="true" autoconfigure="true">
+      <tag name="form.type"/>
+    </service>
     <service id="App\Form\ChangePasswordFormType" class="App\Form\ChangePasswordFormType" autowire="true" autoconfigure="true">
+      <tag name="form.type"/>
+    </service>
+    <service id="App\Form\CommentType" class="App\Form\CommentType" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
     </service>
     <service id="App\Form\RegistrationFormType" class="App\Form\RegistrationFormType" autowire="true" autoconfigure="true">
@@ -497,6 +507,21 @@
     </service>
     <service id="App\Form\ResetPasswordRequestFormType" class="App\Form\ResetPasswordRequestFormType" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
+    </service>
+    <service id="App\Form\UserType" class="App\Form\UserType" autowire="true" autoconfigure="true">
+      <tag name="form.type"/>
+    </service>
+    <service id="App\Repository\ArticleRepository" class="App\Repository\ArticleRepository" autowire="true" autoconfigure="true">
+      <tag name="doctrine.repository_service"/>
+      <argument type="service" id="doctrine"/>
+    </service>
+    <service id="App\Repository\CategoryRepository" class="App\Repository\CategoryRepository" autowire="true" autoconfigure="true">
+      <tag name="doctrine.repository_service"/>
+      <argument type="service" id="doctrine"/>
+    </service>
+    <service id="App\Repository\CommentRepository" class="App\Repository\CommentRepository" autowire="true" autoconfigure="true">
+      <tag name="doctrine.repository_service"/>
+      <argument type="service" id="doctrine"/>
     </service>
     <service id="App\Repository\ResetPasswordRequestRepository" class="App\Repository\ResetPasswordRequestRepository" autowire="true" autoconfigure="true">
       <tag name="doctrine.repository_service"/>
@@ -1340,24 +1365,24 @@
         <argument>Symfony\Component\Form\Extension\Core\Type</argument>
         <argument>App\Form</argument>
         <argument>Symfony\Bridge\Doctrine\Form\Type</argument>
-        <argument>FOS\UserBundle\Form\Type</argument>
         <argument>Vich\UploaderBundle\Form\Type</argument>
         <argument>EasyCorp\Bundle\EasyAdminBundle\Form\Type</argument>
       </argument>
       <argument type="collection">
+        <argument>App\Form\Article1Type</argument>
+        <argument>App\Form\ArticleType</argument>
+        <argument>App\Form\Category1Type</argument>
+        <argument>App\Form\CategoryType</argument>
         <argument>App\Form\ChangePasswordFormType</argument>
+        <argument>App\Form\CommentType</argument>
         <argument>App\Form\RegistrationFormType</argument>
         <argument>App\Form\ResetPasswordRequestFormType</argument>
+        <argument>App\Form\UserType</argument>
         <argument>Symfony\Component\Form\Extension\Core\Type\FormType</argument>
         <argument>Symfony\Component\Form\Extension\Core\Type\ChoiceType</argument>
         <argument>Symfony\Component\Form\Extension\Core\Type\FileType</argument>
         <argument>Symfony\Component\Form\Extension\Core\Type\ColorType</argument>
         <argument>Symfony\Bridge\Doctrine\Form\Type\EntityType</argument>
-        <argument>FOS\UserBundle\Form\Type\UsernameFormType</argument>
-        <argument>FOS\UserBundle\Form\Type\ProfileFormType</argument>
-        <argument>FOS\UserBundle\Form\Type\RegistrationFormType</argument>
-        <argument>FOS\UserBundle\Form\Type\ChangePasswordFormType</argument>
-        <argument>FOS\UserBundle\Form\Type\ResettingFormType</argument>
         <argument>Vich\UploaderBundle\Form\Type\VichFileType</argument>
         <argument>Vich\UploaderBundle\Form\Type\VichImageType</argument>
         <argument>EasyCorp\Bundle\EasyAdminBundle\Form\Type\FiltersFormType</argument>
@@ -1823,14 +1848,11 @@
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\validator/Resources/translations\validators.af.xlf</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\form/Resources/translations\validators.af.xlf</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\security-core/Resources/translations\security.af.xlf</argument>
-            <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\friendsofsymfony\user-bundle/Resources/translations\FOSUserBundle.af.yml</argument>
           </argument>
           <argument key="ar" type="collection">
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\validator/Resources/translations\validators.ar.xlf</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\form/Resources/translations\validators.ar.xlf</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\security-core/Resources/translations\security.ar.xlf</argument>
-            <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\friendsofsymfony\user-bundle/Resources/translations\FOSUserBundle.ar.yml</argument>
-            <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\friendsofsymfony\user-bundle/Resources/translations\validators.ar.yml</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\knplabs\knp-paginator-bundle/translations\KnpPaginatorBundle.ar.xliff</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\vich\uploader-bundle/translations\messages.ar.yaml</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\easycorp\easyadmin-bundle\src/Resources/translations\EasyAdminBundle.ar.php</argument>
@@ -1851,8 +1873,6 @@
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\validator/Resources/translations\validators.bg.xlf</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\form/Resources/translations\validators.bg.xlf</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\security-core/Resources/translations\security.bg.xlf</argument>
-            <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\friendsofsymfony\user-bundle/Resources/translations\FOSUserBundle.bg.yml</argument>
-            <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\friendsofsymfony\user-bundle/Resources/translations\validators.bg.yml</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\knplabs\knp-paginator-bundle/translations\KnpPaginatorBundle.bg.xliff</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\vich\uploader-bundle/translations\messages.bg.yaml</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\easycorp\easyadmin-bundle\src/Resources/translations\EasyAdminBundle.bg.php</argument>
@@ -1866,8 +1886,6 @@
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\validator/Resources/translations\validators.ca.xlf</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\form/Resources/translations\validators.ca.xlf</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\security-core/Resources/translations\security.ca.xlf</argument>
-            <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\friendsofsymfony\user-bundle/Resources/translations\FOSUserBundle.ca.yml</argument>
-            <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\friendsofsymfony\user-bundle/Resources/translations\validators.ca.yml</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\knplabs\knp-paginator-bundle/translations\KnpPaginatorBundle.ca.xliff</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\vich\uploader-bundle/translations\messages.ca.yaml</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\easycorp\easyadmin-bundle\src/Resources/translations\EasyAdminBundle.ca.php</argument>
@@ -1878,8 +1896,6 @@
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\validator/Resources/translations\validators.cs.xlf</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\form/Resources/translations\validators.cs.xlf</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\security-core/Resources/translations\security.cs.xlf</argument>
-            <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\friendsofsymfony\user-bundle/Resources/translations\FOSUserBundle.cs.yml</argument>
-            <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\friendsofsymfony\user-bundle/Resources/translations\validators.cs.yml</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\knplabs\knp-paginator-bundle/translations\KnpPaginatorBundle.cs.xliff</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\vich\uploader-bundle/translations\messages.cs.yaml</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\easycorp\easyadmin-bundle\src/Resources/translations\EasyAdminBundle.cs.php</argument>
@@ -1893,8 +1909,6 @@
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\validator/Resources/translations\validators.da.xlf</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\form/Resources/translations\validators.da.xlf</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\security-core/Resources/translations\security.da.xlf</argument>
-            <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\friendsofsymfony\user-bundle/Resources/translations\FOSUserBundle.da.yml</argument>
-            <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\friendsofsymfony\user-bundle/Resources/translations\validators.da.yml</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\knplabs\knp-paginator-bundle/translations\KnpPaginatorBundle.da.xliff</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\easycorp\easyadmin-bundle\src/Resources/translations\EasyAdminBundle.da.php</argument>
           </argument>
@@ -1902,8 +1916,6 @@
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\validator/Resources/translations\validators.de.xlf</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\form/Resources/translations\validators.de.xlf</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\security-core/Resources/translations\security.de.xlf</argument>
-            <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\friendsofsymfony\user-bundle/Resources/translations\FOSUserBundle.de.yml</argument>
-            <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\friendsofsymfony\user-bundle/Resources/translations\validators.de.yml</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\knplabs\knp-paginator-bundle/translations\KnpPaginatorBundle.de.xliff</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\vich\uploader-bundle/translations\messages.de.yaml</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\easycorp\easyadmin-bundle\src/Resources/translations\EasyAdminBundle.de.php</argument>
@@ -1914,16 +1926,12 @@
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\validator/Resources/translations\validators.el.xlf</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\form/Resources/translations\validators.el.xlf</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\security-core/Resources/translations\security.el.xlf</argument>
-            <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\friendsofsymfony\user-bundle/Resources/translations\FOSUserBundle.el.yml</argument>
-            <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\friendsofsymfony\user-bundle/Resources/translations\validators.el.yml</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\easycorp\easyadmin-bundle\src/Resources/translations\EasyAdminBundle.el.php</argument>
           </argument>
           <argument key="en" type="collection">
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\validator/Resources/translations\validators.en.xlf</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\form/Resources/translations\validators.en.xlf</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\security-core/Resources/translations\security.en.xlf</argument>
-            <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\friendsofsymfony\user-bundle/Resources/translations\FOSUserBundle.en.yml</argument>
-            <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\friendsofsymfony\user-bundle/Resources/translations\validators.en.yml</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\knplabs\knp-paginator-bundle/translations\KnpPaginatorBundle.en.xliff</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\vich\uploader-bundle/translations\messages.en.yaml</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\easycorp\easyadmin-bundle\src/Resources/translations\EasyAdminBundle.en.php</argument>
@@ -1934,8 +1942,6 @@
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\validator/Resources/translations\validators.es.xlf</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\form/Resources/translations\validators.es.xlf</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\security-core/Resources/translations\security.es.xlf</argument>
-            <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\friendsofsymfony\user-bundle/Resources/translations\FOSUserBundle.es.yml</argument>
-            <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\friendsofsymfony\user-bundle/Resources/translations\validators.es.yml</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\knplabs\knp-paginator-bundle/translations\KnpPaginatorBundle.es.xliff</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\vich\uploader-bundle/translations\messages.es.yaml</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\easycorp\easyadmin-bundle\src/Resources/translations\EasyAdminBundle.es.php</argument>
@@ -1946,14 +1952,11 @@
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\validator/Resources/translations\validators.et.xlf</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\form/Resources/translations\validators.et.xlf</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\security-core/Resources/translations\security.et.xlf</argument>
-            <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\friendsofsymfony\user-bundle/Resources/translations\FOSUserBundle.et.yml</argument>
           </argument>
           <argument key="eu" type="collection">
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\validator/Resources/translations\validators.eu.xlf</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\form/Resources/translations\validators.eu.xlf</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\security-core/Resources/translations\security.eu.xlf</argument>
-            <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\friendsofsymfony\user-bundle/Resources/translations\FOSUserBundle.eu.yml</argument>
-            <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\friendsofsymfony\user-bundle/Resources/translations\validators.eu.yml</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\knplabs\knp-paginator-bundle/translations\KnpPaginatorBundle.eu.xliff</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\easycorp\easyadmin-bundle\src/Resources/translations\EasyAdminBundle.eu.php</argument>
           </argument>
@@ -1961,8 +1964,6 @@
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\validator/Resources/translations\validators.fa.xlf</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\form/Resources/translations\validators.fa.xlf</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\security-core/Resources/translations\security.fa.xlf</argument>
-            <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\friendsofsymfony\user-bundle/Resources/translations\FOSUserBundle.fa.yml</argument>
-            <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\friendsofsymfony\user-bundle/Resources/translations\validators.fa.yml</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\knplabs\knp-paginator-bundle/translations\KnpPaginatorBundle.fa.xliff</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\easycorp\easyadmin-bundle\src/Resources/translations\EasyAdminBundle.fa.php</argument>
           </argument>
@@ -1970,8 +1971,6 @@
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\validator/Resources/translations\validators.fi.xlf</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\form/Resources/translations\validators.fi.xlf</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\security-core/Resources/translations\security.fi.xlf</argument>
-            <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\friendsofsymfony\user-bundle/Resources/translations\FOSUserBundle.fi.yml</argument>
-            <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\friendsofsymfony\user-bundle/Resources/translations\validators.fi.yml</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\knplabs\knp-paginator-bundle/translations\KnpPaginatorBundle.fi.xliff</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\vich\uploader-bundle/translations\messages.fi.yaml</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\easycorp\easyadmin-bundle\src/Resources/translations\EasyAdminBundle.fi.php</argument>
@@ -1982,8 +1981,6 @@
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\validator/Resources/translations\validators.fr.xlf</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\form/Resources/translations\validators.fr.xlf</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\security-core/Resources/translations\security.fr.xlf</argument>
-            <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\friendsofsymfony\user-bundle/Resources/translations\FOSUserBundle.fr.yml</argument>
-            <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\friendsofsymfony\user-bundle/Resources/translations\validators.fr.yml</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\knplabs\knp-paginator-bundle/translations\KnpPaginatorBundle.fr.xliff</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\vich\uploader-bundle/translations\messages.fr.yaml</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\easycorp\easyadmin-bundle\src/Resources/translations\EasyAdminBundle.fr.php</argument>
@@ -1994,23 +1991,18 @@
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\validator/Resources/translations\validators.gl.xlf</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\form/Resources/translations\validators.gl.xlf</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\security-core/Resources/translations\security.gl.xlf</argument>
-            <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\friendsofsymfony\user-bundle/Resources/translations\FOSUserBundle.gl.yml</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\easycorp\easyadmin-bundle\src/Resources/translations\EasyAdminBundle.gl.php</argument>
           </argument>
           <argument key="he" type="collection">
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\validator/Resources/translations\validators.he.xlf</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\form/Resources/translations\validators.he.xlf</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\security-core/Resources/translations\security.he.xlf</argument>
-            <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\friendsofsymfony\user-bundle/Resources/translations\FOSUserBundle.he.yml</argument>
-            <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\friendsofsymfony\user-bundle/Resources/translations\validators.he.yml</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\easycorp\easyadmin-bundle\src/Resources/translations\EasyAdminBundle.he.php</argument>
           </argument>
           <argument key="hr" type="collection">
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\validator/Resources/translations\validators.hr.xlf</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\form/Resources/translations\validators.hr.xlf</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\security-core/Resources/translations\security.hr.xlf</argument>
-            <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\friendsofsymfony\user-bundle/Resources/translations\FOSUserBundle.hr.yml</argument>
-            <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\friendsofsymfony\user-bundle/Resources/translations\validators.hr.yml</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\knplabs\knp-paginator-bundle/translations\KnpPaginatorBundle.hr.xliff</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\easycorp\easyadmin-bundle\src/Resources/translations\EasyAdminBundle.hr.php</argument>
           </argument>
@@ -2018,8 +2010,6 @@
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\validator/Resources/translations\validators.hu.xlf</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\form/Resources/translations\validators.hu.xlf</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\security-core/Resources/translations\security.hu.xlf</argument>
-            <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\friendsofsymfony\user-bundle/Resources/translations\FOSUserBundle.hu.yml</argument>
-            <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\friendsofsymfony\user-bundle/Resources/translations\validators.hu.yml</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\knplabs\knp-paginator-bundle/translations\KnpPaginatorBundle.hu.xliff</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\vich\uploader-bundle/translations\messages.hu.yaml</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\easycorp\easyadmin-bundle\src/Resources/translations\EasyAdminBundle.hu.php</argument>
@@ -2035,8 +2025,6 @@
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\validator/Resources/translations\validators.id.xlf</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\form/Resources/translations\validators.id.xlf</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\security-core/Resources/translations\security.id.xlf</argument>
-            <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\friendsofsymfony\user-bundle/Resources/translations\FOSUserBundle.id.yml</argument>
-            <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\friendsofsymfony\user-bundle/Resources/translations\validators.id.yml</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\knplabs\knp-paginator-bundle/translations\KnpPaginatorBundle.id.xliff</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\easycorp\easyadmin-bundle\src/Resources/translations\EasyAdminBundle.id.php</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfonycasts\verify-email-bundle\src/Resources/translations\VerifyEmailBundle.id.xlf</argument>
@@ -2045,8 +2033,6 @@
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\validator/Resources/translations\validators.it.xlf</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\form/Resources/translations\validators.it.xlf</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\security-core/Resources/translations\security.it.xlf</argument>
-            <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\friendsofsymfony\user-bundle/Resources/translations\FOSUserBundle.it.yml</argument>
-            <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\friendsofsymfony\user-bundle/Resources/translations\validators.it.yml</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\knplabs\knp-paginator-bundle/translations\KnpPaginatorBundle.it.xliff</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\vich\uploader-bundle/translations\messages.it.yaml</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\easycorp\easyadmin-bundle\src/Resources/translations\EasyAdminBundle.it.php</argument>
@@ -2057,8 +2043,6 @@
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\validator/Resources/translations\validators.ja.xlf</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\form/Resources/translations\validators.ja.xlf</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\security-core/Resources/translations\security.ja.xlf</argument>
-            <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\friendsofsymfony\user-bundle/Resources/translations\FOSUserBundle.ja.yml</argument>
-            <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\friendsofsymfony\user-bundle/Resources/translations\validators.ja.yml</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\knplabs\knp-paginator-bundle/translations\KnpPaginatorBundle.ja.xliff</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfonycasts\verify-email-bundle\src/Resources/translations\VerifyEmailBundle.ja.xlf</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfonycasts\reset-password-bundle\src/Resources/translations\ResetPasswordBundle.ja.xlf</argument>
@@ -2067,16 +2051,12 @@
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\validator/Resources/translations\validators.lb.xlf</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\form/Resources/translations\validators.lb.xlf</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\security-core/Resources/translations\security.lb.xlf</argument>
-            <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\friendsofsymfony\user-bundle/Resources/translations\FOSUserBundle.lb.yml</argument>
-            <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\friendsofsymfony\user-bundle/Resources/translations\validators.lb.yml</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\easycorp\easyadmin-bundle\src/Resources/translations\EasyAdminBundle.lb.php</argument>
           </argument>
           <argument key="lt" type="collection">
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\validator/Resources/translations\validators.lt.xlf</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\form/Resources/translations\validators.lt.xlf</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\security-core/Resources/translations\security.lt.xlf</argument>
-            <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\friendsofsymfony\user-bundle/Resources/translations\FOSUserBundle.lt.yml</argument>
-            <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\friendsofsymfony\user-bundle/Resources/translations\validators.lt.yml</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\knplabs\knp-paginator-bundle/translations\KnpPaginatorBundle.lt.xliff</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\vich\uploader-bundle/translations\messages.lt.yaml</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\easycorp\easyadmin-bundle\src/Resources/translations\EasyAdminBundle.lt.php</argument>
@@ -2085,14 +2065,11 @@
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\validator/Resources/translations\validators.lv.xlf</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\form/Resources/translations\validators.lv.xlf</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\security-core/Resources/translations\security.lv.xlf</argument>
-            <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\friendsofsymfony\user-bundle/Resources/translations\FOSUserBundle.lv.yml</argument>
-            <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\friendsofsymfony\user-bundle/Resources/translations\validators.lv.yml</argument>
           </argument>
           <argument key="mn" type="collection">
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\validator/Resources/translations\validators.mn.xlf</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\form/Resources/translations\validators.mn.xlf</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\security-core/Resources/translations\security.mn.xlf</argument>
-            <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\friendsofsymfony\user-bundle/Resources/translations\FOSUserBundle.mn.yml</argument>
           </argument>
           <argument key="my" type="collection">
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\validator/Resources/translations\validators.my.xlf</argument>
@@ -2103,15 +2080,11 @@
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\validator/Resources/translations\validators.nb.xlf</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\form/Resources/translations\validators.nb.xlf</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\security-core/Resources/translations\security.nb.xlf</argument>
-            <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\friendsofsymfony\user-bundle/Resources/translations\FOSUserBundle.nb.yml</argument>
-            <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\friendsofsymfony\user-bundle/Resources/translations\validators.nb.yml</argument>
           </argument>
           <argument key="nl" type="collection">
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\validator/Resources/translations\validators.nl.xlf</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\form/Resources/translations\validators.nl.xlf</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\security-core/Resources/translations\security.nl.xlf</argument>
-            <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\friendsofsymfony\user-bundle/Resources/translations\FOSUserBundle.nl.yml</argument>
-            <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\friendsofsymfony\user-bundle/Resources/translations\validators.nl.yml</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\knplabs\knp-paginator-bundle/translations\KnpPaginatorBundle.nl.xliff</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\vich\uploader-bundle/translations\messages.nl.yaml</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\easycorp\easyadmin-bundle\src/Resources/translations\EasyAdminBundle.nl.php</argument>
@@ -2134,8 +2107,6 @@
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\validator/Resources/translations\validators.pl.xlf</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\form/Resources/translations\validators.pl.xlf</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\security-core/Resources/translations\security.pl.xlf</argument>
-            <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\friendsofsymfony\user-bundle/Resources/translations\FOSUserBundle.pl.yml</argument>
-            <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\friendsofsymfony\user-bundle/Resources/translations\validators.pl.yml</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\knplabs\knp-paginator-bundle/translations\KnpPaginatorBundle.pl.xliff</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\vich\uploader-bundle/translations\messages.pl.yaml</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\easycorp\easyadmin-bundle\src/Resources/translations\EasyAdminBundle.pl.php</argument>
@@ -2146,8 +2117,6 @@
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\validator/Resources/translations\validators.pt.xlf</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\form/Resources/translations\validators.pt.xlf</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\security-core/Resources/translations\security.pt.xlf</argument>
-            <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\friendsofsymfony\user-bundle/Resources/translations\FOSUserBundle.pt.yml</argument>
-            <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\friendsofsymfony\user-bundle/Resources/translations\validators.pt.yml</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\vich\uploader-bundle/translations\messages.pt.yaml</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\easycorp\easyadmin-bundle\src/Resources/translations\EasyAdminBundle.pt.php</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfonycasts\verify-email-bundle\src/Resources/translations\VerifyEmailBundle.pt.xlf</argument>
@@ -2157,8 +2126,6 @@
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\validator/Resources/translations\validators.pt_BR.xlf</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\form/Resources/translations\validators.pt_BR.xlf</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\security-core/Resources/translations\security.pt_BR.xlf</argument>
-            <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\friendsofsymfony\user-bundle/Resources/translations\FOSUserBundle.pt_BR.yml</argument>
-            <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\friendsofsymfony\user-bundle/Resources/translations\validators.pt_BR.yml</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\knplabs\knp-paginator-bundle/translations\KnpPaginatorBundle.pt_BR.xliff</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\easycorp\easyadmin-bundle\src/Resources/translations\EasyAdminBundle.pt_BR.php</argument>
           </argument>
@@ -2166,8 +2133,6 @@
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\validator/Resources/translations\validators.ro.xlf</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\form/Resources/translations\validators.ro.xlf</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\security-core/Resources/translations\security.ro.xlf</argument>
-            <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\friendsofsymfony\user-bundle/Resources/translations\FOSUserBundle.ro.yml</argument>
-            <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\friendsofsymfony\user-bundle/Resources/translations\validators.ro.yml</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\knplabs\knp-paginator-bundle/translations\KnpPaginatorBundle.ro.xliff</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\easycorp\easyadmin-bundle\src/Resources/translations\EasyAdminBundle.ro.php</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfonycasts\verify-email-bundle\src/Resources/translations\VerifyEmailBundle.ro.xlf</argument>
@@ -2176,8 +2141,6 @@
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\validator/Resources/translations\validators.ru.xlf</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\form/Resources/translations\validators.ru.xlf</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\security-core/Resources/translations\security.ru.xlf</argument>
-            <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\friendsofsymfony\user-bundle/Resources/translations\FOSUserBundle.ru.yml</argument>
-            <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\friendsofsymfony\user-bundle/Resources/translations\validators.ru.yml</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\knplabs\knp-paginator-bundle/translations\KnpPaginatorBundle.ru.xliff</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\vich\uploader-bundle/translations\messages.ru.yaml</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\easycorp\easyadmin-bundle\src/Resources/translations\EasyAdminBundle.ru.php</argument>
@@ -2188,8 +2151,6 @@
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\validator/Resources/translations\validators.sk.xlf</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\form/Resources/translations\validators.sk.xlf</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\security-core/Resources/translations\security.sk.xlf</argument>
-            <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\friendsofsymfony\user-bundle/Resources/translations\FOSUserBundle.sk.yml</argument>
-            <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\friendsofsymfony\user-bundle/Resources/translations\validators.sk.yml</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\easycorp\easyadmin-bundle\src/Resources/translations\EasyAdminBundle.sk.php</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfonycasts\verify-email-bundle\src/Resources/translations\VerifyEmailBundle.sk.xlf</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfonycasts\reset-password-bundle\src/Resources/translations\ResetPasswordBundle.sk.xlf</argument>
@@ -2198,8 +2159,6 @@
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\validator/Resources/translations\validators.sl.xlf</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\form/Resources/translations\validators.sl.xlf</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\security-core/Resources/translations\security.sl.xlf</argument>
-            <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\friendsofsymfony\user-bundle/Resources/translations\FOSUserBundle.sl.yml</argument>
-            <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\friendsofsymfony\user-bundle/Resources/translations\validators.sl.yml</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\vich\uploader-bundle/translations\messages.sl.yaml</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\easycorp\easyadmin-bundle\src/Resources/translations\EasyAdminBundle.sl.php</argument>
           </argument>
@@ -2217,15 +2176,11 @@
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\validator/Resources/translations\validators.sr_Latn.xlf</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\form/Resources/translations\validators.sr_Latn.xlf</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\security-core/Resources/translations\security.sr_Latn.xlf</argument>
-            <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\friendsofsymfony\user-bundle/Resources/translations\FOSUserBundle.sr_Latn.yml</argument>
-            <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\friendsofsymfony\user-bundle/Resources/translations\validators.sr_Latn.yml</argument>
           </argument>
           <argument key="sv" type="collection">
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\validator/Resources/translations\validators.sv.xlf</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\form/Resources/translations\validators.sv.xlf</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\security-core/Resources/translations\security.sv.xlf</argument>
-            <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\friendsofsymfony\user-bundle/Resources/translations\FOSUserBundle.sv.yml</argument>
-            <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\friendsofsymfony\user-bundle/Resources/translations\validators.sv.yml</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\knplabs\knp-paginator-bundle/translations\KnpPaginatorBundle.sv.xliff</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\easycorp\easyadmin-bundle\src/Resources/translations\EasyAdminBundle.sv.php</argument>
           </argument>
@@ -2233,8 +2188,6 @@
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\validator/Resources/translations\validators.th.xlf</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\form/Resources/translations\validators.th.xlf</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\security-core/Resources/translations\security.th.xlf</argument>
-            <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\friendsofsymfony\user-bundle/Resources/translations\FOSUserBundle.th.yml</argument>
-            <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\friendsofsymfony\user-bundle/Resources/translations\validators.th.yml</argument>
           </argument>
           <argument key="tl" type="collection">
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\validator/Resources/translations\validators.tl.xlf</argument>
@@ -2245,8 +2198,6 @@
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\validator/Resources/translations\validators.tr.xlf</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\form/Resources/translations\validators.tr.xlf</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\security-core/Resources/translations\security.tr.xlf</argument>
-            <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\friendsofsymfony\user-bundle/Resources/translations\FOSUserBundle.tr.yml</argument>
-            <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\friendsofsymfony\user-bundle/Resources/translations\validators.tr.yml</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\knplabs\knp-paginator-bundle/translations\KnpPaginatorBundle.tr.xliff</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\vich\uploader-bundle/translations\messages.tr.yaml</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\easycorp\easyadmin-bundle\src/Resources/translations\EasyAdminBundle.tr.php</argument>
@@ -2257,8 +2208,6 @@
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\validator/Resources/translations\validators.uk.xlf</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\form/Resources/translations\validators.uk.xlf</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\security-core/Resources/translations\security.uk.xlf</argument>
-            <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\friendsofsymfony\user-bundle/Resources/translations\FOSUserBundle.uk.yml</argument>
-            <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\friendsofsymfony\user-bundle/Resources/translations\validators.uk.yml</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\knplabs\knp-paginator-bundle/translations\KnpPaginatorBundle.uk.xliff</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\vich\uploader-bundle/translations\messages.uk.yaml</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\easycorp\easyadmin-bundle\src/Resources/translations\EasyAdminBundle.uk.php</argument>
@@ -2279,15 +2228,11 @@
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\validator/Resources/translations\validators.vi.xlf</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\form/Resources/translations\validators.vi.xlf</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\security-core/Resources/translations\security.vi.xlf</argument>
-            <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\friendsofsymfony\user-bundle/Resources/translations\FOSUserBundle.vi.yml</argument>
-            <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\friendsofsymfony\user-bundle/Resources/translations\validators.vi.yml</argument>
           </argument>
           <argument key="zh_CN" type="collection">
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\validator/Resources/translations\validators.zh_CN.xlf</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\form/Resources/translations\validators.zh_CN.xlf</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\security-core/Resources/translations\security.zh_CN.xlf</argument>
-            <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\friendsofsymfony\user-bundle/Resources/translations\FOSUserBundle.zh_CN.yml</argument>
-            <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\friendsofsymfony\user-bundle/Resources/translations\validators.zh_CN.yml</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\easycorp\easyadmin-bundle\src/Resources/translations\EasyAdminBundle.zh_CN.php</argument>
           </argument>
           <argument key="zh_TW" type="collection">
@@ -2295,21 +2240,7 @@
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\form/Resources/translations\validators.zh_TW.xlf</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\security-core/Resources/translations\security.zh_TW.xlf</argument>
           </argument>
-          <argument key="bn" type="collection">
-            <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\friendsofsymfony\user-bundle/Resources/translations\FOSUserBundle.bn.yml</argument>
-            <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\friendsofsymfony\user-bundle/Resources/translations\validators.bn.yml</argument>
-          </argument>
-          <argument key="bn_BD" type="collection">
-            <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\friendsofsymfony\user-bundle/Resources/translations\FOSUserBundle.bn_BD.yml</argument>
-            <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\friendsofsymfony\user-bundle/Resources/translations\validators.bn_BD.yml</argument>
-          </argument>
-          <argument key="eo" type="collection">
-            <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\friendsofsymfony\user-bundle/Resources/translations\FOSUserBundle.eo.yml</argument>
-            <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\friendsofsymfony\user-bundle/Resources/translations\validators.eo.yml</argument>
-          </argument>
           <argument key="ky" type="collection">
-            <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\friendsofsymfony\user-bundle/Resources/translations\FOSUserBundle.ky.yml</argument>
-            <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\friendsofsymfony\user-bundle/Resources/translations\validators.ky.yml</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\knplabs\knp-paginator-bundle/translations\KnpPaginatorBundle.ky.xliff</argument>
           </argument>
           <argument key="sw" type="collection">
@@ -2330,7 +2261,6 @@
           <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\validator/Resources/translations</argument>
           <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\form/Resources/translations</argument>
           <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\security-core/Resources/translations</argument>
-          <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\friendsofsymfony\user-bundle/Resources/translations</argument>
           <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\knplabs\knp-paginator-bundle/translations</argument>
           <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\vich\uploader-bundle/translations</argument>
           <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\easycorp\easyadmin-bundle\src/Resources/translations</argument>
@@ -2355,7 +2285,6 @@
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\validator/Resources/translations</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\form/Resources/translations</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\security-core/Resources/translations</argument>
-            <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\friendsofsymfony\user-bundle/Resources/translations</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\knplabs\knp-paginator-bundle/translations</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\vich\uploader-bundle/translations</argument>
             <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\easycorp\easyadmin-bundle\src/Resources/translations</argument>
@@ -3291,94 +3220,6 @@
         <argument>0</argument>
       </call>
       <call method="addListener">
-        <argument>fos_user.security.implicit_login</argument>
-        <argument type="collection">
-          <argument type="service_closure" id="fos_user.security.interactive_login_listener"/>
-          <argument>onImplicitLogin</argument>
-        </argument>
-        <argument>0</argument>
-      </call>
-      <call method="addListener">
-        <argument>security.interactive_login</argument>
-        <argument type="collection">
-          <argument type="service_closure" id="fos_user.security.interactive_login_listener"/>
-          <argument>onSecurityInteractiveLogin</argument>
-        </argument>
-        <argument>0</argument>
-      </call>
-      <call method="addListener">
-        <argument>fos_user.registration.completed</argument>
-        <argument type="collection">
-          <argument type="service_closure" id="fos_user.listener.authentication"/>
-          <argument>authenticate</argument>
-        </argument>
-        <argument>0</argument>
-      </call>
-      <call method="addListener">
-        <argument>fos_user.registration.confirmed</argument>
-        <argument type="collection">
-          <argument type="service_closure" id="fos_user.listener.authentication"/>
-          <argument>authenticate</argument>
-        </argument>
-        <argument>0</argument>
-      </call>
-      <call method="addListener">
-        <argument>fos_user.resetting.reset.completed</argument>
-        <argument type="collection">
-          <argument type="service_closure" id="fos_user.listener.authentication"/>
-          <argument>authenticate</argument>
-        </argument>
-        <argument>0</argument>
-      </call>
-      <call method="addListener">
-        <argument>fos_user.change_password.edit.completed</argument>
-        <argument type="collection">
-          <argument type="service_closure" id="fos_user.listener.flash"/>
-          <argument>addSuccessFlash</argument>
-        </argument>
-        <argument>0</argument>
-      </call>
-      <call method="addListener">
-        <argument>fos_user.profile.edit.completed</argument>
-        <argument type="collection">
-          <argument type="service_closure" id="fos_user.listener.flash"/>
-          <argument>addSuccessFlash</argument>
-        </argument>
-        <argument>0</argument>
-      </call>
-      <call method="addListener">
-        <argument>fos_user.registration.completed</argument>
-        <argument type="collection">
-          <argument type="service_closure" id="fos_user.listener.flash"/>
-          <argument>addSuccessFlash</argument>
-        </argument>
-        <argument>0</argument>
-      </call>
-      <call method="addListener">
-        <argument>fos_user.resetting.reset.completed</argument>
-        <argument type="collection">
-          <argument type="service_closure" id="fos_user.listener.flash"/>
-          <argument>addSuccessFlash</argument>
-        </argument>
-        <argument>0</argument>
-      </call>
-      <call method="addListener">
-        <argument>fos_user.resetting.reset.initialize</argument>
-        <argument type="collection">
-          <argument type="service_closure" id="fos_user.listener.resetting"/>
-          <argument>onResettingResetInitialize</argument>
-        </argument>
-        <argument>0</argument>
-      </call>
-      <call method="addListener">
-        <argument>fos_user.resetting.reset.success</argument>
-        <argument type="collection">
-          <argument type="service_closure" id="fos_user.listener.resetting"/>
-          <argument>onResettingResetSuccess</argument>
-        </argument>
-        <argument>0</argument>
-      </call>
-      <call method="addListener">
         <argument>knp_pager.before</argument>
         <argument type="collection">
           <argument type="service_closure" id="knp_paginator.subscriber.paginate"/>
@@ -3918,7 +3759,7 @@
       <argument type="service" id="form.registry"/>
     </service>
     <service id="form.extension" class="Symfony\Component\Form\Extension\DependencyInjection\DependencyInjectionExtension">
-      <argument type="service" id=".service_locator.R.yi6Od"/>
+      <argument type="service" id=".service_locator.J5.Wcgw"/>
       <argument type="collection">
         <argument key="Symfony\Component\Form\Extension\Core\Type\FormType" type="iterator">
           <argument type="service" id="form.type_extension.form.transformation_failure_handling"/>
@@ -4032,7 +3873,6 @@
       <call method="addXmlMappings">
         <argument type="collection">
           <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\symfony\form/Resources/config/validation.xml</argument>
-          <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\friendsofsymfony\user-bundle/Resources/config/validation.xml</argument>
         </argument>
       </call>
       <call method="enableAnnotationMapping">
@@ -4047,7 +3887,6 @@
       <call method="addObjectInitializers">
         <argument type="collection">
           <argument type="service" id="doctrine.orm.validator_initializer"/>
-          <argument type="service" id="fos_user.validator.initializer"/>
         </argument>
       </call>
       <call method="addLoader">
@@ -4055,9 +3894,6 @@
       </call>
       <call method="addLoader">
         <argument type="service" id="doctrine.orm.default_entity_manager.validator_loader"/>
-      </call>
-      <call method="addXmlMapping">
-        <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\friendsofsymfony\user-bundle\DependencyInjection\Compiler/../../Resources/config/storage-validation/orm.xml</argument>
       </call>
       <factory class="Symfony\Component\Validator\Validation" method="createValidatorBuilder"/>
     </service>
@@ -4978,12 +4814,11 @@
       </call>
     </service>
     <service id="doctrine.dbal.default_connection.event_manager" class="Symfony\Bridge\Doctrine\ContainerAwareEventManager">
-      <argument type="service" id=".service_locator.HJ85R4b"/>
+      <argument type="service" id=".service_locator.TcKhdzh"/>
       <argument type="collection">
         <argument>doctrine.orm.messenger.doctrine_schema_subscriber</argument>
         <argument>doctrine.orm.listeners.doctrine_dbal_cache_adapter_schema_subscriber</argument>
         <argument>doctrine.orm.listeners.doctrine_token_provider_schema_subscriber</argument>
-        <argument>fos_user.user_listener</argument>
         <argument type="collection">
           <argument type="collection">
             <argument>loadClassMetadata</argument>
@@ -5078,7 +4913,7 @@
     <service id="doctrine.orm.configuration" class="Doctrine\ORM\Configuration" abstract="true"/>
     <service id="doctrine.orm.entity_manager.abstract" class="Doctrine\ORM\EntityManager" lazy="true" abstract="true"/>
     <service id="doctrine.orm.container_repository_factory" class="Doctrine\Bundle\DoctrineBundle\Repository\ContainerRepositoryFactory">
-      <argument type="service" id=".service_locator.N41nchi"/>
+      <argument type="service" id=".service_locator.tSRzGHD"/>
     </service>
     <service id="doctrine.orm.manager_configurator.abstract" class="Doctrine\Bundle\DoctrineBundle\ManagerConfigurator" abstract="true">
       <argument type="collection"/>
@@ -5811,14 +5646,6 @@
         <argument>!Security</argument>
       </call>
       <call method="addPath">
-        <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\friendsofsymfony\user-bundle/Resources/views</argument>
-        <argument>FOSUser</argument>
-      </call>
-      <call method="addPath">
-        <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\friendsofsymfony\user-bundle/Resources/views</argument>
-        <argument>!FOSUser</argument>
-      </call>
-      <call method="addPath">
         <argument>C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\knplabs\knp-paginator-bundle/templates</argument>
         <argument>KnpPaginator</argument>
       </call>
@@ -6262,7 +6089,15 @@
         </service>
       </argument>
     </service>
-    <service id="security.access_map" class="Symfony\Component\Security\Http\AccessMap"/>
+    <service id="security.access_map" class="Symfony\Component\Security\Http\AccessMap">
+      <call method="add">
+        <argument type="service" id=".security.request_matcher.28NqKnb"/>
+        <argument type="collection">
+          <argument>ROLE_ADMIN</argument>
+        </argument>
+        <argument>null</argument>
+      </call>
+    </service>
     <service id="security.context_listener" class="Symfony\Component\Security\Http\Firewall\ContextListener">
       <tag name="monolog.logger" channel="security"/>
       <argument type="service" id="security.untracked_token_storage"/>
@@ -6662,14 +6497,6 @@
         <argument>0</argument>
       </call>
       <call method="addListener">
-        <argument>security.interactive_login</argument>
-        <argument type="collection">
-          <argument type="service_closure" id="fos_user.security.interactive_login_listener"/>
-          <argument>onSecurityInteractiveLogin</argument>
-        </argument>
-        <argument>0</argument>
-      </call>
-      <call method="addListener">
         <argument>Symfony\Component\Security\Http\Event\CheckPassportEvent</argument>
         <argument type="collection">
           <argument type="service_closure" id="security.listener.csrf_protection"/>
@@ -6781,6 +6608,14 @@
       <argument type="collection">
         <argument key="security.firewall.map.context.dev" type="service_closure" id="security.firewall.map.context.dev"/>
         <argument key="security.firewall.map.context.main" type="service_closure" id="security.firewall.map.context.main"/>
+      </argument>
+    </service>
+    <service id=".security.request_matcher.obhk0jm" class="Symfony\Component\HttpFoundation\RequestMatcher\PathRequestMatcher">
+      <argument>^/admin</argument>
+    </service>
+    <service id=".security.request_matcher.28NqKnb" class="Symfony\Component\HttpFoundation\ChainRequestMatcher">
+      <argument type="collection">
+        <argument type="service" id=".security.request_matcher.obhk0jm"/>
       </argument>
     </service>
     <service id="security.command.user_password_hash" class="Symfony\Component\PasswordHasher\Command\UserPasswordHashCommand">
@@ -7101,253 +6936,6 @@
     </service>
     <service id="framework_extra_bundle.argument_name_convertor" class="Sensio\Bundle\FrameworkExtraBundle\Request\ArgumentNameConverter">
       <argument type="service" id="argument_metadata_factory"/>
-    </service>
-    <service id="fos_user.user_manager.default" class="FOS\UserBundle\Doctrine\UserManager">
-      <argument type="service" id="fos_user.util.password_updater"/>
-      <argument type="service" id="fos_user.util.canonical_fields_updater"/>
-      <argument type="service" id="fos_user.object_manager"/>
-      <argument>App\Entity\User</argument>
-    </service>
-    <service id="fos_user.object_manager" class="Doctrine\Persistence\ObjectManager">
-      <argument>null</argument>
-      <factory service="doctrine" method="getManager"/>
-    </service>
-    <service id="fos_user.user_listener" class="FOS\UserBundle\Doctrine\UserListener">
-      <tag name="doctrine.event_subscriber"/>
-      <argument type="service" id="fos_user.util.password_updater"/>
-      <argument type="service" id="fos_user.util.canonical_fields_updater"/>
-    </service>
-    <service id="fos_user.validator.initializer" class="FOS\UserBundle\Validator\Initializer">
-      <tag name="validator.initializer"/>
-      <argument type="service" id="fos_user.util.canonical_fields_updater"/>
-    </service>
-    <service id="fos_user.security.interactive_login_listener" class="FOS\UserBundle\EventListener\LastLoginListener">
-      <tag name="kernel.event_subscriber"/>
-      <argument type="service" id="fos_user.user_manager.default"/>
-    </service>
-    <service id="fos_user.security.login_manager" class="FOS\UserBundle\Security\LoginManager">
-      <argument type="service" id="security.token_storage"/>
-      <argument type="service" id="security.user_checker"/>
-      <argument type="service" id="security.authentication.session_strategy"/>
-      <argument type="service" id="request_stack"/>
-      <argument>null</argument>
-    </service>
-    <service id="fos_user.user_provider.username" class="FOS\UserBundle\Security\UserProvider">
-      <argument type="service" id="fos_user.user_manager.default"/>
-    </service>
-    <service id="fos_user.user_provider.username_email" class="FOS\UserBundle\Security\EmailUserProvider">
-      <argument type="service" id="fos_user.user_manager.default"/>
-    </service>
-    <service id="fos_user.user_provider.email" class="FOS\UserBundle\Security\EmailProvider">
-      <argument type="service" id="fos_user.user_manager.default"/>
-    </service>
-    <service id="fos_user.security.controller" class="FOS\UserBundle\Controller\SecurityController" public="true">
-      <tag name="container.service_subscriber"/>
-      <argument type="service" id="security.authentication_utils"/>
-      <argument type="service" id="security.csrf.token_manager" on-invalid="null"/>
-      <call method="setContainer">
-        <argument type="service" id=".service_locator.CshazM0.fos_user.security.controller"/>
-      </call>
-    </service>
-    <service id="fos_user.user_checker" class="FOS\UserBundle\Security\UserChecker"/>
-    <service id="fos_user.util.canonicalizer.default" class="FOS\UserBundle\Util\Canonicalizer"/>
-    <service id="fos_user.util.user_manipulator" class="FOS\UserBundle\Util\UserManipulator">
-      <argument type="service" id="fos_user.user_manager.default"/>
-      <argument type="service" id="debug.event_dispatcher"/>
-      <argument type="service" id="request_stack"/>
-    </service>
-    <service id="fos_user.util.token_generator.default" class="FOS\UserBundle\Util\TokenGenerator"/>
-    <service id="fos_user.util.password_updater" class="FOS\UserBundle\Util\HashingPasswordUpdater">
-      <argument type="service" id="security.password_hasher_factory"/>
-    </service>
-    <service id="fos_user.util.canonical_fields_updater" class="FOS\UserBundle\Util\CanonicalFieldsUpdater">
-      <argument type="service" id="fos_user.util.canonicalizer.default"/>
-      <argument type="service" id="fos_user.util.canonicalizer.default"/>
-    </service>
-    <service id="fos_user.mailer.twig_swift" class="FOS\UserBundle\Mailer\TwigSwiftMailer">
-      <tag name="fos_user.requires_swift"/>
-      <argument type="service" id="swiftmailer.mailer"/>
-      <argument type="service" id="router.default"/>
-      <argument type="service" id="twig"/>
-      <argument type="collection">
-        <argument key="template" type="collection">
-          <argument key="confirmation">@FOSUser/Registration/email.txt.twig</argument>
-          <argument key="resetting">@FOSUser/Resetting/email.txt.twig</argument>
-        </argument>
-        <argument key="from_email" type="collection">
-          <argument key="confirmation">%fos_user.registration.confirmation.from_email%</argument>
-          <argument key="resetting">%fos_user.resetting.email.from_email%</argument>
-        </argument>
-      </argument>
-    </service>
-    <service id="fos_user.mailer.noop" class="FOS\UserBundle\Mailer\NoopMailer"/>
-    <service id="fos_user.listener.authentication" class="FOS\UserBundle\EventListener\AuthenticationListener">
-      <tag name="kernel.event_subscriber"/>
-      <argument type="service" id="fos_user.security.login_manager"/>
-      <argument>main</argument>
-    </service>
-    <service id="fos_user.command.activate_user" class="FOS\UserBundle\Command\ActivateUserCommand">
-      <tag name="console.command" command="fos:user:activate"/>
-      <tag name="container.no_preload"/>
-      <argument type="service" id="fos_user.util.user_manipulator"/>
-      <call method="setName">
-        <argument>fos:user:activate</argument>
-      </call>
-      <call method="setDescription">
-        <argument>Activate a user</argument>
-      </call>
-    </service>
-    <service id="fos_user.command.change_password" class="FOS\UserBundle\Command\ChangePasswordCommand">
-      <tag name="console.command" command="fos:user:change-password"/>
-      <tag name="container.no_preload"/>
-      <argument type="service" id="fos_user.util.user_manipulator"/>
-      <call method="setName">
-        <argument>fos:user:change-password</argument>
-      </call>
-      <call method="setDescription">
-        <argument>Change the password of a user.</argument>
-      </call>
-    </service>
-    <service id="fos_user.command.create_user" class="FOS\UserBundle\Command\CreateUserCommand">
-      <tag name="console.command" command="fos:user:create"/>
-      <tag name="container.no_preload"/>
-      <argument type="service" id="fos_user.util.user_manipulator"/>
-      <call method="setName">
-        <argument>fos:user:create</argument>
-      </call>
-      <call method="setDescription">
-        <argument>Create a user.</argument>
-      </call>
-    </service>
-    <service id="fos_user.command.deactivate_user" class="FOS\UserBundle\Command\DeactivateUserCommand">
-      <tag name="console.command" command="fos:user:deactivate"/>
-      <tag name="container.no_preload"/>
-      <argument type="service" id="fos_user.util.user_manipulator"/>
-      <call method="setName">
-        <argument>fos:user:deactivate</argument>
-      </call>
-      <call method="setDescription">
-        <argument>Deactivate a user</argument>
-      </call>
-    </service>
-    <service id="fos_user.command.demote_user" class="FOS\UserBundle\Command\DemoteUserCommand">
-      <tag name="console.command" command="fos:user:demote"/>
-      <tag name="container.no_preload"/>
-      <argument type="service" id="fos_user.util.user_manipulator"/>
-      <call method="setName">
-        <argument>fos:user:demote</argument>
-      </call>
-      <call method="setDescription">
-        <argument>Demote a user by removing a role</argument>
-      </call>
-    </service>
-    <service id="fos_user.command.promote_user" class="FOS\UserBundle\Command\PromoteUserCommand">
-      <tag name="console.command" command="fos:user:promote"/>
-      <tag name="container.no_preload"/>
-      <argument type="service" id="fos_user.util.user_manipulator"/>
-      <call method="setName">
-        <argument>fos:user:promote</argument>
-      </call>
-      <call method="setDescription">
-        <argument>Promotes a user by adding a role</argument>
-      </call>
-    </service>
-    <service id="fos_user.listener.flash" class="FOS\UserBundle\EventListener\FlashListener">
-      <tag name="kernel.event_subscriber"/>
-      <argument type="service" id="request_stack"/>
-      <argument type="service" id="translator.data_collector"/>
-    </service>
-    <service id="fos_user.username_form_type" class="FOS\UserBundle\Form\Type\UsernameFormType">
-      <tag name="form.type" alias="fos_user_username"/>
-      <argument type="service" id="fos_user.user_to_username_transformer"/>
-    </service>
-    <service id="fos_user.user_to_username_transformer" class="FOS\UserBundle\Form\DataTransformer\UserToUsernameTransformer">
-      <argument type="service" id="fos_user.user_manager.default"/>
-    </service>
-    <service id="fos_user.profile.form.factory" class="FOS\UserBundle\Form\Factory\FormFactory">
-      <argument type="service" id="form.factory"/>
-      <argument>fos_user_profile_form</argument>
-      <argument>FOS\UserBundle\Form\Type\ProfileFormType</argument>
-      <argument>%fos_user.profile.form.validation_groups%</argument>
-    </service>
-    <service id="fos_user.profile.form.type" class="FOS\UserBundle\Form\Type\ProfileFormType">
-      <tag name="form.type" alias="fos_user_profile"/>
-      <argument>App\Entity\User</argument>
-    </service>
-    <service id="fos_user.profile.controller" class="FOS\UserBundle\Controller\ProfileController" public="true">
-      <tag name="container.service_subscriber"/>
-      <argument type="service" id="debug.event_dispatcher"/>
-      <argument type="service" id="fos_user.profile.form.factory"/>
-      <argument type="service" id="fos_user.user_manager.default"/>
-      <call method="setContainer">
-        <argument type="service" id=".service_locator.CshazM0.fos_user.profile.controller"/>
-      </call>
-    </service>
-    <service id="fos_user.registration.form.factory" class="FOS\UserBundle\Form\Factory\FormFactory">
-      <argument type="service" id="form.factory"/>
-      <argument>fos_user_registration_form</argument>
-      <argument>FOS\UserBundle\Form\Type\RegistrationFormType</argument>
-      <argument>%fos_user.registration.form.validation_groups%</argument>
-    </service>
-    <service id="fos_user.registration.form.type" class="FOS\UserBundle\Form\Type\RegistrationFormType">
-      <tag name="form.type" alias="fos_user_registration"/>
-      <argument>App\Entity\User</argument>
-    </service>
-    <service id="fos_user.registration.controller" class="FOS\UserBundle\Controller\RegistrationController" public="true">
-      <tag name="container.service_subscriber"/>
-      <argument type="service" id="debug.event_dispatcher"/>
-      <argument type="service" id="fos_user.registration.form.factory"/>
-      <argument type="service" id="fos_user.user_manager.default"/>
-      <argument type="service" id="security.token_storage"/>
-      <call method="setContainer">
-        <argument type="service" id=".service_locator.CshazM0.fos_user.registration.controller"/>
-      </call>
-    </service>
-    <service id="fos_user.change_password.form.factory" class="FOS\UserBundle\Form\Factory\FormFactory">
-      <argument type="service" id="form.factory"/>
-      <argument>fos_user_change_password_form</argument>
-      <argument>FOS\UserBundle\Form\Type\ChangePasswordFormType</argument>
-      <argument>%fos_user.change_password.form.validation_groups%</argument>
-    </service>
-    <service id="fos_user.change_password.form.type" class="FOS\UserBundle\Form\Type\ChangePasswordFormType">
-      <tag name="form.type" alias="fos_user_change_password"/>
-      <argument>App\Entity\User</argument>
-    </service>
-    <service id="fos_user.change_password.controller" class="FOS\UserBundle\Controller\ChangePasswordController" public="true">
-      <tag name="container.service_subscriber"/>
-      <argument type="service" id="debug.event_dispatcher"/>
-      <argument type="service" id="fos_user.change_password.form.factory"/>
-      <argument type="service" id="fos_user.user_manager.default"/>
-      <call method="setContainer">
-        <argument type="service" id=".service_locator.CshazM0.fos_user.change_password.controller"/>
-      </call>
-    </service>
-    <service id="fos_user.resetting.form.factory" class="FOS\UserBundle\Form\Factory\FormFactory">
-      <argument type="service" id="form.factory"/>
-      <argument>fos_user_resetting_form</argument>
-      <argument>FOS\UserBundle\Form\Type\ResettingFormType</argument>
-      <argument>%fos_user.resetting.form.validation_groups%</argument>
-    </service>
-    <service id="fos_user.resetting.form.type" class="FOS\UserBundle\Form\Type\ResettingFormType">
-      <tag name="form.type" alias="fos_user_resetting"/>
-      <argument>App\Entity\User</argument>
-    </service>
-    <service id="fos_user.listener.resetting" class="FOS\UserBundle\EventListener\ResettingListener">
-      <tag name="kernel.event_subscriber"/>
-      <argument type="service" id="router.default"/>
-      <argument>86400</argument>
-    </service>
-    <service id="fos_user.resetting.controller" class="FOS\UserBundle\Controller\ResettingController" public="true">
-      <tag name="container.service_subscriber"/>
-      <argument type="service" id="debug.event_dispatcher"/>
-      <argument type="service" id="fos_user.resetting.form.factory"/>
-      <argument type="service" id="fos_user.user_manager.default"/>
-      <argument type="service" id="fos_user.util.token_generator.default"/>
-      <argument type="service" id="fos_user.mailer.noop"/>
-      <argument>7200</argument>
-      <call method="setContainer">
-        <argument type="service" id=".service_locator.CshazM0.fos_user.resetting.controller"/>
-      </call>
     </service>
     <service id="knp_paginator" class="Knp\Component\Pager\Paginator" public="true" lazy="true">
       <tag name="proxy" interface="Knp\Component\Pager\PaginatorInterface"/>
@@ -7987,6 +7575,24 @@
       <argument>3600</argument>
       <argument>3600</argument>
     </service>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\AdminArticleController" class="App\Controller\AdminArticleController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\AdminArticleController" class="App\Controller\AdminArticleController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Controller\AdminArticleController" class="App\Controller\AdminArticleController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\AdminCategoryController" class="App\Controller\AdminCategoryController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\AdminCategoryController" class="App\Controller\AdminCategoryController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Controller\AdminCategoryController" class="App\Controller\AdminCategoryController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\AdminCommentController" class="App\Controller\AdminCommentController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\AdminCommentController" class="App\Controller\AdminCommentController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Controller\AdminCommentController" class="App\Controller\AdminCommentController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\AdminUserController" class="App\Controller\AdminUserController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\AdminUserController" class="App\Controller\AdminUserController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Controller\AdminUserController" class="App\Controller\AdminUserController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\ArticleController" class="App\Controller\ArticleController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\ArticleController" class="App\Controller\ArticleController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Controller\ArticleController" class="App\Controller\ArticleController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\CategoryController" class="App\Controller\CategoryController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\CategoryController" class="App\Controller\CategoryController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Controller\CategoryController" class="App\Controller\CategoryController" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\HomeController" class="App\Controller\HomeController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\HomeController" class="App\Controller\HomeController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\HomeController" class="App\Controller\HomeController" autowire="true" autoconfigure="true" abstract="true"/>
@@ -7999,12 +7605,30 @@
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\SecurityController" class="App\Controller\SecurityController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\SecurityController" class="App\Controller\SecurityController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\SecurityController" class="App\Controller\SecurityController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\Article1Type" class="App\Form\Article1Type" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Form\Article1Type" class="App\Form\Article1Type" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\ArticleType" class="App\Form\ArticleType" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Form\ArticleType" class="App\Form\ArticleType" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\Category1Type" class="App\Form\Category1Type" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Form\Category1Type" class="App\Form\Category1Type" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\CategoryType" class="App\Form\CategoryType" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Form\CategoryType" class="App\Form\CategoryType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\ChangePasswordFormType" class="App\Form\ChangePasswordFormType" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Form\ChangePasswordFormType" class="App\Form\ChangePasswordFormType" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\CommentType" class="App\Form\CommentType" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Form\CommentType" class="App\Form\CommentType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\RegistrationFormType" class="App\Form\RegistrationFormType" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Form\RegistrationFormType" class="App\Form\RegistrationFormType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\ResetPasswordRequestFormType" class="App\Form\ResetPasswordRequestFormType" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Form\ResetPasswordRequestFormType" class="App\Form\ResetPasswordRequestFormType" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\UserType" class="App\Form\UserType" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Form\UserType" class="App\Form\UserType" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\ArticleRepository" class="App\Repository\ArticleRepository" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Repository\ArticleRepository" class="App\Repository\ArticleRepository" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\CategoryRepository" class="App\Repository\CategoryRepository" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Repository\CategoryRepository" class="App\Repository\CategoryRepository" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\CommentRepository" class="App\Repository\CommentRepository" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Repository\CommentRepository" class="App\Repository\CommentRepository" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\ResetPasswordRequestRepository" class="App\Repository\ResetPasswordRequestRepository" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Repository\ResetPasswordRequestRepository" class="App\Repository\ResetPasswordRequestRepository" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepositoryInterface.0.App\Repository\UserRepository" class="App\Repository\UserRepository" autowire="true" abstract="true"/>
@@ -8418,6 +8042,97 @@
         <argument key="loader" type="service_closure" id=".errored..service_locator.y4_Zrx..Symfony\Component\Config\Loader\LoaderInterface"/>
       </argument>
     </service>
+    <service id=".service_locator.b12wXHr" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="articleRepository" type="service_closure" id="App\Repository\ArticleRepository"/>
+      </argument>
+    </service>
+    <service id=".service_locator.XqCCpgA" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="article" type="service_closure" id=".errored..service_locator.XqCCpgA.App\Entity\Article"/>
+      </argument>
+    </service>
+    <service id=".service_locator.tOLlTpj" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="article" type="service_closure" id=".errored..service_locator.tOLlTpj.App\Entity\Article"/>
+        <argument key="articleRepository" type="service_closure" id="App\Repository\ArticleRepository"/>
+      </argument>
+    </service>
+    <service id=".service_locator.3opkxl5" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="categoryRepository" type="service_closure" id="App\Repository\CategoryRepository"/>
+      </argument>
+    </service>
+    <service id=".service_locator.8IESKP1" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="category" type="service_closure" id=".errored..service_locator.8IESKP1.App\Entity\Category"/>
+      </argument>
+    </service>
+    <service id=".service_locator.0CRkV7m" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="category" type="service_closure" id=".errored..service_locator.0CRkV7m.App\Entity\Category"/>
+        <argument key="categoryRepository" type="service_closure" id="App\Repository\CategoryRepository"/>
+      </argument>
+    </service>
+    <service id=".service_locator.C15PbZX" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="commentRepository" type="service_closure" id="App\Repository\CommentRepository"/>
+      </argument>
+    </service>
+    <service id=".service_locator.hAGYStx" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="comment" type="service_closure" id=".errored..service_locator.hAGYStx.App\Entity\Comment"/>
+      </argument>
+    </service>
+    <service id=".service_locator.Xz_hH6b" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="comment" type="service_closure" id=".errored..service_locator.Xz_hH6b.App\Entity\Comment"/>
+        <argument key="commentRepository" type="service_closure" id="App\Repository\CommentRepository"/>
+      </argument>
+    </service>
+    <service id=".service_locator.kPUOGb8" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="userRepository" type="service_closure" id="App\Repository\UserRepository"/>
+      </argument>
+    </service>
+    <service id=".service_locator.vzUXUAi" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="passwordHasher" type="service_closure" id="security.user_password_hasher"/>
+        <argument key="userRepository" type="service_closure" id="App\Repository\UserRepository"/>
+      </argument>
+    </service>
+    <service id=".service_locator.Hz5btge" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="user" type="service_closure" id=".errored..service_locator.Hz5btge.App\Entity\User"/>
+      </argument>
+    </service>
+    <service id=".service_locator.gDDVCIf" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="passwordHasher" type="service_closure" id="security.user_password_hasher"/>
+        <argument key="user" type="service_closure" id=".errored..service_locator.gDDVCIf.App\Entity\User"/>
+        <argument key="userRepository" type="service_closure" id="App\Repository\UserRepository"/>
+      </argument>
+    </service>
+    <service id=".service_locator.yVvQ1jo" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="user" type="service_closure" id=".errored..service_locator.yVvQ1jo.App\Entity\User"/>
+        <argument key="userRepository" type="service_closure" id="App\Repository\UserRepository"/>
+      </argument>
+    </service>
     <service id=".service_locator.e_4zbH4" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -8445,9 +8160,32 @@
         <argument key="authenticationUtils" type="service_closure" id="security.authentication_utils"/>
       </argument>
     </service>
-    <service id=".service_locator.rPkSHKI" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.cE2djQO" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
+        <argument key="App\Controller\AdminArticleController::delete" type="service_closure" id=".service_locator.tOLlTpj"/>
+        <argument key="App\Controller\AdminArticleController::edit" type="service_closure" id=".service_locator.tOLlTpj"/>
+        <argument key="App\Controller\AdminArticleController::index" type="service_closure" id=".service_locator.b12wXHr"/>
+        <argument key="App\Controller\AdminArticleController::new" type="service_closure" id=".service_locator.b12wXHr"/>
+        <argument key="App\Controller\AdminArticleController::show" type="service_closure" id=".service_locator.XqCCpgA"/>
+        <argument key="App\Controller\AdminCategoryController::delete" type="service_closure" id=".service_locator.0CRkV7m"/>
+        <argument key="App\Controller\AdminCategoryController::edit" type="service_closure" id=".service_locator.0CRkV7m"/>
+        <argument key="App\Controller\AdminCategoryController::index" type="service_closure" id=".service_locator.3opkxl5"/>
+        <argument key="App\Controller\AdminCategoryController::new" type="service_closure" id=".service_locator.3opkxl5"/>
+        <argument key="App\Controller\AdminCategoryController::show" type="service_closure" id=".service_locator.8IESKP1"/>
+        <argument key="App\Controller\AdminCommentController::delete" type="service_closure" id=".service_locator.Xz_hH6b"/>
+        <argument key="App\Controller\AdminCommentController::edit" type="service_closure" id=".service_locator.Xz_hH6b"/>
+        <argument key="App\Controller\AdminCommentController::index" type="service_closure" id=".service_locator.C15PbZX"/>
+        <argument key="App\Controller\AdminCommentController::new" type="service_closure" id=".service_locator.C15PbZX"/>
+        <argument key="App\Controller\AdminCommentController::show" type="service_closure" id=".service_locator.hAGYStx"/>
+        <argument key="App\Controller\AdminUserController::delete" type="service_closure" id=".service_locator.yVvQ1jo"/>
+        <argument key="App\Controller\AdminUserController::edit" type="service_closure" id=".service_locator.gDDVCIf"/>
+        <argument key="App\Controller\AdminUserController::index" type="service_closure" id=".service_locator.kPUOGb8"/>
+        <argument key="App\Controller\AdminUserController::new" type="service_closure" id=".service_locator.vzUXUAi"/>
+        <argument key="App\Controller\AdminUserController::show" type="service_closure" id=".service_locator.Hz5btge"/>
+        <argument key="App\Controller\ArticleController::show" type="service_closure" id=".service_locator.XqCCpgA"/>
+        <argument key="App\Controller\CategoryController::index" type="service_closure" id=".service_locator.3opkxl5"/>
+        <argument key="App\Controller\CategoryController::show" type="service_closure" id=".service_locator.8IESKP1"/>
         <argument key="App\Controller\RegistrationController::register" type="service_closure" id=".service_locator.e_4zbH4"/>
         <argument key="App\Controller\ResetPasswordController::request" type="service_closure" id=".service_locator.EE0.cm9"/>
         <argument key="App\Controller\ResetPasswordController::reset" type="service_closure" id=".service_locator.Z9ydiC1"/>
@@ -8456,6 +8194,29 @@
         <argument key="App\Kernel::registerContainerConfiguration" type="service_closure" id=".service_locator.y4_Zrx."/>
         <argument key="kernel::loadRoutes" type="service_closure" id=".service_locator.y4_Zrx."/>
         <argument key="kernel::registerContainerConfiguration" type="service_closure" id=".service_locator.y4_Zrx."/>
+        <argument key="App\Controller\AdminArticleController:delete" type="service_closure" id=".service_locator.tOLlTpj"/>
+        <argument key="App\Controller\AdminArticleController:edit" type="service_closure" id=".service_locator.tOLlTpj"/>
+        <argument key="App\Controller\AdminArticleController:index" type="service_closure" id=".service_locator.b12wXHr"/>
+        <argument key="App\Controller\AdminArticleController:new" type="service_closure" id=".service_locator.b12wXHr"/>
+        <argument key="App\Controller\AdminArticleController:show" type="service_closure" id=".service_locator.XqCCpgA"/>
+        <argument key="App\Controller\AdminCategoryController:delete" type="service_closure" id=".service_locator.0CRkV7m"/>
+        <argument key="App\Controller\AdminCategoryController:edit" type="service_closure" id=".service_locator.0CRkV7m"/>
+        <argument key="App\Controller\AdminCategoryController:index" type="service_closure" id=".service_locator.3opkxl5"/>
+        <argument key="App\Controller\AdminCategoryController:new" type="service_closure" id=".service_locator.3opkxl5"/>
+        <argument key="App\Controller\AdminCategoryController:show" type="service_closure" id=".service_locator.8IESKP1"/>
+        <argument key="App\Controller\AdminCommentController:delete" type="service_closure" id=".service_locator.Xz_hH6b"/>
+        <argument key="App\Controller\AdminCommentController:edit" type="service_closure" id=".service_locator.Xz_hH6b"/>
+        <argument key="App\Controller\AdminCommentController:index" type="service_closure" id=".service_locator.C15PbZX"/>
+        <argument key="App\Controller\AdminCommentController:new" type="service_closure" id=".service_locator.C15PbZX"/>
+        <argument key="App\Controller\AdminCommentController:show" type="service_closure" id=".service_locator.hAGYStx"/>
+        <argument key="App\Controller\AdminUserController:delete" type="service_closure" id=".service_locator.yVvQ1jo"/>
+        <argument key="App\Controller\AdminUserController:edit" type="service_closure" id=".service_locator.gDDVCIf"/>
+        <argument key="App\Controller\AdminUserController:index" type="service_closure" id=".service_locator.kPUOGb8"/>
+        <argument key="App\Controller\AdminUserController:new" type="service_closure" id=".service_locator.vzUXUAi"/>
+        <argument key="App\Controller\AdminUserController:show" type="service_closure" id=".service_locator.Hz5btge"/>
+        <argument key="App\Controller\ArticleController:show" type="service_closure" id=".service_locator.XqCCpgA"/>
+        <argument key="App\Controller\CategoryController:index" type="service_closure" id=".service_locator.3opkxl5"/>
+        <argument key="App\Controller\CategoryController:show" type="service_closure" id=".service_locator.8IESKP1"/>
         <argument key="App\Controller\RegistrationController:register" type="service_closure" id=".service_locator.e_4zbH4"/>
         <argument key="App\Controller\ResetPasswordController:request" type="service_closure" id=".service_locator.EE0.cm9"/>
         <argument key="App\Controller\ResetPasswordController:reset" type="service_closure" id=".service_locator.Z9ydiC1"/>
@@ -8649,20 +8410,21 @@
       <argument type="service" id="debug.argument_resolver.not_tagged_controller.inner"/>
       <argument type="service" id="debug.stopwatch"/>
     </service>
-    <service id=".service_locator.R.yi6Od" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.J5.Wcgw" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
+        <argument key="App\Form\Article1Type" type="service_closure" id="App\Form\Article1Type"/>
+        <argument key="App\Form\ArticleType" type="service_closure" id="App\Form\ArticleType"/>
+        <argument key="App\Form\Category1Type" type="service_closure" id="App\Form\Category1Type"/>
+        <argument key="App\Form\CategoryType" type="service_closure" id="App\Form\CategoryType"/>
         <argument key="App\Form\ChangePasswordFormType" type="service_closure" id="App\Form\ChangePasswordFormType"/>
+        <argument key="App\Form\CommentType" type="service_closure" id="App\Form\CommentType"/>
         <argument key="App\Form\RegistrationFormType" type="service_closure" id="App\Form\RegistrationFormType"/>
         <argument key="App\Form\ResetPasswordRequestFormType" type="service_closure" id="App\Form\ResetPasswordRequestFormType"/>
+        <argument key="App\Form\UserType" type="service_closure" id="App\Form\UserType"/>
         <argument key="EasyCorp\Bundle\EasyAdminBundle\Form\Type\CrudFormType" type="service_closure" id="EasyCorp\Bundle\EasyAdminBundle\Form\Type\CrudFormType"/>
         <argument key="EasyCorp\Bundle\EasyAdminBundle\Form\Type\FileUploadType" type="service_closure" id="EasyCorp\Bundle\EasyAdminBundle\Form\Type\FileUploadType"/>
         <argument key="EasyCorp\Bundle\EasyAdminBundle\Form\Type\FiltersFormType" type="service_closure" id="EasyCorp\Bundle\EasyAdminBundle\Form\Type\FiltersFormType"/>
-        <argument key="FOS\UserBundle\Form\Type\ChangePasswordFormType" type="service_closure" id="fos_user.change_password.form.type"/>
-        <argument key="FOS\UserBundle\Form\Type\ProfileFormType" type="service_closure" id="fos_user.profile.form.type"/>
-        <argument key="FOS\UserBundle\Form\Type\RegistrationFormType" type="service_closure" id="fos_user.registration.form.type"/>
-        <argument key="FOS\UserBundle\Form\Type\ResettingFormType" type="service_closure" id="fos_user.resetting.form.type"/>
-        <argument key="FOS\UserBundle\Form\Type\UsernameFormType" type="service_closure" id="fos_user.username_form_type"/>
         <argument key="Symfony\Bridge\Doctrine\Form\Type\EntityType" type="service_closure" id="form.type.entity"/>
         <argument key="Symfony\Component\Form\Extension\Core\Type\ChoiceType" type="service_closure" id="form.type.choice"/>
         <argument key="Symfony\Component\Form\Extension\Core\Type\ColorType" type="service_closure" id="form.type.color"/>
@@ -8749,19 +8511,21 @@
       <argument type="service" id=".debug.http_client.inner"/>
       <argument type="service" id="debug.stopwatch" on-invalid="ignore"/>
     </service>
-    <service id=".service_locator.HJ85R4b" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.TcKhdzh" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="doctrine.orm.default_listeners.attach_entity_listeners" type="service_closure" id="doctrine.orm.default_listeners.attach_entity_listeners"/>
         <argument key="doctrine.orm.listeners.doctrine_dbal_cache_adapter_schema_subscriber" type="service_closure" id="doctrine.orm.listeners.doctrine_dbal_cache_adapter_schema_subscriber"/>
         <argument key="doctrine.orm.listeners.doctrine_token_provider_schema_subscriber" type="service_closure" id="doctrine.orm.listeners.doctrine_token_provider_schema_subscriber"/>
         <argument key="doctrine.orm.messenger.doctrine_schema_subscriber" type="service_closure" id="doctrine.orm.messenger.doctrine_schema_subscriber"/>
-        <argument key="fos_user.user_listener" type="service_closure" id="fos_user.user_listener"/>
       </argument>
     </service>
-    <service id=".service_locator.N41nchi" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.tSRzGHD" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
+        <argument key="App\Repository\ArticleRepository" type="service_closure" id="App\Repository\ArticleRepository"/>
+        <argument key="App\Repository\CategoryRepository" type="service_closure" id="App\Repository\CategoryRepository"/>
+        <argument key="App\Repository\CommentRepository" type="service_closure" id="App\Repository\CommentRepository"/>
         <argument key="App\Repository\ResetPasswordRequestRepository" type="service_closure" id="App\Repository\ResetPasswordRequestRepository"/>
         <argument key="App\Repository\UserRepository" type="service_closure" id="App\Repository\UserRepository"/>
       </argument>
@@ -9041,6 +8805,42 @@
         <argument key="twig" type="service_closure" id="twig" on-invalid="ignore"/>
       </argument>
     </service>
+    <service id=".service_locator.CshazM0.App\Controller\AdminArticleController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\AdminArticleController"/>
+      <argument>App\Controller\AdminArticleController</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.CshazM0" method="withContext"/>
+    </service>
+    <service id=".service_locator.CshazM0.App\Controller\AdminCategoryController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\AdminCategoryController"/>
+      <argument>App\Controller\AdminCategoryController</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.CshazM0" method="withContext"/>
+    </service>
+    <service id=".service_locator.CshazM0.App\Controller\AdminCommentController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\AdminCommentController"/>
+      <argument>App\Controller\AdminCommentController</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.CshazM0" method="withContext"/>
+    </service>
+    <service id=".service_locator.CshazM0.App\Controller\AdminUserController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\AdminUserController"/>
+      <argument>App\Controller\AdminUserController</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.CshazM0" method="withContext"/>
+    </service>
+    <service id=".service_locator.CshazM0.App\Controller\ArticleController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\ArticleController"/>
+      <argument>App\Controller\ArticleController</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.CshazM0" method="withContext"/>
+    </service>
+    <service id=".service_locator.CshazM0.App\Controller\CategoryController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\CategoryController"/>
+      <argument>App\Controller\CategoryController</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.CshazM0" method="withContext"/>
+    </service>
     <service id=".service_locator.CshazM0.App\Controller\HomeController" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\HomeController"/>
       <argument>App\Controller\HomeController</argument>
@@ -9124,36 +8924,6 @@
       <argument>sensio_framework_extra.view.listener</argument>
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.xRhNObu" method="withContext"/>
-    </service>
-    <service id=".service_locator.CshazM0.fos_user.security.controller" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator_context" id="fos_user.security.controller"/>
-      <argument>fos_user.security.controller</argument>
-      <argument type="service" id="service_container"/>
-      <factory service=".service_locator.CshazM0" method="withContext"/>
-    </service>
-    <service id=".service_locator.CshazM0.fos_user.profile.controller" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator_context" id="fos_user.profile.controller"/>
-      <argument>fos_user.profile.controller</argument>
-      <argument type="service" id="service_container"/>
-      <factory service=".service_locator.CshazM0" method="withContext"/>
-    </service>
-    <service id=".service_locator.CshazM0.fos_user.registration.controller" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator_context" id="fos_user.registration.controller"/>
-      <argument>fos_user.registration.controller</argument>
-      <argument type="service" id="service_container"/>
-      <factory service=".service_locator.CshazM0" method="withContext"/>
-    </service>
-    <service id=".service_locator.CshazM0.fos_user.change_password.controller" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator_context" id="fos_user.change_password.controller"/>
-      <argument>fos_user.change_password.controller</argument>
-      <argument type="service" id="service_container"/>
-      <factory service=".service_locator.CshazM0" method="withContext"/>
-    </service>
-    <service id=".service_locator.CshazM0.fos_user.resetting.controller" class="Symfony\Component\DependencyInjection\ServiceLocator">
-      <tag name="container.service_locator_context" id="fos_user.resetting.controller"/>
-      <argument>fos_user.resetting.controller</argument>
-      <argument type="service" id="service_container"/>
-      <factory service=".service_locator.CshazM0" method="withContext"/>
     </service>
     <service id=".service_locator.XXv1IfR" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
@@ -9384,12 +9154,12 @@
       <argument type="service" id="EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator"/>
     </service>
     <service id="debug.argument_resolver.service.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
-      <argument type="service" id=".service_locator.rPkSHKI"/>
+      <argument type="service" id=".service_locator.cE2djQO"/>
     </service>
     <service id="debug.argument_resolver.default.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver"/>
     <service id="debug.argument_resolver.variadic.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\VariadicValueResolver"/>
     <service id="debug.argument_resolver.not_tagged_controller.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
-      <argument type="service" id=".service_locator.rPkSHKI"/>
+      <argument type="service" id=".service_locator.cE2djQO"/>
     </service>
     <service id="debug.traced.messenger.bus.default.inner" class="Symfony\Component\Messenger\MessageBus">
       <argument type="iterator">
@@ -9411,23 +9181,17 @@
         <argument type="service" id="doctrine.orm.default_xml_metadata_driver"/>
         <argument>Vich\UploaderBundle\Entity</argument>
       </call>
-      <call method="addDriver">
-        <argument type="service">
-          <service class="Doctrine\ORM\Mapping\Driver\XmlDriver">
-            <argument type="service">
-              <service class="Doctrine\Persistence\Mapping\Driver\SymfonyFileLocator">
-                <argument type="collection">
-                  <argument key="C:\Users\Lemme\NWS\Tuto\S2\ProjetS2\vendor\friendsofsymfony\user-bundle\Resources\config\doctrine-mapping">FOS\UserBundle\Model</argument>
-                </argument>
-                <argument>.orm.xml</argument>
-              </service>
-            </argument>
-          </service>
-        </argument>
-        <argument>FOS\UserBundle\Model</argument>
-      </call>
     </service>
     <service id=".errored..service_locator.y4_Zrx..Symfony\Component\Config\Loader\LoaderInterface" class="Symfony\Component\Config\Loader\LoaderInterface"/>
+    <service id=".errored..service_locator.XqCCpgA.App\Entity\Article" class="App\Entity\Article"/>
+    <service id=".errored..service_locator.tOLlTpj.App\Entity\Article" class="App\Entity\Article"/>
+    <service id=".errored..service_locator.8IESKP1.App\Entity\Category" class="App\Entity\Category"/>
+    <service id=".errored..service_locator.0CRkV7m.App\Entity\Category" class="App\Entity\Category"/>
+    <service id=".errored..service_locator.hAGYStx.App\Entity\Comment" class="App\Entity\Comment"/>
+    <service id=".errored..service_locator.Xz_hH6b.App\Entity\Comment" class="App\Entity\Comment"/>
+    <service id=".errored..service_locator.Hz5btge.App\Entity\User" class="App\Entity\User"/>
+    <service id=".errored..service_locator.gDDVCIf.App\Entity\User" class="App\Entity\User"/>
+    <service id=".errored..service_locator.yVvQ1jo.App\Entity\User" class="App\Entity\User"/>
     <service id=".console.command.about.lazy" class="Symfony\Component\Console\Command\LazyCommand">
       <argument>about</argument>
       <argument type="collection"/>
@@ -9757,48 +9521,6 @@
       <argument>false</argument>
       <argument type="service_closure" id="security.command.user_password_hash"/>
     </service>
-    <service id=".fos_user.command.activate_user.lazy" class="Symfony\Component\Console\Command\LazyCommand">
-      <argument>fos:user:activate</argument>
-      <argument type="collection"/>
-      <argument>Activate a user</argument>
-      <argument>false</argument>
-      <argument type="service_closure" id="fos_user.command.activate_user"/>
-    </service>
-    <service id=".fos_user.command.change_password.lazy" class="Symfony\Component\Console\Command\LazyCommand">
-      <argument>fos:user:change-password</argument>
-      <argument type="collection"/>
-      <argument>Change the password of a user.</argument>
-      <argument>false</argument>
-      <argument type="service_closure" id="fos_user.command.change_password"/>
-    </service>
-    <service id=".fos_user.command.create_user.lazy" class="Symfony\Component\Console\Command\LazyCommand">
-      <argument>fos:user:create</argument>
-      <argument type="collection"/>
-      <argument>Create a user.</argument>
-      <argument>false</argument>
-      <argument type="service_closure" id="fos_user.command.create_user"/>
-    </service>
-    <service id=".fos_user.command.deactivate_user.lazy" class="Symfony\Component\Console\Command\LazyCommand">
-      <argument>fos:user:deactivate</argument>
-      <argument type="collection"/>
-      <argument>Deactivate a user</argument>
-      <argument>false</argument>
-      <argument type="service_closure" id="fos_user.command.deactivate_user"/>
-    </service>
-    <service id=".fos_user.command.demote_user.lazy" class="Symfony\Component\Console\Command\LazyCommand">
-      <argument>fos:user:demote</argument>
-      <argument type="collection"/>
-      <argument>Demote a user by removing a role</argument>
-      <argument>false</argument>
-      <argument type="service_closure" id="fos_user.command.demote_user"/>
-    </service>
-    <service id=".fos_user.command.promote_user.lazy" class="Symfony\Component\Console\Command\LazyCommand">
-      <argument>fos:user:promote</argument>
-      <argument type="collection"/>
-      <argument>Promotes a user by adding a role</argument>
-      <argument>false</argument>
-      <argument type="service_closure" id="fos_user.command.promote_user"/>
-    </service>
     <service id=".EasyCorp\Bundle\EasyAdminBundle\Command\MakeAdminDashboardCommand.lazy" class="Symfony\Component\Console\Command\LazyCommand">
       <argument>make:admin:dashboard</argument>
       <argument type="collection"/>
@@ -9979,7 +9701,7 @@
     </service>
     <service id="console.command_loader" class="Symfony\Component\Console\CommandLoader\ContainerCommandLoader" public="true">
       <tag name="container.no_preload"/>
-      <argument type="service" id=".service_locator.9AKt2e2"/>
+      <argument type="service" id=".service_locator.armRVqj"/>
       <argument type="collection">
         <argument key="about">console.command.about</argument>
         <argument key="assets:install">console.command.assets_install</argument>
@@ -10060,12 +9782,6 @@
         <argument key="lint:twig">twig.command.lint</argument>
         <argument key="debug:firewall">security.command.debug_firewall</argument>
         <argument key="security:hash-password">security.command.user_password_hash</argument>
-        <argument key="fos:user:activate">fos_user.command.activate_user</argument>
-        <argument key="fos:user:change-password">fos_user.command.change_password</argument>
-        <argument key="fos:user:create">fos_user.command.create_user</argument>
-        <argument key="fos:user:deactivate">fos_user.command.deactivate_user</argument>
-        <argument key="fos:user:demote">fos_user.command.demote_user</argument>
-        <argument key="fos:user:promote">fos_user.command.promote_user</argument>
         <argument key="vich:mapping:debug-class">vich_uploader.command.mapping_debug_class</argument>
         <argument key="vich:mapping:debug">vich_uploader.command.mapping_debug</argument>
         <argument key="vich:mapping:list-classes">vich_uploader.command.mapping_list_classes</argument>
@@ -10099,7 +9815,7 @@
         <argument key="make:stimulus-controller">maker.auto_command.make_stimulus_controller</argument>
       </argument>
     </service>
-    <service id=".service_locator.9AKt2e2" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.armRVqj" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="console.command.about" type="service_closure" id=".console.command.about.lazy"/>
@@ -10181,12 +9897,6 @@
         <argument key="twig.command.lint" type="service_closure" id=".twig.command.lint.lazy"/>
         <argument key="security.command.debug_firewall" type="service_closure" id=".security.command.debug_firewall.lazy"/>
         <argument key="security.command.user_password_hash" type="service_closure" id=".security.command.user_password_hash.lazy"/>
-        <argument key="fos_user.command.activate_user" type="service_closure" id=".fos_user.command.activate_user.lazy"/>
-        <argument key="fos_user.command.change_password" type="service_closure" id=".fos_user.command.change_password.lazy"/>
-        <argument key="fos_user.command.create_user" type="service_closure" id=".fos_user.command.create_user.lazy"/>
-        <argument key="fos_user.command.deactivate_user" type="service_closure" id=".fos_user.command.deactivate_user.lazy"/>
-        <argument key="fos_user.command.demote_user" type="service_closure" id=".fos_user.command.demote_user.lazy"/>
-        <argument key="fos_user.command.promote_user" type="service_closure" id=".fos_user.command.promote_user.lazy"/>
         <argument key="vich_uploader.command.mapping_debug_class" type="service_closure" id="vich_uploader.command.mapping_debug_class"/>
         <argument key="vich_uploader.command.mapping_debug" type="service_closure" id="vich_uploader.command.mapping_debug"/>
         <argument key="vich_uploader.command.mapping_list_classes" type="service_closure" id="vich_uploader.command.mapping_list_classes"/>
@@ -10457,23 +10167,6 @@
     <service id="Psr\Log\LoggerInterface" alias="monolog.logger"/>
     <service id="sensio_framework_extra.converter.doctrine.orm.expression_language" alias="sensio_framework_extra.converter.doctrine.orm.expression_language.default"/>
     <service id="sensio_framework_extra.security.expression_language" alias="sensio_framework_extra.security.expression_language.default"/>
-    <service id="fos_user.doctrine_registry" alias="doctrine"/>
-    <service id="FOS\UserBundle\Security\LoginManagerInterface" alias="fos_user.security.login_manager"/>
-    <service id="FOS\UserBundle\Controller\SecurityController" alias="fos_user.security.controller" public="true"/>
-    <service id="FOS\UserBundle\Util\TokenGeneratorInterface" alias="fos_user.util.token_generator.default"/>
-    <service id="FOS\UserBundle\Util\PasswordUpdaterInterface" alias="fos_user.util.password_updater"/>
-    <service id="FOS\UserBundle\Util\CanonicalFieldsUpdater" alias="fos_user.util.canonical_fields_updater"/>
-    <service id="FOS\UserBundle\Model\UserManagerInterface" alias="fos_user.user_manager.default"/>
-    <service id="fos_user.util.email_canonicalizer" alias="fos_user.util.canonicalizer.default"/>
-    <service id="fos_user.util.username_canonicalizer" alias="fos_user.util.canonicalizer.default"/>
-    <service id="fos_user.util.token_generator" alias="fos_user.util.token_generator.default"/>
-    <service id="fos_user.user_manager" alias="fos_user.user_manager.default" public="true"/>
-    <service id="FOS\UserBundle\Controller\ProfileController" alias="fos_user.profile.controller" public="true"/>
-    <service id="FOS\UserBundle\Controller\RegistrationController" alias="fos_user.registration.controller" public="true"/>
-    <service id="FOS\UserBundle\Controller\ChangePasswordController" alias="fos_user.change_password.controller" public="true"/>
-    <service id="FOS\UserBundle\Controller\ResettingController" alias="fos_user.resetting.controller" public="true"/>
-    <service id="fos_user.mailer" alias="fos_user.mailer.noop"/>
-    <service id="FOS\UserBundle\Mailer\MailerInterface" alias="fos_user.mailer.noop"/>
     <service id="Knp\Component\Pager\PaginatorInterface" alias="knp_paginator"/>
     <service id="Knp\Component\Pager\ArgumentAccess\ArgumentAccessInterface" alias="Knp\Component\Pager\ArgumentAccess\RequestArgumentAccess"/>
     <service id="vich_uploader.storage" alias="vich_uploader.storage.file_system"/>
@@ -10501,7 +10194,7 @@
     <service id="SymfonyCasts\Bundle\ResetPassword\ResetPasswordHelperInterface" alias="symfonycasts.reset_password.helper"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.7nzbL4K" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.rPkSHKI"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.cE2djQO"/>
     <service id="doctrine.id_generator_locator" alias=".service_locator.KLVvNIq"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="Psr\Log\LoggerInterface $requestLogger" alias="monolog.logger.request"/>
@@ -10523,11 +10216,13 @@
     <service id=".service_locator.h8Jkkd2" alias="messenger.retry_strategy_locator"/>
     <service id=".service_locator.Mo0FXEU" alias="service_locator_EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator"/>
     <service id=".service_locator.o.uf2zi" alias=".service_locator.7nzbL4K"/>
+    <service id=".service_locator.BW0.tUC" alias=".service_locator.vzUXUAi"/>
+    <service id=".service_locator.yqyLMF9" alias=".service_locator.gDDVCIf"/>
     <service id=".service_locator.V6D1oJY" alias=".service_locator.e_4zbH4"/>
-    <service id=".service_locator.0DRQ7lV" alias=".service_locator.rPkSHKI"/>
+    <service id=".service_locator.HUlDT48" alias=".service_locator.cE2djQO"/>
     <service id=".service_locator.9XMoc9I" alias=".service_locator.kzegaci"/>
-    <service id=".service_locator.ehSctyR" alias=".service_locator.R.yi6Od"/>
-    <service id=".service_locator.4N5t7AB" alias=".service_locator.HJ85R4b"/>
+    <service id=".service_locator._6ICQ2n" alias=".service_locator.J5.Wcgw"/>
+    <service id=".service_locator.XW18Svm" alias=".service_locator.TcKhdzh"/>
     <service id=".service_locator.O24_MAy" alias=".service_locator.yY.p4P7"/>
     <service id=".service_locator.VZoQk0z" alias=".service_locator.CshazM0"/>
     <service id="validator" alias="debug.validator"/>
@@ -10578,6 +10273,20 @@
     <service id="messenger.bus.default" alias="debug.traced.messenger.bus.default"/>
     <service id="doctrine.orm.default_metadata_driver" alias=".doctrine.orm.default_metadata_driver"/>
     <service id=".service_locator.gFlme_s" alias=".service_locator.y4_Zrx."/>
+    <service id=".service_locator.XqClUT3" alias=".service_locator.b12wXHr"/>
+    <service id=".service_locator.s.PmVJl" alias=".service_locator.XqCCpgA"/>
+    <service id=".service_locator.VbAAooj" alias=".service_locator.tOLlTpj"/>
+    <service id=".service_locator.js1hwUF" alias=".service_locator.3opkxl5"/>
+    <service id=".service_locator.G7ToqKm" alias=".service_locator.8IESKP1"/>
+    <service id=".service_locator.BAMJP9h" alias=".service_locator.0CRkV7m"/>
+    <service id=".service_locator.lboLcqS" alias=".service_locator.C15PbZX"/>
+    <service id=".service_locator.jvkdxbJ" alias=".service_locator.hAGYStx"/>
+    <service id=".service_locator.5IsqsLt" alias=".service_locator.Xz_hH6b"/>
+    <service id=".service_locator.025Wi8b" alias=".service_locator.kPUOGb8"/>
+    <service id=".service_locator.VZEzlWe" alias=".service_locator.vzUXUAi"/>
+    <service id=".service_locator.EmZ4cZI" alias=".service_locator.Hz5btge"/>
+    <service id=".service_locator.7Qm_Uu7" alias=".service_locator.gDDVCIf"/>
+    <service id=".service_locator.h_IFvbz" alias=".service_locator.yVvQ1jo"/>
     <service id=".service_locator.qnm_CJ1" alias=".service_locator.e_4zbH4"/>
     <service id=".service_locator.ostNlSn" alias=".service_locator.EE0.cm9"/>
     <service id=".service_locator.uPguXMt" alias=".service_locator.Z9ydiC1"/>

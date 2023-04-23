@@ -14,6 +14,15 @@ return [
         '/_profiler/phpinfo' => [[['_route' => '_profiler_phpinfo', '_controller' => 'web_profiler.controller.profiler::phpinfoAction'], null, null, null, false, false, null]],
         '/_profiler/xdebug' => [[['_route' => '_profiler_xdebug', '_controller' => 'web_profiler.controller.profiler::xdebugAction'], null, null, null, false, false, null]],
         '/_profiler/open' => [[['_route' => '_profiler_open_file', '_controller' => 'web_profiler.controller.profiler::openAction'], null, null, null, false, false, null]],
+        '/admin/article' => [[['_route' => 'app_admin_article_index', '_controller' => 'App\\Controller\\AdminArticleController::index'], null, ['GET' => 0], null, true, false, null]],
+        '/admin/article/new' => [[['_route' => 'app_admin_article_new', '_controller' => 'App\\Controller\\AdminArticleController::new'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        '/admin/category' => [[['_route' => 'app_admin_category_index', '_controller' => 'App\\Controller\\AdminCategoryController::index'], null, ['GET' => 0], null, true, false, null]],
+        '/admin/category/new' => [[['_route' => 'app_admin_category_new', '_controller' => 'App\\Controller\\AdminCategoryController::new'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        '/admin/comment' => [[['_route' => 'app_admin_comment_index', '_controller' => 'App\\Controller\\AdminCommentController::index'], null, ['GET' => 0], null, true, false, null]],
+        '/admin/comment/new' => [[['_route' => 'app_admin_comment_new', '_controller' => 'App\\Controller\\AdminCommentController::new'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        '/admin/user' => [[['_route' => 'app_admin_user_index', '_controller' => 'App\\Controller\\AdminUserController::index'], null, ['GET' => 0], null, true, false, null]],
+        '/admin/user/new' => [[['_route' => 'app_admin_user_new', '_controller' => 'App\\Controller\\AdminUserController::new'], null, ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        '/category' => [[['_route' => 'app_category_index', '_controller' => 'App\\Controller\\CategoryController::index'], null, ['GET' => 0], null, true, false, null]],
         '/' => [[['_route' => 'app_home', '_controller' => 'App\\Controller\\HomeController::index'], null, null, null, false, false, null]],
         '/register' => [[['_route' => 'app_register', '_controller' => 'App\\Controller\\RegistrationController::register'], null, null, null, false, false, null]],
         '/reset-password' => [[['_route' => 'app_forgot_password_request', '_controller' => 'App\\Controller\\ResetPasswordController::request'], null, null, null, false, false, null]],
@@ -38,7 +47,35 @@ return [
                         .'|(*:159)'
                     .')'
                 .')'
-                .'|/reset\\-password/reset(?:/([^/]++))?(*:205)'
+                .'|/a(?'
+                    .'|dmin/(?'
+                        .'|article/([^/]++)(?'
+                            .'|(*:201)'
+                            .'|/edit(*:214)'
+                            .'|(*:222)'
+                        .')'
+                        .'|c(?'
+                            .'|ategory/([^/]++)(?'
+                                .'|(*:254)'
+                                .'|/edit(*:267)'
+                                .'|(*:275)'
+                            .')'
+                            .'|omment/([^/]++)(?'
+                                .'|(*:302)'
+                                .'|/edit(*:315)'
+                                .'|(*:323)'
+                            .')'
+                        .')'
+                        .'|user/([^/]++)(?'
+                            .'|(*:349)'
+                            .'|/edit(*:362)'
+                            .'|(*:370)'
+                        .')'
+                    .')'
+                    .'|rticle/([^/]++)(*:395)'
+                .')'
+                .'|/category/([^/]++)(*:422)'
+                .'|/reset\\-password/reset(?:/([^/]++))?(*:466)'
             .')/?$}sDu',
     ],
     [ // $dynamicRoutes
@@ -49,7 +86,21 @@ return [
         136 => [[['_route' => '_profiler_exception', '_controller' => 'web_profiler.controller.exception_panel::body'], ['token'], null, null, false, false, null]],
         149 => [[['_route' => '_profiler_exception_css', '_controller' => 'web_profiler.controller.exception_panel::stylesheet'], ['token'], null, null, false, false, null]],
         159 => [[['_route' => '_profiler', '_controller' => 'web_profiler.controller.profiler::panelAction'], ['token'], null, null, false, true, null]],
-        205 => [
+        201 => [[['_route' => 'app_admin_article_show', '_controller' => 'App\\Controller\\AdminArticleController::show'], ['id'], ['GET' => 0], null, false, true, null]],
+        214 => [[['_route' => 'app_admin_article_edit', '_controller' => 'App\\Controller\\AdminArticleController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        222 => [[['_route' => 'app_admin_article_delete', '_controller' => 'App\\Controller\\AdminArticleController::delete'], ['id'], ['POST' => 0], null, false, true, null]],
+        254 => [[['_route' => 'app_admin_category_show', '_controller' => 'App\\Controller\\AdminCategoryController::show'], ['id'], ['GET' => 0], null, false, true, null]],
+        267 => [[['_route' => 'app_admin_category_edit', '_controller' => 'App\\Controller\\AdminCategoryController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        275 => [[['_route' => 'app_admin_category_delete', '_controller' => 'App\\Controller\\AdminCategoryController::delete'], ['id'], ['POST' => 0], null, false, true, null]],
+        302 => [[['_route' => 'app_admin_comment_show', '_controller' => 'App\\Controller\\AdminCommentController::show'], ['id'], ['GET' => 0], null, false, true, null]],
+        315 => [[['_route' => 'app_admin_comment_edit', '_controller' => 'App\\Controller\\AdminCommentController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        323 => [[['_route' => 'app_admin_comment_delete', '_controller' => 'App\\Controller\\AdminCommentController::delete'], ['id'], ['POST' => 0], null, false, true, null]],
+        349 => [[['_route' => 'app_admin_user_show', '_controller' => 'App\\Controller\\AdminUserController::show'], ['id'], ['GET' => 0], null, false, true, null]],
+        362 => [[['_route' => 'app_admin_user_edit', '_controller' => 'App\\Controller\\AdminUserController::edit'], ['id'], ['GET' => 0, 'POST' => 1], null, false, false, null]],
+        370 => [[['_route' => 'app_admin_user_delete', '_controller' => 'App\\Controller\\AdminUserController::delete'], ['id'], ['POST' => 0], null, false, true, null]],
+        395 => [[['_route' => 'app_article_show', '_controller' => 'App\\Controller\\ArticleController::show'], ['id'], ['GET' => 0], null, false, true, null]],
+        422 => [[['_route' => 'app_category_show', '_controller' => 'App\\Controller\\CategoryController::show'], ['id'], ['GET' => 0], null, false, true, null]],
+        466 => [
             [['_route' => 'app_reset_password', 'token' => null, '_controller' => 'App\\Controller\\ResetPasswordController::reset'], ['token'], null, null, false, true, null],
             [null, null, null, null, false, false, 0],
         ],

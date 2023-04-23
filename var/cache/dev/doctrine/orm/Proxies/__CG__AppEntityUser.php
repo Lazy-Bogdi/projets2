@@ -17,12 +17,16 @@ class User extends \App\Entity\User implements \Doctrine\Persistence\Proxy
     }
 
     private const LAZY_OBJECT_PROPERTY_SCOPES = [
+        "\0".parent::class."\0".'articles' => [parent::class, 'articles', null],
+        "\0".parent::class."\0".'comments' => [parent::class, 'comments', null],
         "\0".parent::class."\0".'email' => [parent::class, 'email', null],
         "\0".parent::class."\0".'firstname' => [parent::class, 'firstname', null],
         "\0".parent::class."\0".'id' => [parent::class, 'id', null],
         "\0".parent::class."\0".'lastname' => [parent::class, 'lastname', null],
         "\0".parent::class."\0".'password' => [parent::class, 'password', null],
         "\0".parent::class."\0".'roles' => [parent::class, 'roles', null],
+        'articles' => [parent::class, 'articles', null],
+        'comments' => [parent::class, 'comments', null],
         'email' => [parent::class, 'email', null],
         'firstname' => [parent::class, 'firstname', null],
         'id' => [parent::class, 'id', null],
