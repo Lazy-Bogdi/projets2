@@ -92,6 +92,14 @@ class __TwigTemplate_7ed618de3194aec5e06f79cf4e7ebeb3 extends Template
 
 <div class=\"example-wrapper\">
     <h1> Hello You're Home! ✅</h1>
+    <a href=\"";
+        // line 13
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_login");
+        echo "\">Se connecter</a>
+    <a href=\"";
+        // line 14
+        echo $this->extensions['Symfony\Bridge\Twig\Extension\RoutingExtension']->getPath("app_register");
+        echo "\">S'enregistrer </a>
 </div>
 ";
         
@@ -114,7 +122,7 @@ class __TwigTemplate_7ed618de3194aec5e06f79cf4e7ebeb3 extends Template
 
     public function getDebugInfo()
     {
-        return array (  88 => 6,  78 => 5,  59 => 3,  36 => 1,);
+        return array (  101 => 14,  97 => 13,  88 => 6,  78 => 5,  59 => 3,  36 => 1,);
     }
 
     public function getSourceContext()
@@ -131,6 +139,8 @@ class __TwigTemplate_7ed618de3194aec5e06f79cf4e7ebeb3 extends Template
 
 <div class=\"example-wrapper\">
     <h1> Hello You're Home! ✅</h1>
+    <a href=\"{{path('app_login')}}\">Se connecter</a>
+    <a href=\"{{path('app_register')}}\">S'enregistrer </a>
 </div>
 {% endblock %}
 ", "home/index.html.twig", "C:\\Users\\Lemme\\NWS\\Tuto\\S2\\ProjetS2\\templates\\home\\index.html.twig");

@@ -454,6 +454,13 @@
         <argument type="service" id=".service_locator.CshazM0.App\Controller\CategoryController"/>
       </call>
     </service>
+    <service id="App\Controller\CommentController" class="App\Controller\CommentController" public="true" autowire="true" autoconfigure="true">
+      <tag name="controller.service_arguments"/>
+      <tag name="container.service_subscriber"/>
+      <call method="setContainer">
+        <argument type="service" id=".service_locator.CshazM0.App\Controller\CommentController"/>
+      </call>
+    </service>
     <service id="App\Controller\HomeController" class="App\Controller\HomeController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
       <tag name="container.service_subscriber"/>
@@ -497,6 +504,9 @@
       <tag name="form.type"/>
     </service>
     <service id="App\Form\ChangePasswordFormType" class="App\Form\ChangePasswordFormType" autowire="true" autoconfigure="true">
+      <tag name="form.type"/>
+    </service>
+    <service id="App\Form\Comment1Type" class="App\Form\Comment1Type" autowire="true" autoconfigure="true">
       <tag name="form.type"/>
     </service>
     <service id="App\Form\CommentType" class="App\Form\CommentType" autowire="true" autoconfigure="true">
@@ -1374,6 +1384,7 @@
         <argument>App\Form\Category1Type</argument>
         <argument>App\Form\CategoryType</argument>
         <argument>App\Form\ChangePasswordFormType</argument>
+        <argument>App\Form\Comment1Type</argument>
         <argument>App\Form\CommentType</argument>
         <argument>App\Form\RegistrationFormType</argument>
         <argument>App\Form\ResetPasswordRequestFormType</argument>
@@ -3759,7 +3770,7 @@
       <argument type="service" id="form.registry"/>
     </service>
     <service id="form.extension" class="Symfony\Component\Form\Extension\DependencyInjection\DependencyInjectionExtension">
-      <argument type="service" id=".service_locator.J5.Wcgw"/>
+      <argument type="service" id=".service_locator.Fx9CfKi"/>
       <argument type="collection">
         <argument key="Symfony\Component\Form\Extension\Core\Type\FormType" type="iterator">
           <argument type="service" id="form.type_extension.form.transformation_failure_handling"/>
@@ -7593,6 +7604,9 @@
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\CategoryController" class="App\Controller\CategoryController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\CategoryController" class="App\Controller\CategoryController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\CategoryController" class="App\Controller\CategoryController" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\CommentController" class="App\Controller\CommentController" autowire="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\CommentController" class="App\Controller\CommentController" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Controller\CommentController" class="App\Controller\CommentController" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Contracts\Service\ServiceSubscriberInterface.0.App\Controller\HomeController" class="App\Controller\HomeController" autowire="true" abstract="true"/>
     <service id=".instanceof.Symfony\Bundle\FrameworkBundle\Controller\AbstractController.0.App\Controller\HomeController" class="App\Controller\HomeController" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Controller\HomeController" class="App\Controller\HomeController" autowire="true" autoconfigure="true" abstract="true"/>
@@ -7615,6 +7629,8 @@
     <service id=".abstract.instanceof.App\Form\CategoryType" class="App\Form\CategoryType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\ChangePasswordFormType" class="App\Form\ChangePasswordFormType" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Form\ChangePasswordFormType" class="App\Form\ChangePasswordFormType" autowire="true" autoconfigure="true" abstract="true"/>
+    <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\Comment1Type" class="App\Form\Comment1Type" autowire="true" abstract="true"/>
+    <service id=".abstract.instanceof.App\Form\Comment1Type" class="App\Form\Comment1Type" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\CommentType" class="App\Form\CommentType" autowire="true" abstract="true"/>
     <service id=".abstract.instanceof.App\Form\CommentType" class="App\Form\CommentType" autowire="true" autoconfigure="true" abstract="true"/>
     <service id=".instanceof.Symfony\Component\Form\FormTypeInterface.0.App\Form\RegistrationFormType" class="App\Form\RegistrationFormType" autowire="true" abstract="true"/>
@@ -8133,6 +8149,13 @@
         <argument key="userRepository" type="service_closure" id="App\Repository\UserRepository"/>
       </argument>
     </service>
+    <service id=".service_locator.5XonMaQ" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator"/>
+      <argument type="collection">
+        <argument key="article" type="service_closure" id=".errored..service_locator.5XonMaQ.App\Entity\Article"/>
+        <argument key="commentRepository" type="service_closure" id="App\Repository\CommentRepository"/>
+      </argument>
+    </service>
     <service id=".service_locator.e_4zbH4" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
@@ -8160,7 +8183,7 @@
         <argument key="authenticationUtils" type="service_closure" id="security.authentication_utils"/>
       </argument>
     </service>
-    <service id=".service_locator.cE2djQO" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.EWQbo3t" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Controller\AdminArticleController::delete" type="service_closure" id=".service_locator.tOLlTpj"/>
@@ -8183,7 +8206,7 @@
         <argument key="App\Controller\AdminUserController::index" type="service_closure" id=".service_locator.kPUOGb8"/>
         <argument key="App\Controller\AdminUserController::new" type="service_closure" id=".service_locator.vzUXUAi"/>
         <argument key="App\Controller\AdminUserController::show" type="service_closure" id=".service_locator.Hz5btge"/>
-        <argument key="App\Controller\ArticleController::show" type="service_closure" id=".service_locator.XqCCpgA"/>
+        <argument key="App\Controller\ArticleController::show" type="service_closure" id=".service_locator.5XonMaQ"/>
         <argument key="App\Controller\CategoryController::index" type="service_closure" id=".service_locator.3opkxl5"/>
         <argument key="App\Controller\CategoryController::show" type="service_closure" id=".service_locator.8IESKP1"/>
         <argument key="App\Controller\RegistrationController::register" type="service_closure" id=".service_locator.e_4zbH4"/>
@@ -8214,7 +8237,7 @@
         <argument key="App\Controller\AdminUserController:index" type="service_closure" id=".service_locator.kPUOGb8"/>
         <argument key="App\Controller\AdminUserController:new" type="service_closure" id=".service_locator.vzUXUAi"/>
         <argument key="App\Controller\AdminUserController:show" type="service_closure" id=".service_locator.Hz5btge"/>
-        <argument key="App\Controller\ArticleController:show" type="service_closure" id=".service_locator.XqCCpgA"/>
+        <argument key="App\Controller\ArticleController:show" type="service_closure" id=".service_locator.5XonMaQ"/>
         <argument key="App\Controller\CategoryController:index" type="service_closure" id=".service_locator.3opkxl5"/>
         <argument key="App\Controller\CategoryController:show" type="service_closure" id=".service_locator.8IESKP1"/>
         <argument key="App\Controller\RegistrationController:register" type="service_closure" id=".service_locator.e_4zbH4"/>
@@ -8410,7 +8433,7 @@
       <argument type="service" id="debug.argument_resolver.not_tagged_controller.inner"/>
       <argument type="service" id="debug.stopwatch"/>
     </service>
-    <service id=".service_locator.J5.Wcgw" class="Symfony\Component\DependencyInjection\ServiceLocator">
+    <service id=".service_locator.Fx9CfKi" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator"/>
       <argument type="collection">
         <argument key="App\Form\Article1Type" type="service_closure" id="App\Form\Article1Type"/>
@@ -8418,6 +8441,7 @@
         <argument key="App\Form\Category1Type" type="service_closure" id="App\Form\Category1Type"/>
         <argument key="App\Form\CategoryType" type="service_closure" id="App\Form\CategoryType"/>
         <argument key="App\Form\ChangePasswordFormType" type="service_closure" id="App\Form\ChangePasswordFormType"/>
+        <argument key="App\Form\Comment1Type" type="service_closure" id="App\Form\Comment1Type"/>
         <argument key="App\Form\CommentType" type="service_closure" id="App\Form\CommentType"/>
         <argument key="App\Form\RegistrationFormType" type="service_closure" id="App\Form\RegistrationFormType"/>
         <argument key="App\Form\ResetPasswordRequestFormType" type="service_closure" id="App\Form\ResetPasswordRequestFormType"/>
@@ -8841,6 +8865,12 @@
       <argument type="service" id="service_container"/>
       <factory service=".service_locator.CshazM0" method="withContext"/>
     </service>
+    <service id=".service_locator.CshazM0.App\Controller\CommentController" class="Symfony\Component\DependencyInjection\ServiceLocator">
+      <tag name="container.service_locator_context" id="App\Controller\CommentController"/>
+      <argument>App\Controller\CommentController</argument>
+      <argument type="service" id="service_container"/>
+      <factory service=".service_locator.CshazM0" method="withContext"/>
+    </service>
     <service id=".service_locator.CshazM0.App\Controller\HomeController" class="Symfony\Component\DependencyInjection\ServiceLocator">
       <tag name="container.service_locator_context" id="App\Controller\HomeController"/>
       <argument>App\Controller\HomeController</argument>
@@ -9154,12 +9184,12 @@
       <argument type="service" id="EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator"/>
     </service>
     <service id="debug.argument_resolver.service.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\ServiceValueResolver">
-      <argument type="service" id=".service_locator.cE2djQO"/>
+      <argument type="service" id=".service_locator.EWQbo3t"/>
     </service>
     <service id="debug.argument_resolver.default.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\DefaultValueResolver"/>
     <service id="debug.argument_resolver.variadic.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\VariadicValueResolver"/>
     <service id="debug.argument_resolver.not_tagged_controller.inner" class="Symfony\Component\HttpKernel\Controller\ArgumentResolver\NotTaggedControllerValueResolver">
-      <argument type="service" id=".service_locator.cE2djQO"/>
+      <argument type="service" id=".service_locator.EWQbo3t"/>
     </service>
     <service id="debug.traced.messenger.bus.default.inner" class="Symfony\Component\Messenger\MessageBus">
       <argument type="iterator">
@@ -9192,6 +9222,7 @@
     <service id=".errored..service_locator.Hz5btge.App\Entity\User" class="App\Entity\User"/>
     <service id=".errored..service_locator.gDDVCIf.App\Entity\User" class="App\Entity\User"/>
     <service id=".errored..service_locator.yVvQ1jo.App\Entity\User" class="App\Entity\User"/>
+    <service id=".errored..service_locator.5XonMaQ.App\Entity\Article" class="App\Entity\Article"/>
     <service id=".console.command.about.lazy" class="Symfony\Component\Console\Command\LazyCommand">
       <argument>about</argument>
       <argument type="collection"/>
@@ -10194,7 +10225,7 @@
     <service id="SymfonyCasts\Bundle\ResetPassword\ResetPasswordHelperInterface" alias="symfonycasts.reset_password.helper"/>
     <service id="container.env_var_processors_locator" alias=".service_locator.7nzbL4K" public="true"/>
     <service id="twig.loader.filesystem" alias="twig.loader.native_filesystem"/>
-    <service id="argument_resolver.controller_locator" alias=".service_locator.cE2djQO"/>
+    <service id="argument_resolver.controller_locator" alias=".service_locator.EWQbo3t"/>
     <service id="doctrine.id_generator_locator" alias=".service_locator.KLVvNIq"/>
     <service id="twig.loader" alias="twig.loader.native_filesystem"/>
     <service id="Psr\Log\LoggerInterface $requestLogger" alias="monolog.logger.request"/>
@@ -10219,9 +10250,9 @@
     <service id=".service_locator.BW0.tUC" alias=".service_locator.vzUXUAi"/>
     <service id=".service_locator.yqyLMF9" alias=".service_locator.gDDVCIf"/>
     <service id=".service_locator.V6D1oJY" alias=".service_locator.e_4zbH4"/>
-    <service id=".service_locator.HUlDT48" alias=".service_locator.cE2djQO"/>
+    <service id=".service_locator.URCAWj1" alias=".service_locator.EWQbo3t"/>
     <service id=".service_locator.9XMoc9I" alias=".service_locator.kzegaci"/>
-    <service id=".service_locator._6ICQ2n" alias=".service_locator.J5.Wcgw"/>
+    <service id=".service_locator.uwCfVM0" alias=".service_locator.Fx9CfKi"/>
     <service id=".service_locator.XW18Svm" alias=".service_locator.TcKhdzh"/>
     <service id=".service_locator.O24_MAy" alias=".service_locator.yY.p4P7"/>
     <service id=".service_locator.VZoQk0z" alias=".service_locator.CshazM0"/>
@@ -10287,6 +10318,7 @@
     <service id=".service_locator.EmZ4cZI" alias=".service_locator.Hz5btge"/>
     <service id=".service_locator.7Qm_Uu7" alias=".service_locator.gDDVCIf"/>
     <service id=".service_locator.h_IFvbz" alias=".service_locator.yVvQ1jo"/>
+    <service id=".service_locator.VrLf2yH" alias=".service_locator.5XonMaQ"/>
     <service id=".service_locator.qnm_CJ1" alias=".service_locator.e_4zbH4"/>
     <service id=".service_locator.ostNlSn" alias=".service_locator.EE0.cm9"/>
     <service id=".service_locator.uPguXMt" alias=".service_locator.Z9ydiC1"/>

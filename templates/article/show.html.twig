@@ -3,23 +3,35 @@
 {% block title %}Article{% endblock %}
 
 {% block body %}
-    <h1>Article</h1>
+<h1>Article</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ article.id }}</td>
-            </tr>
-            <tr>
-                <th>Title</th>
-                <td>{{ article.title }}</td>
-            </tr>
-            <tr>
-                <th>Content</th>
-                <td>{{ article.content }}</td>
-            </tr>
-        </tbody>
-    </table>
+<table class="table">
+    <tbody>
+        <tr>
+            <th>Id</th>
+            <td>{{ article.id }}</td>
+        </tr>
+        <tr>
+            <th>Title</th>
+            <td>{{ article.title }}</td>
+        </tr>
+        <tr>
+            <th>Content</th>
+            <td>{{ article.content }}</td>
+        </tr>
+    </tbody>
+</table>
+<div>
+    <ul>
+        {% for comment in comments %}
+        <li>
+            <h4>{{ comment.user.firstname }}</h4>
+            <span>{{ comment.content }}</span>
+        </li>
+        {% endfor %}
+    </ul>
+    {# <a href="{{path('app_comment_new')}}">Ajouter un commentaire</a> #}
+    {{ include('comment/new.html.twig') }}
+</div>
 
 {% endblock %}
