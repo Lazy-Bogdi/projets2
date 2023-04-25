@@ -39,6 +39,24 @@ class ArticleRepository extends ServiceEntityRepository
         }
     }
 
+    public function findBySearch(string $search): array
+    {
+        if ($search != "") {
+            return $this->createQueryBuilder('a')
+            ->where('a.content LIKE :search')
+            ->orWhere('a.title LIKE :search')
+            ->setParameter('search', "%$search%")
+            ->orderBy('a.id', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+        }else{
+            return [];
+        }
+        
+        
+    }
+
 //    /**
 //     * @return Article[] Returns an array of Article objects
 //     */
