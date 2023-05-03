@@ -37,7 +37,7 @@ class Article
     #[ORM\OneToMany(mappedBy: 'article', targetEntity: Comment::class, orphanRemoval: true)]
     private Collection $comments;
 
-    #[Vich\UploadableField(mapping: 'articles', fileNameProperty: 'fileName', size: 'fileSize')]
+    #[Vich\UploadableField(mapping: 'articles', fileNameProperty: 'fileName', size: 'fileSize', mimeType: 'fileType')]
     private ?File $file = null;
 
     #[ORM\Column(nullable: true)]
@@ -47,11 +47,18 @@ class Article
     private ?int $fileSize = null;
 
     #[ORM\Column(nullable: true)]
+    private ?string $fileType = null;
+
+    #[ORM\Column(nullable: true)]
     private ?DateTimeImmutable $updatedAt = null;
+
+    #[ORM\OneToMany(mappedBy: 'article', targetEntity: UserHistory::class, orphanRemoval: true)]
+    private Collection $userHistories;
 
     public function __construct()
     {
         $this->comments = new ArrayCollection();
+        $this->userHistories = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -182,7 +189,50 @@ class Article
         return $this->fileSize;
     }
 
-    public function __toString(){
+    public function getFileType(): ?string
+    {
+        return $this->fileType;
+    }
+
+    public function setFileType(?string $fileType): self
+    {
+        $this->fileType = $fileType;
+
+        return $this;
+    }
+
+    public function __toString()
+    {
         return $this->title;
+    }
+
+    /**
+     * @return Collection<int, UserHistory>
+     */
+    public function getUserHistories(): Collection
+    {
+        return $this->userHistories;
+    }
+
+    public function addUserHistory(UserHistory $userHistory): self
+    {
+        if (!$this->userHistories->contains($userHistory)) {
+            $this->userHistories->add($userHistory);
+            $userHistory->setArticle($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserHistory(UserHistory $userHistory): self
+    {
+        if ($this->userHistories->removeElement($userHistory)) {
+            // set the owning side to null (unless already changed)
+            if ($userHistory->getArticle() === $this) {
+                $userHistory->setArticle(null);
+            }
+        }
+
+        return $this;
     }
 }

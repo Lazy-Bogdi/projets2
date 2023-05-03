@@ -9,6 +9,7 @@ use App\Repository\ArticleRepository;
 use DateTimeImmutable;
 use App\Entity\Comment;
 use App\Form\Comment1Type;
+use App\Form\ArticleDoneType;
 use App\Repository\CommentRepository;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -39,9 +40,22 @@ class ArticleController extends AbstractController
 
         $allComments = $article->getComments();
 
+        $formArticleDone = $this->createForm(ArticleDoneType::class);
+        $formArticleDone->handleRequest($request);
+
+        if ($formArticleDone->isSubmitted() && $formArticleDone->isValid()) {
+
+            // dd($formArticleDone);
+            return $this->forward('App\Controller\UserHistoryController::addUserHistory', [
+                'user' => $this->getUser(),
+                'article' => $article,
+            ]);
+        }
+
         return $this->render('article/show.html.twig', [
             'article' => $article,
             'formComent' => $formComment,
+            'formArticleDone' => $formArticleDone,
             'comments' => $allComments,
         ]);
     }

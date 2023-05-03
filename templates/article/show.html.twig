@@ -4,23 +4,44 @@
 
 {% block body %}
 <h1>Article</h1>
+<div>
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ article.id }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ article.title }}</td>
+            </tr>
+            <tr>
+                <th>Content</th>
+                <td>{{ article.content }}</td>
+            </tr>
+           
+            {% if article.fileName != null and article.fileType == 'application/mp4' %}
+            <tr>
+                <th>Video</th>
+                <td>
+                    <video controls width="250">
+                        <source src="{{ asset('articles/contents/') }}{{article.fileName}}" type="video/mp4">
+                        <a href="{{ asset('articles/contents/') }}{{article.fileName}}">MP4</a>
+                    </video>
 
-<table class="table">
-    <tbody>
-        <tr>
-            <th>Id</th>
-            <td>{{ article.id }}</td>
-        </tr>
-        <tr>
-            <th>Title</th>
-            <td>{{ article.title }}</td>
-        </tr>
-        <tr>
-            <th>Content</th>
-            <td>{{ article.content }}</td>
-        </tr>
-    </tbody>
-</table>
+                </td>
+            </tr>
+            {% endif %}
+        </tbody>
+    </table>
+    <div>
+        {{ form_start(formArticleDone) }}
+        {{ form_widget(formArticleDone) }}
+        <button class="btn">{{ button_label|default('Save') }}</button>
+        {{ form_end(formArticleDone) }}
+
+    </div>
+</div>
 <div>
     <ul>
         {% for comment in comments %}

@@ -3,31 +3,39 @@
 {% block title %}User{% endblock %}
 
 {% block body %}
-    <h1>User</h1>
+<h1>User</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ user.id }}</td>
-            </tr>
-            <tr>
-                <th>Email</th>
-                <td>{{ user.email }}</td>
-            </tr>
+<table class="table">
+    <tbody>
+        <tr>
+            <th>Id</th>
+            <td>{{ user.id }}</td>
+        </tr>
+        <tr>
+            <th>Email</th>
+            <td>{{ user.email }}</td>
+        </tr>
 
-            <tr>
-                <th>Lastname</th>
-                <td>{{ user.lastname }}</td>
-            </tr>
-            <tr>
-                <th>Firstname</th>
-                <td>{{ user.firstname }}</td>
-            </tr>
-        </tbody>
-    </table>
+        <tr>
+            <th>Lastname</th>
+            <td>{{ user.lastname }}</td>
+        </tr>
+        <tr>
+            <th>Firstname</th>
+            <td>{{ user.firstname }}</td>
+        </tr>
+    </tbody>
+</table>
 
-    <a href="{{ path('app_profile_edit') }}">edit</a>
+<a href="{{ path('app_profile_edit') }}">edit</a>
+<div id="history">
+    <h3>Tuto Complétés</h3>
+    {% for history in userHistory %}
+    {{ history.article.title}}<br>
+    {{ history.article.category}}
+    {{ history.article.category}}
+    {% endfor %}
+</div>
 
-    {{ include('profile/_delete_form.html.twig') }}
+{# {{ include('profile/_delete_form.html.twig') }} #}
 {% endblock %}
