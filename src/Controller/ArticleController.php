@@ -2,27 +2,46 @@
 
 namespace App\Controller;
 
-use App\Entity\Article;
-use App\Form\Article1Type;
-use App\Repository\ArticleRepository;
-
 use DateTimeImmutable;
+use App\Entity\Article;
 use App\Entity\Comment;
+
+use App\Form\Article1Type;
 use App\Form\Comment1Type;
 use App\Form\ArticleDoneType;
+use App\Repository\ArticleRepository;
 use App\Repository\CommentRepository;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 #[Route('/article')]
 class ArticleController extends AbstractController
 {
+    private $security;
+    private $em;    
+    
+    public function __construct(EntityManagerInterface $em,Security $security)
+    {
+        $this->em = $em;
+        $this->security = $security;
+    }
+
     #[Route('/{id}', name: 'app_article_show', methods: ['GET', 'POST'])]
     public function show(Article $article, CommentRepository $commentRepository, Request $request): Response
     {
+        // if (!$this->isGranted('ROLE_USER')) {
+        //     // If not, redirect the user to a login page
+        //     return $this->redirectToRoute('app_login');
+        // }
+
+        if(!$this->security->isGranted('IS_AUTHENTICATED_FULLY') && $request->attributes->get('_route') !== 'login'){
+            return $this->redirectToRoute('app_login');
+        }
         $comment = new Comment();
         $comment->setCreatedAt(new DateTimeImmutable);
         $comment->setUser($this->getUser());

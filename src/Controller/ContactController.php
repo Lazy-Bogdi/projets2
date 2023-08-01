@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Form\ContactType;
 use Symfony\Component\Mime\Email;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,6 +14,15 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ContactController extends AbstractController
 {
+    private $security;
+    private $em;    
+    
+    public function __construct(EntityManagerInterface $em,Security $security)
+    {
+        $this->em = $em;
+        $this->security = $security;
+    }
+    
     #[Route('/contact', name: 'app_contact')]
     public function index(Request $request, MailerInterface $mailer): Response
     {

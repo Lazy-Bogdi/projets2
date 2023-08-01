@@ -174,6 +174,10 @@ class ResetPasswordController extends AbstractController
         // Store the token object in session for retrieval in check-email route.
         $this->setTokenObjectInSession($resetToken);
 
+        $rawString = "<script>alert('XSS attack');</script>";
+        $escapedString = htmlspecialchars($rawString);
+        echo $escapedString;
+
         return $this->redirectToRoute('app_check_email');
     }
 }

@@ -6,6 +6,8 @@ use DateTimeImmutable;
 use App\Entity\Comment;
 use App\Form\CommentType;
 use App\Repository\CommentRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -14,6 +16,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 #[Route('/admin/comment')]
 class AdminCommentController extends AbstractController
 {
+    public function __construct(EntityManagerInterface $em,Security $security)
+    {
+        $this->em = $em;
+        $this->security = $security;
+    }
+    
     #[Route('/', name: 'app_admin_comment_index', methods: ['GET'])]
     public function index(CommentRepository $commentRepository): Response
     {
