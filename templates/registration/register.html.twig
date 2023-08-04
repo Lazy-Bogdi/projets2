@@ -2,18 +2,114 @@
 
 {% block title %}Register{% endblock %}
 
+{% block stylesheets %}
+<link rel="stylesheet" href="{{ asset('assets/css/register.css') }}">
+{% endblock %}
+
 {% block body %}
-    <h1>Register</h1>
+<div class="container">
+    <form method="post" class="register-form">
+        {{ form_widget(registrationForm._token, {'attr': {'type': 'hidden'} }) }}
+        <h1 class="h3 mb-3 font-weight-normal">Register</h1>
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.firstname) }}
-        {{ form_row(registrationForm.lastname) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
+        <div class="form-group">
+            {{ form_label(registrationForm.email, 'Email', {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(registrationForm.email, {'attr': {'class': 'form-control', 'placeholder': 'Email'}}) }}
+            {{ form_errors(registrationForm.email) }}
+        </div>
 
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+        <div class="form-group">
+            {{ form_label(registrationForm.firstname, 'First Name', {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(registrationForm.firstname, {'attr': {'class': 'form-control', 'placeholder': 'First Name'}})
+            }}
+            {{ form_errors(registrationForm.firstname) }}
+        </div>
+
+        <div class="form-group">
+            {{ form_label(registrationForm.lastname, 'Last Name', {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(registrationForm.lastname, {'attr': {'class': 'form-control', 'placeholder': 'Last Name'}})
+            }}
+            {{ form_errors(registrationForm.lastname) }}
+        </div>
+
+        {# <div class="form-group">{{ form_label(registrationForm.plainPassword, 'Password', {'label_attr': {'class': 'form-label'}}) }}
+            <div class="input-group">
+                
+                {{ form_widget(registrationForm.plainPassword, {'attr': {'class': 'form-control', 'placeholder': 'Password'}}) }}
+                <div class="input-group-append">
+                    <span class="input-group-text">
+                        <i id="togglePasswordVisibility" class="fa-solid fa-eye" style="color: #54928e;"></i>
+                    </span>
+                </div>
+                {{ form_errors(registrationForm.plainPassword) }}
+            </div>
+        </div> #}
+        <div class="form-group">
+            {{ form_label(registrationForm.plainPassword.first, 'Password', {'label_attr': {'class': 'form-label'}}) }}
+            <div class="input-group">
+                {{ form_widget(registrationForm.plainPassword.first, {'attr': {'class': 'form-control', 'placeholder': 'Password'}}) }}
+                <div class="input-group-append">
+                    <span class="input-group-text">
+                        <i class="togglePasswordVisibility fa-solid fa-eye-slash" style="color: #54928e;"></i>
+                    </span>
+                </div>
+                {{ form_errors(registrationForm.plainPassword.first) }}
+            </div>
+        </div>
+        <div class="form-group">
+            {{ form_label(registrationForm.plainPassword.second, 'Repeat Password', {'label_attr': {'class': 'form-label'}}) }}
+            <div class="input-group">
+                {{ form_widget(registrationForm.plainPassword.second, {'attr': {'class': 'form-control', 'placeholder': 'Repeat Password'}}) }}
+                <div class="input-group-append">
+                    <span class="input-group-text">
+                        <i class="togglePasswordVisibility fa-solid fa-eye-slash" style="color: #54928e;"></i>
+                    </span>
+                </div>
+                {{ form_errors(registrationForm.plainPassword.second) }}
+            </div>
+        </div>
+
+        <div class="form-group form-check">
+            {{ form_widget(registrationForm.agreeTerms, {'attr': {'class': 'form-check-input'}}) }}
+            {{ form_label(registrationForm.agreeTerms, 'Agree to Terms of Service', {'label_attr': {'class': 'form-check-label'}}) }}
+            {{ form_errors(registrationForm.agreeTerms) }}
+        </div>
+
+        <button type="submit" class="btn btn-lg btn-primary">Register</button>
+    </form>
+    {# {{ form_end(registrationForm) }} #}
+    <div class="form-link">
+        <small><a href="{{ path('app_login') }}">Already have an account ? Login now ! </a></small>
+    </div>
+
+</div>
+
+{% endblock %}
+{% block optionals_script %}
+<script>
+    // select password inputs
+    let passwordInputs = document.querySelectorAll("input[id^='registration_form_plainPassword_']");
+    console.log(passwordInputs)
+    passwordInputs.forEach(function(input) {
+        // get parent node (div.input-group)
+        let parentNode = input.parentNode;
+        // select first .togglePasswordVisibility in parentNode
+        let toggleIcon = parentNode.querySelector('.togglePasswordVisibility');
+        
+        toggleIcon.addEventListener('click', function (event) {
+            let passwordIcon = event.target;
+            if (input.type === "password") {
+                input.type = "text";
+                // passwordIcon.classList.remove('fa-eye');
+                // passwordIcon.classList.add('fa-eye-slash');
+            } else {
+                input.type = "password";
+                // passwordIcon.classList.remove('fa-eye-slash');
+                // passwordIcon.classList.add('fa-eye');
+            }
+            passwordIcon.classList.toggle('fa-eye');
+            passwordIcon.classList.toggle('fa-eye-slash');
+        });
+    });
+</script>
 {% endblock %}

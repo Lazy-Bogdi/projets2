@@ -1,0 +1,30 @@
+.left-menu {
+    width: 250px;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: -250px; /* hides the menu initially */
+    /* background-color: #c5e2df; */
+    background-color: #587a78;
+    padding-top: 60px;
+    transition: 0.5s; /* transition effect */
+}
+
+.left-menu a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #475857;
+    display: block;
+    transition: 0.3s;
+}
+
+.left-menu a:hover {
+    color: #829291;
+    
+
+}
+
+.left-menu.active {
+    left: 0; /* brings the menu into view */
+}

@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AdminAllController!{% endblock %}
+{% block stylesheets %}
+<link rel="stylesheet" href="{{ asset('assets/css/adminLinks.css') }}">
+{% endblock %}
+{% block body %}
+
+<div class="adminLinks">
+    <ul>
+        {% for routeName, routePath in get_admin_routes() %}
+        <li><a href="{{ path(routeName) }}">Go to {{ routePath }}</a></li>
+        {% endfor %}
+
+    </ul>
+</div>
+{% endblock %}

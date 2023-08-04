@@ -1,0 +1,34 @@
+{# {{ form_start(form) }}
+{% for field in form %}
+{% if field.vars.name != '_token' %}
+<div class="form-group">
+    {{ form_label(field) }}
+    {{ form_widget(field) }}
+</div>
+{% endif %}
+{% endfor %}
+<button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }} #}
+
+{{ form_start(form) }}
+{% for field in form %}
+	{% if field.vars.name != '_token' %}
+		<div class="form-group" {% if field.vars.name=='plainPassword' %} id="password-fields" {% endif %}>
+			{{ form_label(field) }}
+			{% if field.vars.name == 'change_password' %}
+				<label class="switch">
+					{{ form_widget(field, {'attr': {'class': 'switch-input'}}) }}
+					<span class="switch-slider"></span>
+				</label>
+			{% else %}
+				{% if field.vars.name == 'roles' %}
+					{{ form_widget(form.roles, {'attr': {'class': 'select2-multi', 'multiple': 'multiple'}}) }}
+				{% else %}
+					{{ form_widget(field) }}
+				{% endif %}
+			{% endif %}
+		</div>
+	{% endif %}
+{% endfor %}
+<button class="btn">{{ button_label|default('Save') }}</button>
+{{ form_end(form) }}

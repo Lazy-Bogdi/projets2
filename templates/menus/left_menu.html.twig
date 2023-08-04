@@ -1,0 +1,11 @@
+<link rel="stylesheet" href="{{ asset('assets/css/left_menu.css') }}">
+
+<div id="leftMenu" class="left-menu">
+    <a href="{{ path('app_category_index') }}">Categories</a>
+    {% if app.user and is_granted('ROLE_ADMIN', app.user) %}
+    <!-- add your admin-only links here -->
+    <a href="{{ path('app_admin_all') }}">All Admin Links</a>
+    {% endif %}
+</div>
+
+<script src="{{ asset('assets/js/left_menu.js') }}"></script>

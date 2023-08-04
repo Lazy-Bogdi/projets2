@@ -18,9 +18,9 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 class ProfileController extends AbstractController
 {
     private $security;
-    private $em;    
-    
-    public function __construct(EntityManagerInterface $em,Security $security)
+    private $em;
+
+    public function __construct(EntityManagerInterface $em, Security $security)
     {
         $this->em = $em;
         $this->security = $security;
@@ -38,18 +38,21 @@ class ProfileController extends AbstractController
 
     public function showUserHistory(User $user)
     {
-        return $this->em->getRepository(UserHistory::class)->findBy(['user' => $user], ['lastVisited' =>'DESC']);
+        return $this->em->getRepository(UserHistory::class)->findBy(['user' => $user], ['lastVisited' => 'DESC']);
     }
 
     #[Route('/edit', name: 'app_profile_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, UserRepository $userRepository, UserPasswordHasherInterface $passwordHasher): Response
     {
-        $form = $this->createForm(User1Type::class, $this->getUser());
+        $form = $this->createForm(User1Type::class, $this->getUser(), ['is_edit' => true]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $plainPassword = $form->get('plainPassword')->getData();
-            $this->getUser()->setPassword($passwordHasher->hashPassword($this->getUser(), $plainPassword));
+            if ($form->get('change_password')->getData() && !empty($form->get('plainPassword')->getData())) {
+                $plainPassword = $form->get('plainPassword')->getData();
+                $this->getUser()->setPassword($passwordHasher->hashPassword($this->getUser(), $plainPassword));
+            }
+
             $userRepository->save($this->getUser(), true);
 
             return $this->redirectToRoute('app_profile_show', [], Response::HTTP_SEE_OTHER);

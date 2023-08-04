@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Comment index{% endblock %}
+{% block stylesheets %}
+<link rel="stylesheet" href="{{ asset('assets/css/adminCrudView.css') }}">
+{% endblock %}
+{% block body %}
+<div class="crudContainer">
+    <h1>Comment index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Content</th>
+                <th>CreatedAt</th>
+                <th>UpdatedAt</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for comment in comments %}
+            <tr>
+                <td>{{ comment.id }}</td>
+                <td>{{ comment.content }}</td>
+                <td>{{ comment.createdAt ? comment.createdAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ comment.updatedAt ? comment.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
+                <td>
+                    <a href="{{ path('app_admin_comment_show', {'id': comment.id}) }}" class="show-button">show</a>
+                    <a href="{{ path('app_admin_comment_edit', {'id': comment.id}) }}" class="edit-button">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_admin_comment_new') }}" class="create-button">Create new</a>
+    <a href="{{ path('app_admin_all') }}" class="admin-menu-button">ADMIN MENU</a>
+</div>
+{% endblock %}

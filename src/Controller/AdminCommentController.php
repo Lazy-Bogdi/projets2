@@ -16,16 +16,18 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 #[Route('/admin/comment')]
 class AdminCommentController extends AbstractController
 {
-    public function __construct(EntityManagerInterface $em,Security $security)
+    private $security;
+    private $em;
+    public function __construct(EntityManagerInterface $em, Security $security)
     {
         $this->em = $em;
         $this->security = $security;
     }
-    
+
     #[Route('/', name: 'app_admin_comment_index', methods: ['GET'])]
     public function index(CommentRepository $commentRepository): Response
     {
-        return $this->render('admin_comment/index.html.twig', [
+        return $this->render('admin/admin_comment/index.html.twig', [
             'comments' => $commentRepository->findAll(),
         ]);
     }
@@ -44,7 +46,7 @@ class AdminCommentController extends AbstractController
             return $this->redirectToRoute('app_admin_comment_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('admin_comment/new.html.twig', [
+        return $this->renderForm('admin/admin_comment/new.html.twig', [
             'comment' => $comment,
             'form' => $form,
         ]);
@@ -53,7 +55,7 @@ class AdminCommentController extends AbstractController
     #[Route('/{id}', name: 'app_admin_comment_show', methods: ['GET'])]
     public function show(Comment $comment): Response
     {
-        return $this->render('admin_comment/show.html.twig', [
+        return $this->render('admin/admin_comment/show.html.twig', [
             'comment' => $comment,
         ]);
     }
@@ -71,7 +73,7 @@ class AdminCommentController extends AbstractController
             return $this->redirectToRoute('app_admin_comment_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('admin_comment/edit.html.twig', [
+        return $this->renderForm('admin/admin_comment/edit.html.twig', [
             'comment' => $comment,
             'form' => $form,
         ]);
@@ -80,7 +82,7 @@ class AdminCommentController extends AbstractController
     #[Route('/{id}', name: 'app_admin_comment_delete', methods: ['POST'])]
     public function delete(Request $request, Comment $comment, CommentRepository $commentRepository): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$comment->getId(), $request->request->get('_token'))) {
+        if ($this->isCsrfTokenValid('delete' . $comment->getId(), $request->request->get('_token'))) {
             $commentRepository->remove($comment, true);
         }
 

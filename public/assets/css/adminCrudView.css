@@ -1,0 +1,68 @@
+/* body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+} */
+
+.crudContainer {
+    margin: 10% auto;
+    width: 90%;
+    max-width: 1200px;
+    padding: 40px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+}
+
+.crudContainer > h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.crudContainer > .table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.crudContainer > .table th, .crudContainer > .table td {
+    padding: 15px;
+    border: 1px solid #ddd;
+}
+
+.crudContainer > .table thead {
+    background-color: #f5f5f5;
+}
+
+.crudContainer > .table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.crudContainer > .table tbody tr:hover {
+    background-color: #f2f2f2;
+}
+
+.crudContainer > .table a {
+    color: #337ab7;
+    text-decoration: none;
+}
+
+.crudContainer > .table a:hover {
+    color: #23527c;
+    text-decoration: underline;
+}
+
+.crudContainer > .create-button, .crudContainer > .admin-menu-button {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #337ab7;
+    color: #fff;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.crudContainer > .create-button:hover, .crudContainer > .admin-menu-button:hover {
+    background-color: #23527c;
+}
+

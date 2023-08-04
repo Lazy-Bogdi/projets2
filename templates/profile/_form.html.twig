@@ -1,4 +1,19 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
+{% for field in form %}
+    {% if field.vars.name != '_token' %}
+        <div class="form-group" {% if field.vars.name == 'plainPassword' %}id="password-fields"{% endif %}>
+            {{ form_label(field) }}
+            {% if field.vars.name == 'change_password' %}
+                <label class="switch">
+                    {{ form_widget(field, {'attr': {'class': 'switch-input'}}) }}
+                    <span class="switch-slider"></span>
+                </label>
+            {% else %}
+                {{ form_widget(field) }}
+            {% endif %}
+        </div>
+    {% endif %}
+{% endfor %}
     <button class="btn">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}
+

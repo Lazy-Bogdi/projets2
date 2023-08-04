@@ -1,0 +1,62 @@
+/* assets/css/form.css */
+
+/* body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+} */
+
+.formContainer {
+    margin: 15% auto;
+    width: 90%;
+    max-width: 800px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+    padding: 20px;
+}
+
+.formContainer h1 {
+    margin-bottom: 20px;
+    color: #333;
+    font-size: 24px;
+}
+
+.formContainer form {
+    width: 100%;
+}
+
+.formContainer form .form-group {
+    margin-bottom: 20px;
+}
+
+.formContainer form .form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #666;
+}
+
+.formContainer form .form-group input[type="text"], 
+.formContainer form .form-group input[type="email"], 
+.formContainer form .form-group input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.formContainer form button {
+    padding: 10px 20px;
+    border: none;
+    background-color: #5cb85c;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.formContainer form button:hover {
+    background-color: #449d44;
+}
+.select2-selection--multiple{
+    width: 200%;
+}

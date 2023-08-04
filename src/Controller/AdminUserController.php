@@ -18,18 +18,18 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 class AdminUserController extends AbstractController
 {
     private $security;
-    private $em;    
-    
-    public function __construct(EntityManagerInterface $em,Security $security)
+    private $em;
+
+    public function __construct(EntityManagerInterface $em, Security $security)
     {
         $this->em = $em;
         $this->security = $security;
     }
-    
+
     #[Route('/', name: 'app_admin_user_index', methods: ['GET'])]
     public function index(UserRepository $userRepository): Response
     {
-        return $this->render('admin_user/index.html.twig', [
+        return $this->render('admin/admin_user/index.html.twig', [
             'users' => $userRepository->findAll(),
         ]);
     }
@@ -38,7 +38,7 @@ class AdminUserController extends AbstractController
     public function new(Request $request, UserRepository $userRepository, UserPasswordHasherInterface $passwordHasher): Response
     {
         $user = new User();
-        $form = $this->createForm(UserType::class, $user);
+        $form = $this->createForm(UserType::class, $user,['is_edit' => false]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -49,7 +49,7 @@ class AdminUserController extends AbstractController
             return $this->redirectToRoute('app_admin_user_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('admin_user/new.html.twig', [
+        return $this->renderForm('admin/admin_user/new.html.twig', [
             'user' => $user,
             'form' => $form,
         ]);
@@ -58,26 +58,28 @@ class AdminUserController extends AbstractController
     #[Route('/{id}', name: 'app_admin_user_show', methods: ['GET'])]
     public function show(User $user): Response
     {
-        return $this->render('admin_user/show.html.twig', [
+        return $this->render('admin/admin_user/show.html.twig', [
             'user' => $user,
         ]);
     }
 
     #[Route('/{id}/edit', name: 'app_admin_user_edit', methods: ['GET', 'POST'])]
-    public function edit(Request $request, User $user, UserRepository $userRepository,UserPasswordHasherInterface $passwordHasher): Response
+    public function edit(Request $request, User $user, UserRepository $userRepository, UserPasswordHasherInterface $passwordHasher): Response
     {
-        $form = $this->createForm(UserType::class, $user);
+        $form = $this->createForm(UserType::class, $user,['is_edit' => true]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $plainPassword = $form->get('plainPassword')->getData();
-            $user->setPassword($passwordHasher->hashPassword($user, $plainPassword));
+            if ($form->get('change_password')->getData() && !empty($form->get('plainPassword')->getData())) {
+                $plainPassword = $form->get('plainPassword')->getData();
+                $user->setPassword($passwordHasher->hashPassword($user, $plainPassword));
+            }
             $userRepository->save($user, true);
 
             return $this->redirectToRoute('app_admin_user_index', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('admin_user/edit.html.twig', [
+        return $this->renderForm('admin/admin_user/edit.html.twig', [
             'user' => $user,
             'form' => $form,
         ]);
