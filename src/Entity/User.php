@@ -46,6 +46,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'user', targetEntity: UserHistory::class, orphanRemoval: true)]
     private Collection $userHistories;
 
+    #[ORM\Column(length: 50, nullable: true)]
+    private ?string $timezone = null;
+
     public function __construct()
     {
         $this->articles = new ArrayCollection();
@@ -237,6 +240,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $userHistory->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getTimezone(): ?string
+    {
+        return $this->timezone;
+    }
+
+    public function setTimezone(?string $timezone): self
+    {
+        $this->timezone = $timezone;
 
         return $this;
     }

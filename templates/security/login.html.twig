@@ -3,83 +3,104 @@
 {% block title %}Log in!
 {% endblock %}
 {% block stylesheets %}
-	<link rel="stylesheet" href="{{ asset('assets/css/login.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/css/login.css') }}">
 {% endblock %}
 
 {% block body %}
-	<div class="container">
-		<form method="post">
-			{% if error %}
-				<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-			{% endif %}
+<div class="container">
+	<form method="post">
+		{% if error %}
+		<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+		{% endif %}
 
-			{% if app.user %}
-				<div class="mb-3">
-					You are logged in as
-					{{ app.user.userIdentifier }},
-					<a href="{{ path('app_logout') }}">Logout</a>
-				</div>
-			{% endif %}
-
-			<h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-			<label class="form-label" for="inputEmail">Email</label>
-			<input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
-			<label class="form-label" for="inputPassword">Password</label>
-			<div class="input-group">
-                <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password"
-                    required>
-                <div class="input-group-append">
-                    <span class="input-group-text">
-                        <i id="togglePasswordVisibility" class="fa-solid fa-eye" style="color: #54928e;"></i>
-                    </span>
-                </div>
-            </div>            
-			<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-
-			{#
-			        Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
-			        See https://symfony.com/doc/current/security/remember_me.html
-			
-			        <div class="checkbox mb-3">
-			            <label>
-			                <input type="checkbox" name="_remember_me"> Remember me
-			            </label>
-			        </div>
-			        #}
-
-			<button class="btn btn-lg btn-primary" type="submit">
-				Sign in
-			</button>
-		</form>
-		<div class="form-link">
-			<small>
-				<a href="{{ path('app_forgot_password_request') }}">FORGOT YOUR PASSWORD?</a>
-			</small>
-
+		{% if app.user %}
+		<div class="mb-3">
+			You are logged in as
+			{{ app.user.userIdentifier }},
+			<a href="{{ path('app_logout') }}">Logout</a>
 		</div>
-		<div class="form-link">
-			<small>
-				<a href="{{ path('app_register') }}">Don't have an account ? Regiser now !
-				</a>
-			</small>
+		{% endif %}
+
+		<h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+		<label class="form-label" for="inputEmail">Email</label>
+		<input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control"
+			autocomplete="email" required autofocus>
+		<label class="form-label" for="inputPassword">Password</label>
+		<div class="input-group">
+			<input type="password" name="password" id="inputPassword" class="form-control"
+				autocomplete="current-password" required>
+			<div class="input-group-append">
+				<span class="input-group-text">
+					<i id="togglePasswordVisibility" class="fa-solid fa-eye" style="color: #54928e;"></i>
+				</span>
+			</div>
 		</div>
+		<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+		{#
+		Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+		See https://symfony.com/doc/current/security/remember_me.html
+
+		<div class="checkbox mb-3">
+			<label>
+				<input type="checkbox" name="_remember_me"> Remember me
+			</label>
+		</div>
+		#}
+
+		<button class="btn btn-lg btn-primary" type="submit">
+			Sign in
+		</button>
+	</form>
+	<div class="form-link">
+		<small>
+			<a href="{{ path('app_forgot_password_request') }}">FORGOT YOUR PASSWORD?</a>
+		</small>
+
 	</div>
+	<div class="form-link">
+		<small>
+			<a href="{{ path('app_register') }}">Don't have an account ? Regiser now !
+			</a>
+		</small>
+	</div>
+</div>
 {% endblock %}
 {% block optionals_script %}
 <script>
-    document.querySelector("#togglePasswordVisibility").addEventListener('click', function (event) {
-        let passwordInput = document.querySelector("#inputPassword");
-        let passwordIcon = event.target;
+	document.querySelector("#togglePasswordVisibility").addEventListener('click', function (event) {
+		let passwordInput = document.querySelector("#inputPassword");
+		let passwordIcon = event.target;
 
-        if (passwordInput.type === "password") {
-            passwordInput.type = "text";
-            passwordIcon.classList.remove('fa-eye');
-            passwordIcon.classList.add('fa-eye-slash');
-        } else {
-            passwordInput.type = "password";
-            passwordIcon.classList.remove('fa-eye-slash');
-            passwordIcon.classList.add('fa-eye');
-        }
-    });
+		if (passwordInput.type === "password") {
+			passwordInput.type = "text";
+			passwordIcon.classList.remove('fa-eye');
+			passwordIcon.classList.add('fa-eye-slash');
+		} else {
+			passwordInput.type = "password";
+			passwordIcon.classList.remove('fa-eye-slash');
+			passwordIcon.classList.add('fa-eye');
+		}
+	});
+
+	// get the user's timezone
+	const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
+	// prepare the data to send
+	const data = JSON.stringify({ timezone: timeZone });
+
+	// send a POST request to the server
+	fetch('/get-user-timezone', {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: data,
+	})
+		.then(response => response.json())
+		.then(data => console.log(data))
+		.catch((error) => {
+			console.error('Error:', error);
+		});
 </script>
 {% endblock %}
