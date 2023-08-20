@@ -23,7 +23,7 @@ class BaseController extends AbstractController
     protected function checkAccessControl(Request $request)
     {
         if (!$this->security->isGranted('IS_AUTHENTICATED_FULLY') && $request->attributes->get('_route') !== 'login') {
-            return $this->redirectToRoute('app_login');
+            return $this->redirectToRoute('app_login_route');
         }
     }
 }
