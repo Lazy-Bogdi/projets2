@@ -31,16 +31,8 @@
             </tr>
         </tbody>
     </table>
+    {# {{ include('profile/user_history.html.twig') }} #}
 
-    <div id="history">
-        <h3>Tuto Complétés</h3>
-        {% for history in userHistory %}
-        <div class="historyItem">
-            <p>{{ history.article.title}}</p>
-            {# <p>{{ history.article.category}}</p> #}
-        </div>
-        {% endfor %}
-    </div>
     <div class="actions">
         <a href="{{ path('app_profile_edit') }}">edit</a>
     </div>

@@ -5,7 +5,11 @@ namespace App\Form;
 use App\Entity\Category;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+// use Vich\UploaderBundle\Form\Type\VichImageType;
+
+
 
 class CategoryType extends AbstractType
 {
@@ -13,6 +17,9 @@ class CategoryType extends AbstractType
     {
         $builder
             ->add('name')
+            ->add('imageFile', VichImageType::class,[
+                'required' =>false
+            ])
         ;
     }
 

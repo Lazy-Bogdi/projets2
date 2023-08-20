@@ -1,42 +1,56 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Article{% endblock %}
+
 {% block stylesheets %}
 <link rel="stylesheet" href="{{ asset('assets/css/articleShow.css') }}">
 {% endblock %}
+
 {% block body %}
-<div class="article">
-  <div class="article_header">
-    <h1>{{ article.title }}</h1>
-    {% if article.fileName != null and article.fileType == 'application/mp4' %}
-    <div class="article__video">
-      <video controls width="100%">
-        <source src="{{ asset('articles/contents/') }}{{ article.fileName }}" type="video/mp4">
-        <a href="{{ asset('articles/contents/') }}{{ article.fileName }}">MP4</a>
-      </video>
+<div class="article-wrapper">
+
+    <!-- Article Content Wrapper -->
+    <div class="article-content-wrapper">
+        <div class="article">
+            <div class="article_header">
+                <h1>{{ article.title }}</h1>
+                {% if article.fileName != null and article.fileType == 'application/mp4' %}
+                <div class="article_video">
+                    <video controls width="100%">
+                        <source src="{{ asset('articles/contents/') }}{{ article.fileName }}" type="video/mp4">
+                        <a href="{{ asset('articles/contents/') }}{{ article.fileName }}">MP4</a>
+                    </video>
+                </div>
+                {% endif %}
+            </div>
+            <div class="article_content">
+                {{ article.content }}
+            </div>
+            <div class="article_done">
+                {# 
+                {{ form_start(formArticleDone) }}
+                {{ form_widget(formArticleDone) }}
+                {{ form_end(formArticleDone) }} 
+                #}
+            </div>
+        </div>
     </div>
-    {% endif %}
-  </div>
-  <div class="article_content">
-    {{ article.content }}
-  </div>
-  <div class="article_done">
-    {{ form_start(formArticleDone) }}
-    {{ form_widget(formArticleDone) }}
-    {# <button class="btn">{{ button_label|default('Post') }}</button> #}
-    {{ form_end(formArticleDone) }}
-  </div>
-  <div class="article_comments">
-    <h3>Commentaires</h3>
-    <ul>
-      {% for comment in comments %}
-      <li>
-        <h4>{{ comment.user.firstname }}</h4>
-        <p>{{ comment.content }}</p>
-      </li>
-      {% endfor %}
-    </ul>
-    {{ include('comment/new.html.twig') }}
-  </div>
+
+    <!-- Comments Wrapper -->
+    <div class="comments-wrapper">
+        <div class="article_comments">
+            <h3>Commentaires</h3>
+            <ul>
+                {% for comment in comments %}
+                <li>
+                    <h4>{{ comment.user.firstname }}</h4>
+                    <p>{{ comment.content }}</p>
+                </li>
+                {% endfor %}
+            </ul>
+            {{ include('comment/new.html.twig') }}
+        </div>
+    </div>
+
 </div>
 {% endblock %}

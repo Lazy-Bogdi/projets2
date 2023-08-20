@@ -7,18 +7,26 @@
 {% endblock %}
 
 {% block body %}
-    <h1>Category index</h1>
+<h1>Category index</h1>
 
-    <div class="category-grid">
-        {% for category in categories %}
-            <div class="category">
-                <h4>{{ category.name }}</h4>
-                <a href="{{ path('app_category_show', {'id': category.id}) }}">show</a>
-            </div>
-        {% else %}
-            <div class="category">
-                No records found.
-            </div>
-        {% endfor %}
+<div class="category-grid">
+    {% for category in pagination %}
+    <div class="category">
+        <div class="content" style="background-image: url('/categories/contents/{{ category.imageName }}')"></div>
+        <div class="title">
+            <a href="{{ path('app_category_show', {'id': category.id}) }}">{{ category.name }}</a>
+        </div>
     </div>
+    {% else %}
+    <div class="category">
+        No records found.
+    </div>
+    {% endfor %}
+</div>
+
+<!-- Add the pagination links here -->
+<div class="pagination">
+    {{ knp_pagination_render(pagination) }}
+</div>
+
 {% endblock %}

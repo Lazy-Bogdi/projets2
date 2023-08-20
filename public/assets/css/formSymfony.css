@@ -57,6 +57,10 @@
 .formContainer form button:hover {
     background-color: #449d44;
 }
+.formContainer img {
+max-height: 500px;
+max-width: 500px;
+}
 .select2-selection--multiple{
     width: 200%;
 }

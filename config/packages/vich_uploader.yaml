@@ -5,9 +5,12 @@ vich_uploader:
         type: attribute
 
     mappings:
-       articles:
-           uri_prefix: /articles/contents
-           upload_destination: '%kernel.project_dir%/public/articles/contents'
-           namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
-
-           delete_on_update: false
+        articles:
+            uri_prefix: /articles/contents
+            upload_destination: "%kernel.project_dir%/public/articles/contents"
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
+            delete_on_update: false
+        category_image:
+            uri_prefix: /categories/contents
+            upload_destination: "%kernel.project_dir%/public/categories/contents"
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer

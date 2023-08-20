@@ -1,55 +1,111 @@
-/* .article {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 20px;
-    background-color: #f9f9f9;
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+body {
+  font-family: 'Arial', sans-serif;
+  color: #333;
+  line-height: 1.6;
+  padding: 20px 0;
+  /* background-color: #f7f7f7; */
+}
+
+.article-wrapper {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 50px; /* Horizontal padding to ensure space around the content */
+  /* max-width: 1400px; */
+  margin: 10% auto;
+}
+
+.article-content-wrapper {
+  flex: 0 0 70%; /* Takes up 70% of the width */
+  margin-right: 20px;
+}
+
+.comments-wrapper {
+  flex: 0 0 28%; /* Takes up 28% of the width. This + 70% from article content + 2% for the margin in between = 100% */
+  height: 80vh; /* adjust this as per your requirements */
+  overflow-y: auto; /* Makes it scrollable */
+}
+
+.article {
+  background-color: rgb(163, 193, 188);
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  border-radius: 8px;
+}
+
+.article_header {
+  text-align: center;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #eaeaea;
+}
+
+.article_header h1 {
+  font-size: 2.5em;
+  margin-bottom: 15px;
+}
+
+.article_video {
+  margin: 20px auto;
+  max-width: 900px;
+}
+
+.article_video video {
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.article_content {
+  margin-top: 20px;
+  font-size: 1.1em;
+  line-height: 1.8;
+  padding: 20px;
+}
+
+.article_done {
+  display: none;
+}
+
+.article_comments {
+  padding: 15px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.article_comments h3 {
+  font-size: 1.8em;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #eaeaea;
+  padding-bottom: 10px;
+}
+
+.article_comments ul {
+  padding: 0;
+  list-style: none;
+}
+
+.article_comments li {
+  padding: 10px 0;
+  border-bottom: 1px solid #eaeaea;
+}
+
+.article_comments h4 {
+  font-size: 1.2em;
+  margin-bottom: 5px;
+}
+
+.comment_form {
+  margin-top: 30px;
+}
+
+/* For responsive designs, you might want to stack them on smaller screens */
+@media (max-width: 1200px) {
+  .article-wrapper {
+      flex-direction: column;
   }
-  
-  .article_header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    margin-bottom: 20px;
+
+  .article-content-wrapper,
+  .comments-wrapper {
+      width: 100%;
+      margin: 0;
   }
-  
-  .article_video {
-    margin-bottom: 20px;
-  }
-  
-  .article_content {
-    width: 100%;
-    margin-bottom: 20px;
-  }
-  
-  .article_comments {
-    width: 100%;
-    margin-bottom: 20px;
-  }
-  
-  .article_comments h3 {
-    margin-bottom: 10px;
-  }
-  
-  .article_comments ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .article_comments li {
-    margin-bottom: 10px;
-  }
-  
-  .article_comments h4 {
-    margin: 0;
-  }
-  
-  .article_comments p {
-    margin: 0;
-  }
-   */
+}

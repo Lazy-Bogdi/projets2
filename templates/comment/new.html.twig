@@ -1,11 +1,13 @@
 {# {% extends 'base.html.twig' %} #}
 
-{% block title %}New Comment{% endblock %}
+{% block title %}
+<h4>Postez votre commentaire ici</h4>
+{% endblock %}
 
 {% block body %}
-    <h1>Create new Comment</h1>
+{# <h1>Create new Comment</h1> #}
 
-    {{ include('comment/_form.html.twig') }}
+{{ include('comment/_form.html.twig') }}
 
 
 {% endblock %}

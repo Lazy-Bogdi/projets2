@@ -5,10 +5,80 @@
 }
 
 .category {
+    position: relative;
     border: 1px solid #ccc;
-    padding: 1rem;
+    /* padding: 1rem; */
     background-color: #b0b0b0;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 20px;
+    height: 800px;
+    width: 450px;
+    margin: 40px auto;
+    overflow: hidden;
+    transition: transform 1s;
 }
+
+.category:hover .content {
+    background-size: 120%;
+    filter: blur(5px);
+}
+
+.category:hover {
+    transform: scale(1.1);
+}
+
+
+.category .content {
+    height: 100%;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    transition: background-size 0.8s, filter 1s;
+}
+
+
+.category .title {
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    padding: 10px 20px;
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50%;
+    border-radius: 15px;
+    text-align: center;
+    height: 5%;
+    transition: height 0.8s, font-size 0.5s, filter 1s;
+}
+
+.category:hover .title {
+    height: 10%;
+    font-size: x-large;
+}
+
+.category .title a {
+    color: #fff;
+    /* white link color */
+    text-decoration: none;
+    /* remove underline */
+    font-weight: 500;
+    /* semi-bold font */
+}
+
+.category .title a:hover {
+    text-decoration: underline;
+}
+
+
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+}
+
+
 
 @media (max-width: 991px) {
     .category-grid {

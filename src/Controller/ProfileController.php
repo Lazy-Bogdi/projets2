@@ -32,13 +32,17 @@ class ProfileController extends AbstractController
 
         return $this->render('profile/show.html.twig', [
             'user' => $this->getUser(),
-            'userHistory' => $this->showUserHistory($this->getUser())
         ]);
     }
 
-    public function showUserHistory(User $user)
+    #[Route('/history', name: 'app_profile_history')]
+    public function showUserHistory(): Response
     {
-        return $this->em->getRepository(UserHistory::class)->findBy(['user' => $user], ['lastVisited' => 'DESC']);
+        //TODO::STYLISER LES DIFFERENTS TEMPLATES
+        $history = $this->em->getRepository(UserHistory::class)->findBy(['user' => $this->getUser()], ['lastVisited' => 'DESC']);
+        return $this->render('profile/user_history.html.twig', [
+            'userHistory' => $history
+        ]);
     }
 
     #[Route('/edit', name: 'app_profile_edit', methods: ['GET', 'POST'])]
