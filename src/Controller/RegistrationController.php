@@ -22,6 +22,10 @@ class RegistrationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            $usersCount = $entityManager->getRepository(User::class)->countAllUsers();
+            if ($usersCount === 0) {
+                $user->setRoles(['ROLE_ADMIN']); // Set the user role to admin
+            }
             // encode the plain password
             $user->setPassword($userPasswordHasher->hashPassword($user, $form->get('plainPassword')->getData()));
 
