@@ -1,71 +1,71 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Log in!
-{% endblock %}
+{% block title %}Log in!{% endblock %}
 {% block stylesheets %}
 <link rel="stylesheet" href="{{ asset('assets/css/login.css') }}">
 {% endblock %}
 
 {% block body %}
 <div class="container">
-	<form method="post">
-		{% if error %}
-		<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-		{% endif %}
+	<div class="login">
+		<h1>Se Connecter</h1>
+		<form method="post">
+			{% if error %}
+			<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+			{% endif %}
 
-		{% if app.user %}
-		<div class="mb-3">
-			You are logged in as
-			{{ app.user.userIdentifier }},
-			<a href="{{ path('app_logout') }}">Logout</a>
-		</div>
-		{% endif %}
-
-		<h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-		<label class="form-label" for="inputEmail">Email</label>
-		<input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control"
-			autocomplete="email" required autofocus>
-		<label class="form-label" for="inputPassword">Password</label>
-		<div class="input-group">
-			<input type="password" name="password" id="inputPassword" class="form-control"
-				autocomplete="current-password" required>
-			<div class="input-group-append">
-				<span class="input-group-text">
-					<i id="togglePasswordVisibility" class="fa-solid fa-eye" style="color: #54928e;"></i>
-				</span>
+			{% if app.user %}
+			<div class="mb-3">
+				You are logged in as {{ app.user.userIdentifier }},
+				<a href="{{ path('app_logout') }}">Logout</a>
 			</div>
+			{% endif %}
+
+			{# <label class="form-label" for="inputEmail">Email</label> #}
+			<input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control"
+				autocomplete="email" required placeholder="E-mail" autofocus>
+
+			{# <label class="form-label" for="inputPassword">Password</label> #}
+			<div class="input-group">
+				<input type="password" name="password" id="inputPassword" class="form-control"
+					autocomplete="current-password" placeholder="Mot de passe" required>
+				<div class="input-group-append">
+					<span class="input-group-text">
+						<i id="togglePasswordVisibility" class="fa-solid fa-eye"></i>
+					</span>
+				</div>
+			</div>
+
+			<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+			<button class="btn btn-lg" type="submit">Connexion</button>
+		</form>
+		<div class="form-link">
+	
+				<a href="{{ path('app_forgot_password_request') }}">FORGOT YOUR PASSWORD?</a>
+
 		</div>
-		<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+		<div class="form-link">
 
-		{#
-		Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
-		See https://symfony.com/doc/current/security/remember_me.html
+				<a href="{{ path('app_register') }}">Don't have an account? Register now!</a>
 
-		<div class="checkbox mb-3">
-			<label>
-				<input type="checkbox" name="_remember_me"> Remember me
-			</label>
 		</div>
-		#}
-
-		<button class="btn btn-lg btn-primary" type="submit">
-			Sign in
-		</button>
-	</form>
-	<div class="form-link">
-		<small>
-			<a href="{{ path('app_forgot_password_request') }}">FORGOT YOUR PASSWORD?</a>
-		</small>
-
 	</div>
-	<div class="form-link">
-		<small>
-			<a href="{{ path('app_register') }}">Don't have an account ? Regiser now !
-			</a>
-		</small>
+
+	<div class="description">
+		<h1>LeGuideDeBogdan</h1>
+		<ul>
+			<li>Des cours exclusifs tous niveaux</li>
+			<li>Des formats hyper variés pour ne jamais t'ennuyer</li>
+			<li>Un ax de connaissance pour les grand curieux !</li>
+		</ul>
+		<div id="iconConnexion">
+			<img src="{{ asset('assets/icons/connexionIcon.svg') }}" alt="">
+		</div>
 	</div>
 </div>
 {% endblock %}
+
 {% block optionals_script %}
 <script>
 	document.querySelector("#togglePasswordVisibility").addEventListener('click', function (event) {

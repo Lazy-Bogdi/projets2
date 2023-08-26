@@ -2,5 +2,5 @@
 /var/
 /migrations/
 /public/bundles/
-# /public/articles/
-# /public/categories/
+/public/articles/
+/public/categories/

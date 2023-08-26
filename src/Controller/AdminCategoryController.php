@@ -70,6 +70,10 @@ class AdminCategoryController extends AbstractController
     public function delete(Request $request, Category $category, CategoryRepository $categoryRepository): Response
     {
         if ($this->isCsrfTokenValid('delete'.$category->getId(), $request->request->get('_token'))) {
+            foreach($category->getArticles()->getValues() as $article){
+                $article->setCategory(null);
+            }
+            // dump($category->getArticles()->getValues());die;
             $categoryRepository->remove($category, true);
         }
 
