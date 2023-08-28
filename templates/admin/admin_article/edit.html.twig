@@ -15,3 +15,11 @@
     {{ include('admin/admin_article/_delete_form.html.twig') }}
 </div>
 {% endblock %}
+{% block optionals_script %}
+<script>
+    tinymce.init({
+        selector: 'textarea',
+        // other options you might want
+    });
+</script>
+    {% endblock %}

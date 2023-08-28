@@ -39,7 +39,7 @@
         </div>
         {% endif %}
 
-        <div class="text">{{ article.content }}</div>
+        <div class="text">{{ article.content|raw }}</div>
         <div class="completeCourse">
             {% if app.user and not course_completed %}
             {# Si l'utilisateur est connecté et qu'il n'a pas encore complété le cours #}

@@ -24,7 +24,7 @@
                 <td>{{ article.title }}</td>
                 <td>{{ article.content }}</td>
                 <td>
-                    <a href="{{ path('app_admin_article_show', {'id': article.id}) }}" class="show-button">show</a>
+                    {# <a href="{{ path('app_admin_article_show', {'id': article.id}) }}" class="show-button">show</a> #}
                     <a href="{{ path('app_admin_article_edit', {'id': article.id}) }}" class="edit-button">edit</a>
                 </td>
             </tr>

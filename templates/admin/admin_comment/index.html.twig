@@ -26,7 +26,7 @@
                 <td>{{ comment.createdAt ? comment.createdAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>{{ comment.updatedAt ? comment.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
                 <td>
-                    <a href="{{ path('app_admin_comment_show', {'id': comment.id}) }}" class="show-button">show</a>
+                    {# <a href="{{ path('app_admin_comment_show', {'id': comment.id}) }}" class="show-button">show</a> #}
                     <a href="{{ path('app_admin_comment_edit', {'id': comment.id}) }}" class="edit-button">edit</a>
                 </td>
             </tr>
