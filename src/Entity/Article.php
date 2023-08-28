@@ -55,10 +55,14 @@ class Article
     #[ORM\OneToMany(mappedBy: 'article', targetEntity: UserHistory::class, orphanRemoval: true)]
     private Collection $userHistories;
 
+    #[ORM\OneToMany(mappedBy: 'article', targetEntity: UserCompletedCourse::class)]
+    private Collection $userCompletedCourses;
+
     public function __construct()
     {
         $this->comments = new ArrayCollection();
         $this->userHistories = new ArrayCollection();
+        $this->userCompletedCourses = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -230,6 +234,36 @@ class Article
             // set the owning side to null (unless already changed)
             if ($userHistory->getArticle() === $this) {
                 $userHistory->setArticle(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, UserCompletedCourse>
+     */
+    public function getUserCompletedCourses(): Collection
+    {
+        return $this->userCompletedCourses;
+    }
+
+    public function addUserCompletedCourse(UserCompletedCourse $userCompletedCourse): self
+    {
+        if (!$this->userCompletedCourses->contains($userCompletedCourse)) {
+            $this->userCompletedCourses->add($userCompletedCourse);
+            $userCompletedCourse->setArticle($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserCompletedCourse(UserCompletedCourse $userCompletedCourse): self
+    {
+        if ($this->userCompletedCourses->removeElement($userCompletedCourse)) {
+            // set the owning side to null (unless already changed)
+            if ($userCompletedCourse->getArticle() === $this) {
+                $userCompletedCourse->setArticle(null);
             }
         }
 

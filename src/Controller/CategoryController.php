@@ -29,7 +29,7 @@ class CategoryController extends AbstractController
     #[Route('/', name: 'app_category_index', methods: ['GET'])]
     public function index(CategoryRepository $categoryRepository, Request $request, PaginatorInterface $paginator): Response
     {
-        if (!empty($request->cookies->get('user_timezone'))) {
+        if (!empty($request->cookies->get('user_timezone')) && $this->getUser()) {
             $this->getUser()->setTimeZone($request->cookies->get('user_timezone'));
             $this->em->persist($this->getUser());
             $this->em->flush();

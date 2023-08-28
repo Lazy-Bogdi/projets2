@@ -11,8 +11,10 @@ use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 #[Route('/profile')]
 class ProfileController extends AbstractController
@@ -35,19 +37,16 @@ class ProfileController extends AbstractController
         ]);
     }
 
-    #[Route('/history', name: 'app_profile_history')]
-    public function showUserHistory(): Response
-    {
-        //TODO::STYLISER LES DIFFERENTS TEMPLATES
-        $history = $this->em->getRepository(UserHistory::class)->findBy(['user' => $this->getUser()], ['lastVisited' => 'DESC']);
-        return $this->render('profile/user_history.html.twig', [
-            'userHistory' => $history
-        ]);
-    }
-
     #[Route('/edit', name: 'app_profile_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, UserRepository $userRepository, UserPasswordHasherInterface $passwordHasher): Response
     {
+        if (!$this->security->isGranted('IS_AUTHENTICATED_FULLY') && $request->attributes->get('_route') !== 'login') {
+            return $this->redirectToRoute('app_login_route');
+        }
+        $userHistory = $this->em->getRepository(UserHistory::class)->findBy(['user' => $this->getUser()], ['lastVisited' => 'DESC']);
+        $userCompletedCourse = $this->getUser()->getUserCompletedCourses();
+
+
         $form = $this->createForm(User1Type::class, $this->getUser(), ['is_edit' => true]);
         $form->handleRequest($request);
 
@@ -59,22 +58,27 @@ class ProfileController extends AbstractController
 
             $userRepository->save($this->getUser(), true);
 
-            return $this->redirectToRoute('app_profile_show', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_profile_edit', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('profile/edit.html.twig', [
             'user' => $this->getUser(),
             'form' => $form,
+            'userHistory' => $userHistory,
+            'userCompletedCourse' => $userCompletedCourse
         ]);
     }
 
     #[Route('/', name: 'app_profile_delete', methods: ['POST'])]
-    public function delete(Request $request, UserRepository $userRepository): Response
+    public function delete(Request $request, UserRepository $userRepository, SessionInterface $session,TokenStorageInterface $tokenStorage): Response
     {
         if ($this->isCsrfTokenValid('delete' . $this->getUser()->getId(), $request->request->get('_token'))) {
+            $session->invalidate();
             $userRepository->remove($this->getUser(), true);
+            $tokenStorage->setToken(null);
+            
         }
 
-        return $this->redirectToRoute('app_profile_show', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_login_route');
     }
 }

@@ -4,8 +4,10 @@ namespace App\Form;
 
 use App\Entity\Article;
 use Symfony\Component\Form\AbstractType;
+
 use Symfony\Component\Form\FormBuilderInterface;
 use Vich\UploaderBundle\Form\Type\VichImageType;
+use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ArticleType extends AbstractType
@@ -15,7 +17,14 @@ class ArticleType extends AbstractType
         $builder
             ->add('title')
             ->add('content')
-            ->add('file', VichImageType::class)
+            ->add('file', VichImageType::class, [
+                'required' => false,
+                'constraints' => [
+                    new File([
+                        'maxSize' => '700M', // Adjust the size as needed
+                    ]),
+                ],
+            ])
             ->add('user')
             ->add('category')
         ;

@@ -1,23 +1,86 @@
 {% extends 'base.html.twig' %}
-
-{% block title %}Hello HomeController!{% endblock %}
-
 {% block stylesheets %}
 <link rel="stylesheet" href="{{ asset('assets/css/home.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/css/faq.css') }}">
 {% endblock %}
-
 {% block body %}
 
-<div class="container">
-
-    {% if user != null %}
-    <h1> Déjà sur le depart {{ user.firstname }} ?</h1>
-    <a href="{{path('app_logout')}}">Logout</a>
-    {% else %}
-    <h1> Bienvenue !</h1>
-    <a href="{{path('app_login_route')}}">Se connecter</a>
-    <a href="{{path('app_register')}}">S'enregistrer</a>
-    {% endif %}
+<!-- Presentation Section -->
+<div class="div-section presentation">
+    <h2>Bienvenue sur Notre Plateforme</h2>
+    <p>Rejoignez une communauté croissante d'apprenants qui ont choisi de prendre en main leur éducation. Notre
+        plateforme offre des tutoriels de haute qualité, abordant une multitude de sujets et adaptés à tous les niveaux.
+        Chaque ressource est soigneusement conçue pour vous offrir une expérience d'apprentissage incomparable. Alors,
+        pourquoi attendre? Plongez dans le monde de la connaissance dès aujourd'hui!</p>
+        <div id="iconConnexion">
+			<img src="{{ asset('assets/icons/connexionIcon.svg') }}" alt="">
+		</div>
 </div>
+
+<!-- Motivation Section -->
+<div class="div-section motivation">
+    <h2>Restez Motivé</h2>
+    <p>Chaque jour est une opportunité pour apprendre quelque chose de nouveau. Embrassez la curiosité, repoussez vos
+        limites et découvrez tout ce que vous pouvez accomplir. La connaissance est la clé qui ouvre toutes les portes.
+        Avec nous, votre potentiel n'a pas de limite.</p>
+    <a href="{{ path('app_category_index') }}">
+        <button>Commencez Maintenant</button>
+    </a>
+</div>
+
+{# <!-- FAQ Section -->
+<div class="faq">
+
+    <!-- FAQ 1 -->
+    <input id="faq-a" type="checkbox">
+    <label for="faq-a">
+        <p class="faq-heading">Qu'est-ce que cette plateforme offre?</p>
+        <div class="faq-arrow"></div>
+        <p class="faq-text">Nous offrons une plateforme où les individus peuvent accéder à des tutoriels de haute
+            qualité couvrant divers domaines. Chaque tutoriel est conçu en pensant à l'utilisateur, garantissant une
+            expérience d'apprentissage complète et enrichissante. Rejoignez-nous et découvrez un monde de connaissances
+            à portée de main.</p>
+    </label>
+
+    <!-- FAQ 2 -->
+    <input id="faq-b" type="checkbox">
+    <label for="faq-b">
+        <p class="faq-heading">Est-ce gratuit?</p>
+        <div class="faq-arrow"></div>
+        <p class="faq-text">Absolument! Notre mission est de rendre l'éducation accessible. Tous les tutoriels et
+            ressources sur notre plateforme sont entièrement gratuits. Apprenez à votre rythme sans aucun frais.</p>
+    </label>
+
+    <!-- FAQ 3 -->
+    <input id="faq-c" type="checkbox">
+    <label for="faq-c">
+        <p class="faq-heading">Comment puis-je commencer?</p>
+        <div class="faq-arrow"></div>
+        <p class="faq-text">Commencer est simple. Explorez notre plateforme et découvrez les sujets qui vous passionnent
+            le plus. Une fois que vous avez trouvé un cours ou un tutoriel qui vous intrigue, il suffit de cliquer
+            dessus pour commencer votre voyage d'apprentissage. Et si jamais vous avez des questions ou des
+            préoccupations, notre communauté est là pour aider.</p>
+    </label>
+
+    <!-- FAQ 4 (New) -->
+    <input id="faq-d" type="checkbox">
+    <label for="faq-d">
+        <p class="faq-heading">Comment puis-je contribuer à la plateforme?</p>
+        <div class="faq-arrow"></div>
+        <p class="faq-text">Si vous souhaitez contribuer en ajoutant vos propres tutoriels ou en aidant à améliorer ceux
+            existants, veuillez nous contacter et nous ferons le nécessaire. Nous apprécions les contributions de tous les
+            experts et passionnés du domaine.</p>
+    </label>
+
+    <!-- FAQ 5 (New) -->
+    <input id="faq-e" type="checkbox">
+    <label for="faq-e">
+        <p class="faq-heading">Y a-t-il une application mobile?</p>
+        <div class="faq-arrow"></div>
+        <p class="faq-text">Non, notre application mobile n'est pas encore disponible. Nous sommes en train encore en pleine élaboration et recherche. Pour le moment notre équipe est dédié pour la maintenance du site web. Ceci étant dit cela ne vous empêche pas de profitez de l'apprentissage où que vous soyez!</p>
+    </label>
+
+</div> #}
+
 
 {% endblock %}

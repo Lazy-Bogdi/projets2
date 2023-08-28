@@ -12,7 +12,7 @@ body {
   display: flex;
   flex-direction: row;
   width: 100vw;
-  height: calc(100vh - 60px);
+  height: calc(100vh - 40px);
 
 }
 
@@ -43,7 +43,7 @@ body {
 }
 
 h1 {
-  font-size: 2em;
+  font-size: 32px;
   margin-bottom: 20px;
   font-family: 'Baloo Bhaijaan', cursive;
   color: #ECDBBA;
@@ -57,16 +57,17 @@ form {
 .form-control {
   width: 20vw;
   padding: 10px;
-  height: 2vh;
+  height: 3vh;
   margin: 5px 0 20px 0;
   background-color: black;
-  color: white;
+  color: #ECDBBA;
   border: none;
   border-radius: 54px;
+  text-indent: 25px;
 }
 
 .form-control::placeholder {
-  color: white;
+  color: #ECDBBA;
 }
 
 

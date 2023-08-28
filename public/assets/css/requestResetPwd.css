@@ -1,0 +1,87 @@
+body {
+    margin: 0;
+    font-family: 'League Spartan', sans-serif;
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+    background-color: #346751;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+  
+  h1 {
+    font-size: 36px;
+    margin-bottom: 50px; /* Increase space below title */
+    font-family: 'Baloo Bhaijaan', cursive;
+    color: #ECDBBA;
+    text-align: center;
+  }
+  
+  form {
+    margin: 20px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .form-control {
+    width: 15vw; /* Increase the size of the input */
+    padding: 20px; /* Increase padding for a larger input box */
+    height: 2vh;
+    margin: 10px 25px;
+    background-color: #161616; /* Background color change */
+    color: #ECDBBA; /* Text color similar to the title */
+    border: none;
+    border-radius: 60px;
+    text-indent: 15px;
+  }
+  
+  .form-control::placeholder {
+    color: #ECDBBA;
+  }
+  
+  .btn:hover {
+    background-color: #9d3b27;
+  }
+  
+  .btn {
+    font-size: 15px; /* Decrease font size of button */
+    font-weight: bold;
+    /* width: 40%;  */
+    padding: 10px; 
+    color: black;
+    background-color: #C84B31;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+  
+  small {
+    color: #ECDBBA;
+    margin-bottom: 20px;
+    text-align: center;
+    max-width: 30vw;
+  }
+  
+  .alert {
+    font-size: 18px;
+    width: 80%;
+    margin: 10px;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+  }
+  
+  .alert-danger {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+  }
+  

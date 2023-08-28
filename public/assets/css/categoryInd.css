@@ -1,99 +1,164 @@
-.category-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1rem;
+body {
+    font-family: 'League Spartan', sans-serif;
+    margin: 0;
+    /* background-color: #f3f3f3; */
+    /* height: 100vh; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.container {
+    padding-top: 50px;
+    /* height: calc(100vh - 60px); */
+    width: 100vw;
+    /* padding: 20px; */
+
+}
+
+.category-description {
+    background-color: #346751;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0;
+    height: 40vh;
+    padding: 0 35px 0 35px;
+}
+
+.gif {
+
+    width: 30%;
+    height: 30vh;
+
+    /* border-radius: 15px; */
+}
+.computerillu {
+    /* width: 30%; */
+    height: 20vh;
+    margin-right: 25vw;
+}
+
+.description-list {
+    flex: 1;
+    padding-left: 20px;
+}
+
+.description-list h1 {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.description-list ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.description-list li {
+    margin-bottom: 15px;
+}
+
+.description-list li::before {
+    content: url('../icons/puce.svg');
+    margin-right: 10px;
+}
+
+
+h1 {
+    display: flex;
+    align-items: center;
+    font-size: 2em;
+    margin-bottom: 35px;
+    padding: 25px 0 0 25px;
+    color: #ECDBBA;
+}
+
+h1 hr {
+    flex: 1;
+    border: none;
+    height: 3px;
+    background-color: #ddd;
+    margin-left: 20px;
+    border-radius: 5px;
+}
+
+.categories-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    /* Space between items */
+    margin-bottom: 20px;
+    
+
+}
+
+#divCategory {
+    background-color: #161616;
+    height: 60vh;
+    padding: 0 35px 0 35px;
 }
 
 .category {
-    position: relative;
-    border: 1px solid #ccc;
-    /* padding: 1rem; */
-    background-color: #b0b0b0;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    border-radius: 20px;
-    height: 800px;
-    width: 450px;
-    margin: 40px auto;
-    overflow: hidden;
-    transition: transform 1s;
+    flex: 1 1 calc(25% - 20px);
+    /* Four items in a row, adjust as needed */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* margin-bottom: 20px; */
+    /* height: 20vh; */
+}
+.content .img {
+    height: 70%;
+    width: 100%;
+    border-radius: 54px;
+    margin-bottom: 10px;
 }
 
-.category:hover .content {
-    background-size: 120%;
-    filter: blur(5px);
-}
 
-.category:hover {
+.content{
+    background-color: #346751;
+    border-radius: 54px;
+    height: 45vh;
+    width: 70%;
+    transition: transform 0.8s ease;
+}
+.content:hover{
     transform: scale(1.1);
 }
 
-
-.category .content {
-    height: 100%;
-    background-size: 100%;
-    background-repeat: no-repeat;
-    transition: background-size 0.8s, filter 1s;
+.content img {
+    height: 70%;
+    width: 100%;
+    border-radius: 54px;
+    margin-bottom: 10px;
 }
 
-
-.category .title {
-    background-color: rgba(0, 0, 0, 0.7);
-    color: #fff;
-    padding: 10px 20px;
-    position: absolute;
-    bottom: 10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 50%;
-    border-radius: 15px;
+.title {
     text-align: center;
-    height: 5%;
-    transition: height 0.8s, font-size 0.5s, filter 1s;
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 5px;
+    font-family: 'Baloo Bhaijaan', cursive;
 }
 
-.category:hover .title {
-    height: 10%;
-    font-size: x-large;
-}
-
-.category .title a {
-    color: #fff;
-    /* white link color */
+.title a{
     text-decoration: none;
-    /* remove underline */
-    font-weight: 500;
-    /* semi-bold font */
+    color: #ECDBBA;
 }
-
-.category .title a:hover {
+.title a:hover{
     text-decoration: underline;
+    color: #ECDBBA;
 }
 
-
-.category-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
+.description {
+    text-align: center;
+    font-size: 1em;
+    color: #ECDBBA;
 }
 
-
-
-@media (max-width: 991px) {
-    .category-grid {
-        grid-template-columns: repeat(3, 1fr);
-    }
-}
-
-@media (max-width: 767px) {
-    .category-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (max-width: 575px) {
-    .category-grid {
-        grid-template-columns: 1fr;
-    }
+.pagination {
+    text-align: center;
+    margin-top: 20px;
 }

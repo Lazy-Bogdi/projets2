@@ -1,19 +1,85 @@
 {{ form_start(form) }}
-{% for field in form %}
-    {% if field.vars.name != '_token' %}
-        <div class="form-group" {% if field.vars.name == 'plainPassword' %}id="password-fields"{% endif %}>
-            {{ form_label(field) }}
-            {% if field.vars.name == 'change_password' %}
-                <label class="switch">
-                    {{ form_widget(field, {'attr': {'class': 'switch-input'}}) }}
-                    <span class="switch-slider"></span>
-                </label>
-            {% else %}
-                {{ form_widget(field) }}
-            {% endif %}
+<div class="form-group row">
+    {{ form_widget(form.firstname, {'attr': {'class': 'half-input', 'placeholder': 'Prénom'}}) }}
+    {{ form_widget(form.lastname, {'attr': {'class': 'half-input', 'placeholder': 'Nom de famille'}}) }}
+</div>
+
+<div class="form-group">
+    {{ form_widget(form.email, {'attr': {'class': 'full-input', 'placeholder': 'Email'}}) }}
+</div>
+
+<div class="form-group">
+    <label class="switch">
+        {{ form_widget(form.change_password, {'attr': {'class': 'switch-input'}}) }}
+        <span class="switch-slider"></span>
+    </label>
+</div>
+
+<div class="form-group" id="password-fields" style="display: none;">
+    <div class="input-group">
+        {{ form_widget(form.plainPassword.first, {'attr': {'class': 'full-input password-field', 'placeholder': 'Mot de passe'}}) }}
+        <div class="input-group-append">
+            <span class="input-group-text">
+                <i class="fa-solid fa-eye password-visibility-toggle"></i>
+            </span>
         </div>
-    {% endif %}
-{% endfor %}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+    </div>
+    <div class="input-group mt-2">
+        {{ form_widget(form.plainPassword.second, {'attr': {'class': 'full-input password-field', 'placeholder': 'Répétez le mot de passe'}}) }}
+        <div class="input-group-append">
+            <span class="input-group-text">
+                <i class="fa-solid fa-eye password-visibility-toggle"></i>
+            </span>
+        </div>
+    </div>
+</div>
+
+<button class="btn">{{ button_label|default('Save') }}</button>
 {{ form_end(form) }}
 
+
+{% block optionals_script %}
+<script>
+    let changePasswordCheckbox = document.getElementById('user1_change_password');
+    let passwordFields = document.getElementById('password-fields');
+    let firstPasswordInput = passwordFields.querySelector('input[name*="[first]"]');
+    let secondPasswordInput = passwordFields.querySelector('input[name*="[second]"]');
+
+    // Afficher ou cacher les champs du mot de passe basé sur l'état initial de la case à cocher
+    if (changePasswordCheckbox.checked) {
+        passwordFields.style.display = 'block';
+    } else {
+        passwordFields.style.display = 'none';
+    }
+
+    // Gestionnaire d'événements pour afficher ou cacher les champs du mot de passe lors de la modification de l'état de la case à cocher
+    changePasswordCheckbox.addEventListener('change', function () {
+        if (this.checked) {
+            passwordFields.style.display = 'block';
+            // passwordFields.style.visibility = 'visible';
+            // console.log('gangshit')
+        } else {
+            passwordFields.style.display = 'none';
+            firstPasswordInput.value = '';
+            secondPasswordInput.value = '';
+        }
+    });
+    
+    // Gestion de la visibilité du mot de passe
+    document.querySelectorAll(".password-visibility-toggle").forEach(toggleIcon => {
+        toggleIcon.addEventListener('click', function(event) {
+            const passwordField = toggleIcon.closest(".input-group").querySelector(".password-field");
+
+            if (passwordField.type === "password") {
+                passwordField.type = "text";
+                toggleIcon.classList.remove('fa-eye');
+                toggleIcon.classList.add('fa-eye-slash');
+            } else {
+                passwordField.type = "password";
+                toggleIcon.classList.remove('fa-eye-slash');
+                toggleIcon.classList.add('fa-eye');
+            }
+        });
+    });
+</script>
+{% endblock %}

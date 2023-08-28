@@ -49,11 +49,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 50, nullable: true)]
     private ?string $timezone = null;
 
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: UserCompletedCourse::class)]
+    private Collection $userCompletedCourses;
+
     public function __construct()
     {
         $this->articles = new ArrayCollection();
         $this->comments = new ArrayCollection();
         $this->userHistories = new ArrayCollection();
+        $this->userCompletedCourses = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -252,6 +256,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setTimezone(?string $timezone): self
     {
         $this->timezone = $timezone;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, UserCompletedCourse>
+     */
+    public function getUserCompletedCourses(): Collection
+    {
+        return $this->userCompletedCourses;
+    }
+
+    public function addUserCompletedCourse(UserCompletedCourse $userCompletedCourse): self
+    {
+        if (!$this->userCompletedCourses->contains($userCompletedCourse)) {
+            $this->userCompletedCourses->add($userCompletedCourse);
+            $userCompletedCourse->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserCompletedCourse(UserCompletedCourse $userCompletedCourse): self
+    {
+        if ($this->userCompletedCourses->removeElement($userCompletedCourse)) {
+            // set the owning side to null (unless already changed)
+            if ($userCompletedCourse->getUser() === $this) {
+                $userCompletedCourse->setUser(null);
+            }
+        }
 
         return $this;
     }

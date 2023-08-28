@@ -1,12 +1,25 @@
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+<link rel="stylesheet" href="{{ asset('assets/css/resetPwd.css') }}">
+{% endblock %}
+
 {% block title %}Reset your password{% endblock %}
 
 {% block body %}
+<div class="container">
     <h1>Reset your password</h1>
-
+    
     {{ form_start(resetForm) }}
-        {{ form_row(resetForm.plainPassword) }}
-        <button class="btn btn-primary">Reset password</button>
+        
+        {{ form_row(resetForm.plainPassword, { 'attr': {'class': 'form-control'} }) }}
+        
+        {# Adding CSRF Token #}
+        {{ form_row(resetForm._token, { 'attr': {'style': 'display:none;'} }) }}
+
+        <div class="submit-btn">
+            <button class="btn btn-primary">Reset password</button>
+        </div>
     {{ form_end(resetForm) }}
+</div>
 {% endblock %}

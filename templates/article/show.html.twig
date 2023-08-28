@@ -4,53 +4,58 @@
 
 {% block stylesheets %}
 <link rel="stylesheet" href="{{ asset('assets/css/articleShow.css') }}">
+{#
+<link rel="stylesheet" href="{{ asset('assets/css/categoryShow.css') }}"> #}
 {% endblock %}
 
 {% block body %}
-<div class="article-wrapper">
 
-    <!-- Article Content Wrapper -->
-    <div class="article-content-wrapper">
-        <div class="article">
-            <div class="article_header">
-                <h1>{{ article.title }}</h1>
-                {% if article.fileName != null and article.fileType == 'application/mp4' %}
-                <div class="article_video">
-                    <video controls width="100%">
-                        <source src="{{ asset('articles/contents/') }}{{ article.fileName }}" type="video/mp4">
-                        <a href="{{ asset('articles/contents/') }}{{ article.fileName }}">MP4</a>
-                    </video>
-                </div>
-                {% endif %}
-            </div>
-            <div class="article_content">
-                {{ article.content }}
-            </div>
-            <div class="article_done">
-                {# 
-                {{ form_start(formArticleDone) }}
-                {{ form_widget(formArticleDone) }}
-                {{ form_end(formArticleDone) }} 
-                #}
-            </div>
+<div class="container">
+
+    <!-- Article Header: Title and Video if exists -->
+    <div class="article-header">
+        <h1> Les cours de {{ article.category }}</h1>
+
+
+        <div class="header-illustration">
+            <img src="{{asset('assets/icons/computerIllu.svg') }}" alt="Category Illustration">
         </div>
     </div>
 
-    <!-- Comments Wrapper -->
-    <div class="comments-wrapper">
-        <div class="article_comments">
-            <h3>Commentaires</h3>
-            <ul>
-                {% for comment in comments %}
-                <li>
-                    <h4>{{ comment.user.firstname }}</h4>
-                    <p>{{ comment.content }}</p>
-                </li>
-                {% endfor %}
-            </ul>
-            {{ include('comment/new.html.twig') }}
+    <!-- Article Content -->
+    <div class="article-content">
+        <h2>{{ article.title }}</h2>
+        {% if article.fileName != null and article.fileType == 'application/mp4' %}
+        <div class="article-video">
+            <video id="my-video" class="video-js vjs-default-skin vjs-big-play-centered" controls preload="auto"
+                width="640" height="264" data-setup='{}'>
+                <source src="{{ asset('articles/contents/') }}{{ article.fileName }}" type="video/mp4">
+                <p class="vjs-no-js">
+                    To view this video please enable JavaScript, and consider upgrading to a
+                    web browser that
+                    <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+                </p>
+            </video>
         </div>
+        {% endif %}
+
+        <div class="text">{{ article.content }}</div>
+        <div class="completeCourse">
+            {% if app.user and not course_completed %}
+            {# Si l'utilisateur est connecté et qu'il n'a pas encore complété le cours #}
+            <form action="{{ path('mark_course_completed', {'id': article.id}) }}" method="post">
+                <button type="submit">Marquer comme complété</button>
+            </form>
+            {% elseif app.user %}
+            <button disabled>Cours déjà complété</button>
+            {% endif %}
+
+        </div>
+
     </div>
+
+    <!-- The other content, e.g. comments, could be added below if needed -->
 
 </div>
+
 {% endblock %}

@@ -7,21 +7,50 @@
 {% endblock %}
 
 {% block body %}
-<h1>Les articles de la catégorie {{ category.name }}</h1>
 
-<div class="article-grid">
-    {% for article in articles %}
-    <div class="article">
 
-        <div class="article-content">
-            <div class="article-title">{{ article.title }}</div>
-            <div class="article-text">{{ article.content }}</div>
-            <a class="article-link" href="{{ path('app_article_show', {'id': article.id}) }}">show</a>
+<div class="container">
+    <div class="firstTitle">
+        <h1>Les Cours de {{ category.name }}</h1>
+    </div>
+    <div class="description-category">
+        <div class="category-text">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua. Scelerisque viverra mauris in aliquam. Vel orci porta non pulvinar neque laoreet
+                suspendisse interdum consectetur. Eget nunc scelerisque viverra mauris. Est placerat in egestas erat
+                imperdiet sed euismod nisi. Id aliquet lectus proin nibh nisl condimentum id venenatis. Amet volutpat
+                consequat mauris nunc congue nisi vitae. Laoreet suspendisse interdum consectetur libero id faucibus
+                nisl tincidunt. Purus viverra accumsan in nisl nisi scelerisque eu ultrices vitae. Quis varius quam
+                quisque id diam vel. Fermentum posuere urna nec tincidunt praesent semper feugiat nibh sed. In aliquam
+                sem fringilla ut. Aliquet bibendum enim facilisis gravida neque convallis a cras semper. Leo vel
+                fringilla est ullamcorper eget nulla facilisi etiam. Vulputate odio ut enim blandit volutpat maecenas.
+                Erat pellentesque adipiscing commodo elit at imperdiet dui accumsan sit. Platea dictumst vestibulum
+                rhoncus est pellentesque. Non diam phasellus vestibulum lorem sed risus ultricies tristique nulla. Sed
+                turpis tincidunt id aliquet risus feugiat.</p>
+        </div>
+        <div class="category-illustration">
+            <img src="{{asset('assets/icons/computerIllu.svg') }}" alt="Category Illustration">
         </div>
     </div>
-    {% else %}
-    <p>no records found</p>
-    {% endfor %}
+
+    <div class="article-list">
+        {% for article in articles %}
+        <div class="article-row">
+            <div class="progress-bar">
+                <img src="{{ asset('assets/icons/puce2.svg')}}" alt="Progress puce">
+            </div>
+            <a class="linkBeforeDiv" href="{{ path('app_article_show', {'id': article.id}) }}">
+                <div class="article-item">
+                    <div class="article-title">{{ article.title }}</div>
+                    <span class="article-link">&gt;</span>
+                </div>
+            </a>
+
+        </div>
+        {% else %}
+        <p>no records found</p>
+        {% endfor %}
+    </div>
 </div>
 
 <a href="{{ path('app_category_index') }}">back to list</a>

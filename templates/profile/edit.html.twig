@@ -1,50 +1,97 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit User{% endblock %}
+{% block title %}Profil{% endblock %}
 
 {% block stylesheets %}
-<link rel="stylesheet" href="{{ asset('assets/css/formSymfony.css') }}">
 <link rel="stylesheet" href="{{ asset('assets/css/profile/profilePasswordSwitch.css') }}">
+<link rel="stylesheet" href="{{ asset('assets/css/profile/userInterface.css') }}">
 {% endblock %}
 
 {% block body %}
-<div class="formContainer">
-    <h1>Edit User</h1>
+<div class="profile-container">
 
-    {{ include('profile/_form.html.twig', {'button_label': 'Update'}) }}
+    <!-- Profile Info -->
+    <div class="profile-info">
+        <div class="profile-icon">
+            <i class="fas fa-user"></i>
+        </div>
+        <h1>Informations du profil</h1>
+        {{ include('profile/_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+        <div class="unregister-link">
+            {{ include('profile/_delete_form.html.twig', {'button_label': 'Mettre à jour'}) }}
+        </div>
+    </div>
 
-    {{ include('profile/_delete_form.html.twig') }}
-</div>
+    <!-- Tabs Section -->
+    <div class="profile-tabs">
+        <div class="tab-buttons">
+            <div id="completedCoursesBtn" class="tab-button active">Cours complétés</div>
+            <div id="historyBtn" class="tab-button">Historique</div>
+        </div>
+
+        <div class="tab-content">
+            <!-- Completed Courses Tab -->
+            <div id="completedCoursesTab" class="tab active">
+                {% for completedCourse in userCompletedCourse %}
+                <div class="completed-course-item">
+                    <span class="completed-course-title">{{completedCourse.article.title}}</span>
+                    <a href="{{ path('app_article_show', {'id': completedCourse.article.id}) }}" class="completed-course-link">Voir</a>
+                    <!-- Add a link to the specific course or related action here -->
+                </div>
+                {# <a class="linkBeforeDiv" href="{{ path('app_article_show', {'id': article.id}) }}">
+                    <div class="article-item">
+                        <div class="article-title">{{ article.title }}</div>
+                        <span class="article-link">&gt;</span>
+                    </div>
+                </a> #}
+                {% else %}
+                <p>Vous n'avez complété aucun cours</p>
+                {% endfor %}
+            </div>
+
+            <!-- History Tab -->
+            <div id="historyTab" class="tab">
+                {% for history in userHistory %}
+                <div class="history-item">
+                    <span class="history-title">{{history.article.title}}</span>
+                    <a href="#" class="history-link">Voir</a>
+                    <!-- Add a link to the specific history or related action here -->
+                </div>
+                {% else %}
+                <p>Vous n'avez pas d'historique</p>
+                {% endfor %}
+            </div>
+
+        </div>
+
+    </div>
+    {% endblock %}
 
 
-{% endblock %}
-{% block optionals_script %}
-<script>
-    // document.querySelector('.switch-input').addEventListener('change', function (event) {
-    //     var passwordFields = document.getElementById('password-fields');
-    //     if (event.target.checked) {
-    //         passwordFields.style.display = 'block';
-    //     } else {
-    //         passwordFields.style.display = 'none';
-    //     }
-    // });
+    {% block optionals_script %}
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const completedCoursesBtn = document.getElementById('completedCoursesBtn');
+            const historyBtn = document.getElementById('historyBtn');
 
-    document.querySelector('.switch-input').addEventListener('change', function (event) {
-        let passwordFields = document.getElementById('password-fields');
-        let passwordInput = document.getElementById('user1_plainPassword_first');
-        let confirmPasswordInput = document.getElementById('user1_plainPassword_second');
-        if (event.target.checked) {
-            passwordFields.style.maxHeight = passwordFields.scrollHeight + "px";
-            // console.log(passwordFields.style.maxHeight)
-        } else {
-            passwordFields.style.maxHeight = '0';
-            passwordFields.style.maxHeight = '0';
-            passwordInput.value = '';
-            confirmPasswordInput.value = '';
-            console.log(passwordFields.style.maxHeight, passwordInput.value, confirmPasswordInput.value)
-        }
-    });
+            const completedCoursesTab = document.getElementById('completedCoursesTab');
+            const historyTab = document.getElementById('historyTab');
+
+            completedCoursesBtn.addEventListener('click', function () {
+                completedCoursesBtn.classList.add('active');
+                historyBtn.classList.remove('active');
+                completedCoursesTab.classList.add('active');
+                historyTab.classList.remove('active');
+            });
+
+            historyBtn.addEventListener('click', function () {
+                historyBtn.classList.add('active');
+                completedCoursesBtn.classList.remove('active');
+                historyTab.classList.add('active');
+                completedCoursesTab.classList.remove('active');
+            });
+        });
 
 
-</script>
-{% endblock %}
+    </script>
+    {% endblock %}

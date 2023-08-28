@@ -7,26 +7,55 @@
 {% endblock %}
 
 {% block body %}
-<h1>Category index</h1>
 
-<div class="category-grid">
-    {% for category in pagination %}
-    <div class="category">
-        <div class="content" style="background-image: url('/categories/contents/{{ category.imageName }}')"></div>
-        <div class="title">
-            <a href="{{ path('app_category_show', {'id': category.id}) }}">{{ category.name }}</a>
+<div class="container">
+    <div class="category-description">
+        <img class='gif'
+            src="https://s3-alpha-sig.figma.com/img/70b8/4fb0/6f341b9f56b3f077dc1c06be2e74393c?Expires=1693785600&Signature=JOAIx8XeAjUlwR2TyH1SMb~djvjKUwTO~ap0ONGhN6tdZl-RIahJgn8yzkyHn3Y69jJ3049VVXI3BHwtV-HGTZ562mNt6F2fRsM78QZ2PYycnmcRB77HPPIyY2UH6xq2YBkoawqXT1flbZqwEHA9e9o95PEiLNIfatNm4KSnXa-Li4zSC5TU7Z9zSz-A1kdUElfd4qCrE2et9ZytSB0vYTF3an8aIpQ3UMR1fp-Xt6n64shpEoP31OkqGe~ktDyxIxioVolPnU7gRZ8W6oQ7P-QHxV4KrDxwf9EUzOLlm8Kr4np5J5OgPJUPGVB7JqGGlo5V4hwrsktN0DYd-BOFIA__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4"
+            alt="Description Image">
+        <img class='computerillu' src="{{ asset('assets/icons/computerIllu.svg')}}" alt="Description Image">
+        <div class="description-list">
+            <h1>Apprends à coder chez toi </h1>
+            <ul>
+                <li>Des cours exclusifs tous niveaux</li>
+                <li>Des formats hyper variés pour ne jamais t'ennuyer</li>
+                <li>Un max de connaissances pour les grands curieux</li>
+            </ul>
         </div>
     </div>
-    {% else %}
-    <div class="category">
-        No records found.
-    </div>
-    {% endfor %}
-</div>
+    <div id="divCategory">
+        <h1>Catégorie
+            <hr>
+        </h1>
 
-<!-- Add the pagination links here -->
-<div class="pagination">
-    {{ knp_pagination_render(pagination) }}
+        <div class="categories-row">
+            {% for category in pagination %}
+            <div class="category">
+                <a href="{{ path('app_category_show', {'id': category.id}) }}">
+                    <div class="content">
+                        <img src="/categories/contents/{{ category.imageName }}" alt="{{ category.name }}">
+                        <div class="title">
+                            <a href="{{ path('app_category_show', {'id': category.id}) }}">{{ category.name }}</a>
+                        </div>
+                        <div class="description">
+                            {{ category.description|default('No description provided.') }}
+                        </div>
+                    </div>
+                </a>
+            </div>
+            {% else %}
+            <div class="category">
+                No records found.
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Add the pagination links here -->
+    <div class="pagination">
+        {{ knp_pagination_render(pagination) }}
+    </div>
+
 </div>
 
 {% endblock %}

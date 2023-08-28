@@ -16,7 +16,10 @@ class User1Type extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('email')
+        ->add('email', TextType::class, [
+            'attr' => ['placeholder' => 'Email'],
+            'label' => false
+        ])
             ->add('plainPassword', RepeatedType::class, [
                 'type' => PasswordType::class,
                 'invalid_message' => 'The password fields must match.',
@@ -31,11 +34,20 @@ class User1Type extends AbstractType
                 'required' => false,
                 'label' => 'Change Password',
                 'attr' => [
-                    'class' => 'change-password-checkbox',
+                    'class' => 'change-password-checkbox switch-input',
+                ],
+                'label_attr' => [
+                    'class' => 'switch'
                 ]
             ])
-            ->add('lastname')
-            ->add('firstname')
+            ->add('lastname', TextType::class, [
+                'attr' => ['placeholder' => 'Nom de famille'],
+                'label' => false
+            ])
+            ->add('firstname', TextType::class, [
+                'attr' => ['placeholder' => 'Prénom'],
+                'label' => false
+            ])
         ;
     }
 
