@@ -15,7 +15,8 @@
         {{ form_row(resetForm.plainPassword, { 'attr': {'class': 'form-control'} }) }}
         
         {# Adding CSRF Token #}
-        {{ form_row(resetForm._token, { 'attr': {'style': 'display:none;'} }) }}
+        {{ form_row(resetForm._token, { 'attr': {'class': 'hidden'} }) }}
+        
 
         <div class="submit-btn">
             <button class="btn btn-primary">Reset password</button>
